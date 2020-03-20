@@ -11,7 +11,7 @@
                 <el-form :model="selectForm"  ref="selectForm">
                     <el-select v-model="selectForm.selectSchool" placeholder="全部学校" class="handle-select mr10">
                         <el-option key="1" label="福州大学" value="福州大学"></el-option>
-                        <el-option key="2" label="福建师范大学" value="福建师范大学"></el-option>
+                        
                     </el-select>
                     <el-input v-model="selectForm.selectKeyWord" placeholder="请输入课程" class="handle-input mr10"></el-input>
                     <el-button type="primary" @click="submitForm(selectForm)">搜索</el-button>
