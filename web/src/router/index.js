@@ -6,7 +6,9 @@ Vue.use(Router)
 
 const s_course = resolve => require(['../components/page/S_course.vue'], resolve)
 const table = resolve => require(['../components/page/BaseTable.vue'], resolve)
-const form = resolve => require(['../components/page/BaseForm.vue'], resolve)
+const login = resolve => require(['../components/page/login.vue'], resolve)
+const forget = resolve => require(['../components/page/ForgetForm.vue'], resolve)
+const err403 = resolve => require(['../components/page/403.vue'], resolve)
 
 export default new Router({
   mode: 'history',  //把Router的mode修改为history模式,VueRouter默认的模式为HASH模式
@@ -36,13 +38,32 @@ export default new Router({
       }
     },
     {
-      path: '/form',
-      component: form,
-      name: 'form',
+      path: '/login',
+      component: login,
+      name: 'login',
       meta: {
-        title: '基本表单',
+        title: '到云',
+        requireAuth: true
+      }
+    },
+    {
+      path: '/forget',
+      component: forget,
+      name: 'forget',
+      meta: {
+        title: '忘记密码',
+        requireAuth: true
+      }
+    },
+    {
+      path: '/err403',
+      component: err403,
+      name: 'err403',
+      meta: {
+        title: '403',
         requireAuth: true
       }
     }
+
   ]
 })
