@@ -1,13 +1,13 @@
 var studentSqlMap = {
 
     // 增
-    insert:'insert into student() values ()',
+    insert: 'insert into student(student_number, student_name, student_sex, student_telephone, student_mailbox, student_born_time, student_school, student_college, student_class) values (?, ?, ?, ?, ?, ?, ?, ?, ?)',
     // 删
-    delete:'delete from student where ',
+    deleteById: 'delete from student where student_id = ?',
     // 改 
-    update:'update student set  where ',
+    updateNameById: 'update student set student_name = ? where student_id = ?',
     // 查
-    select:'select * from student where '
+    selectById: 'select * from student where student_id = ?'
 
 
 };

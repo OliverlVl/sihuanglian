@@ -1,13 +1,11 @@
 var select_courseSqlMap = {
 
     // 增
-    insert:'insert into select_course() values ()',
+    insert:'insert into select_course(student_id, course_id) values (?, ?)',
     // 删
-    delete:'delete from select_course where ',
-    // 改 
-    update:'update select_course set  where ',
+    deleteById:'delete from select_course where select_course_id = ?',
     // 查
-    select:'select * from select_course where '
+    select_courseByStudentId:'select * from select_course where student_id = ?'
 
 
 };

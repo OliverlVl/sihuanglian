@@ -1,13 +1,13 @@
 var sign_inSqlMap = {
 
     // 增
-    insert:'insert into sign_in() values ()',
+    insert: 'insert into sign_in(course_id, teacher_id, sign_teacher_time) values (?,?,?)',
     // 删
-    delete:'delete from sign_in where ',
+    deleteById: 'delete from sign_in where sign_id = ?',
     // 改 
-    update:'update sign_in set  where ',
+    updateById: 'update sign_in set student_id = ?, student_place = ?, sign_student_time = ? where sign_id = ?',
     // 查
-    select:'select * from sign_in where '
+    selectByCourseId: 'select * from sign_in where course_id = ?'
 
 
 };
