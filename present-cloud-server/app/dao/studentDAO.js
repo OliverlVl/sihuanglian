@@ -6,11 +6,10 @@ var pool = mysql.createPool(mysqlConf.mysql);
 module.exports = {
     // 增insert
 
-    // 删
+    // 删delete
 
-    // 改
+    // 改update
 
-    // 查
-
+    // 查select
 
 };
