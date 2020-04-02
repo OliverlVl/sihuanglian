@@ -1,10 +1,10 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.04.02 17:36:02                          */
+/* Created on:     2020.04.02 18:31:06                          */
 /*==============================================================*/
 
 
-drop table if exists admain;
+drop table if exists admin;
 
 drop table if exists class;
 
@@ -27,18 +27,18 @@ drop table if exists student;
 drop table if exists teacher;
 
 /*==============================================================*/
-/* Table: admain                                                */
+/* Table: admin                                                 */
 /*==============================================================*/
-create table admain
+create table admin
 (
-   admain_id            int not null auto_increment,
-   admain_number        int not null,
-   admain_name          varchar(20) not null,
+   admin_id             int not null auto_increment,
+   admin_number         int not null,
+   admin_name           varchar(20) not null,
    create_time          datetime,
    creator              varchar(20),
    update_time          datetime,
    updater              varchar(20),
-   primary key (admain_id)
+   primary key (admin_id)
 );
 
 /*==============================================================*/
@@ -102,7 +102,7 @@ create table information
    information_id       int not null,
    information_name     varchar(20) not null,
    information_context  text not null,
-   admain_id            int not null,
+   admin_id             int not null,
    create_time          datetime,
    creator              varchar(20),
    update_time          datetime,
@@ -224,8 +224,8 @@ create table teacher
 alter table course add constraint FK_Reference_9 foreign key (course_teacher_id)
       references teacher (teacher_id) on delete restrict on update restrict;
 
-alter table information add constraint FK_Reference_10 foreign key (admain_id)
-      references admain (admain_id) on delete restrict on update restrict;
+alter table information add constraint FK_Reference_10 foreign key (admin_id)
+      references admin (admin_id) on delete restrict on update restrict;
 
 alter table score add constraint FK_Reference_2 foreign key (course_id)
       references course (course_id) on delete restrict on update restrict;
