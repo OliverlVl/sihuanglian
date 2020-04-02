@@ -36,8 +36,8 @@ module.exports = {
     },
 
     // 查select 查看所有
-    select: function(admin, callback) {
-        pool.query(admainSqlMap.select, 
+    selectAll: function(admin, callback) {
+        pool.query(admainSqlMap.selectAll, 
             function (error, result) {
                 if (error) throw error;
                 callback(result);

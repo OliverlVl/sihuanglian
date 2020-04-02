@@ -7,7 +7,7 @@ var adminSqlMap = {
     // 改 修改管理员姓名
     updateById:'update admin set admin_name=? where admin_id=? ',
     // 查 通过id,查看所有管理员
-    select:'select * from admin'
+    selectAll:'select * from admin'
 
 
 };

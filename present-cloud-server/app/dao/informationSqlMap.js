@@ -1,13 +1,13 @@
 var informationSqlMap = {
 
     // 增
-    insert:'insert into information() values ()',
+    insert:'insert into information(information_name, information_context, admin_id, create_time, creator) values (?, ?, ?, ?, ?)',
     // 删
-    delete:'delete from information where ',
+    delete:'delete from information where information_id = ?',
     // 改 
-    update:'update information set  where ',
+    update:'update information set information_name = ?, information_context = ?, admin_id = ?, update_time = ?, updater = ? where information_id = ?',
     // 查
-    select:'select * from information where '
+    selectAll:'select * from information'
 
 
 };

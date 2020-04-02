@@ -6,7 +6,7 @@ var pool = mysql.createPool(mysqlConf.mysql);
 module.exports = {
     // 增insert
     insert: function (login, callback) {
-        pool.query(loginSqlMap.insert, [login.login_name, login.login_password, login.login_type, login.user_id,], function (error, result) {
+        pool.query(loginSqlMap.insert, [login.login_name, login.login_password, login.login_type, login.user_id], function (error, result) {
             if (error) throw error;
             callback(result);
         })
