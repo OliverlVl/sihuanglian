@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.04.02 15:27:47                          */
+/* Created on:     2020.04.02 15:56:29                          */
 /*==============================================================*/
 
 
@@ -13,6 +13,8 @@ drop table if exists course;
 drop table if exists feedback;
 
 drop table if exists information;
+
+drop table if exists login;
 
 drop table if exists score;
 
@@ -32,7 +34,6 @@ create table admain
    admain_id            int not null auto_increment,
    admain_number        int not null,
    admain_name          varchar(20) not null,
-   admain_password      varchar(100) not null,
    create_time          datetime,
    creator              varchar(20),
    update_time          datetime,
@@ -110,6 +111,19 @@ create table information
 );
 
 /*==============================================================*/
+/* Table: login                                                 */
+/*==============================================================*/
+create table login
+(
+   login_id             int not null,
+   login_name           varchar(20),
+   login_passward       varchar(20),
+   login_type           int,
+   user_id              int,
+   primary key (login_id)
+);
+
+/*==============================================================*/
 /* Table: score                                                 */
 /*==============================================================*/
 create table score
@@ -171,7 +185,6 @@ create table student
    student_number       int not null,
    student_name         varchar(20) not null,
    student_sex          varchar(10) not null,
-   student_passworld    varchar(100) not null,
    student_telephone    int not null,
    student_mailbox      varchar(20),
    student_born_time    date,
@@ -195,7 +208,6 @@ create table teacher
    teacher_number       int not null,
    teacher_name         varchar(20) not null,
    teacher_sexs         varchar(10) not null,
-   teacher_password     varchar(100) not null,
    teacher_telephone    int not null,
    student_mailbox      varchar(20),
    teacher_born_time    date,
