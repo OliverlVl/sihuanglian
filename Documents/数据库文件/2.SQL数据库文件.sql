@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.04.02 15:56:29                          */
+/* Created on:     2020.04.02 17:36:02                          */
 /*==============================================================*/
 
 
@@ -117,7 +117,7 @@ create table login
 (
    login_id             int not null,
    login_name           varchar(20),
-   login_passward       varchar(20),
+   login_password       varchar(20),
    login_type           int,
    user_id              int,
    primary key (login_id)
@@ -207,7 +207,7 @@ create table teacher
    teacher_id           int not null auto_increment,
    teacher_number       int not null,
    teacher_name         varchar(20) not null,
-   teacher_sexs         varchar(10) not null,
+   teacher_sex          varchar(10) not null,
    teacher_telephone    int not null,
    student_mailbox      varchar(20),
    teacher_born_time    date,
