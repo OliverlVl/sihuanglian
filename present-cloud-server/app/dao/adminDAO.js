@@ -8,7 +8,7 @@ module.exports = {
     // 增insert
     insert: function (admin, callback) {
         pool.query(admainSqlMap.insert, 
-            [admin.admin_id, admin.admin_number, admin.admin_name, admin.create_time, admin.creator, admin.update_time, admin.updater], 
+            [admin.admin_number, admin.admin_name, admin.create_time, admin.creator, admin.update_time, admin.updater], 
             function (error, result) {
                 if (error) throw error;
                 callback(result);
