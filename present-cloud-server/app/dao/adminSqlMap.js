@@ -1,7 +1,7 @@
 var adminSqlMap = {
 
     // 增 增加一个管理员
-    insert:'insert into admin(admin_id, admin_number, admin_name, create_time, creator, update_time, updater) values (0, ?, ?, ?, ?, ?, ?)',
+    insert:'insert into admin(admin_number, admin_name, create_time, creator, update_time, updater) values (?, ?, ?, ?, ?, ?)',
     // 删 通过id删除一个管理员
     deleteById:'delete from admin where admin_id=?',
     // 改 修改管理员姓名
