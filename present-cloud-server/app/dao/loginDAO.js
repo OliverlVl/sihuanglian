@@ -30,7 +30,7 @@ module.exports = {
 
     // 查select
     selectByUserId: function (login, callback) {
-        pool.query(loginSqlMap.selectByCourseId, login.user_id, function (error, result) {
+        pool.query(loginSqlMap.selectByUserId, login.user_id, function (error, result) {
             if (error) throw error;
             callback(result);
         })

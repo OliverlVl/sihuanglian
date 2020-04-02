@@ -30,7 +30,7 @@ module.exports = {
 
     // 查select
     selectByStudentIdAndCourseId: function (score, callback) {
-        pool.query(scoreSqlMap.selectByCourseId, [score.student_id, score.course_id], function (error, result) {
+        pool.query(scoreSqlMap.selectByStudentIdAndCourseId, [score.student_id, score.course_id], function (error, result) {
             if (error) throw error;
             callback(result);
         })
