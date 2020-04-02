@@ -5,7 +5,9 @@ var pool = mysql.createPool(mysqlConf.mysql);
 
 module.exports = {
 
-    // 增insert
+    //////////////////////////// 增insert ////////////////////////////
+
+    // 增加一条记录
     insert: function (admin, callback) {
         pool.query(admainSqlMap.insert, 
             [admin.admin_number, admin.admin_name, admin.create_time, admin.creator, admin.update_time, admin.updater], 
@@ -15,7 +17,9 @@ module.exports = {
         })
     },
 
-    // 删delete
+    //////////////////////////// 删delete ////////////////////////////
+
+    // 根据id删除一个记录
     deleteById: function (admin, callback) {
         pool.query(admainSqlMap.deleteById, 
             admin.admin_id, 
@@ -25,7 +29,9 @@ module.exports = {
         })
     },
 
-    // 改update 修改管理员姓名
+    //////////////////////////// 改update ////////////////////////////
+
+    // 根据id修改管理员姓名
     updateById: function (admin, callback) {
         pool.query(admainSqlMap.updateById, 
             [admin.admin_name, admin.admin_id],
@@ -35,7 +41,9 @@ module.exports = {
         })
     },
 
-    // 查select 查看所有
+    //////////////////////////// 查select ////////////////////////////
+
+    // 查看所有管理员信息
     selectAll: function(admin, callback) {
         pool.query(admainSqlMap.selectAll, 
             function (error, result) {
