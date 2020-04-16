@@ -8,8 +8,9 @@ class HomeService extends Service {
 //   }
 
   async getUserInfo() {
-    // this.ctx.model 调用model .User (对象驼峰式命名)
-    const user = await this.ctx.model.User.findAll()
+    // this.ctx.model 调用model .User (对象,根据model文件名(首字母大写))
+    // const user = await this.ctx.model.User.findAll()
+    const user = await this.ctx.model.SignIn.findAll()
     return user
   }
 }
