@@ -1,5 +1,6 @@
 'use strict'
 
+// 测试 （无用对象）
 module.exports = app => {
     const { STRING, INTEGER } = app.Sequelize; //获取 sequelize对应的数据类型映射
 
