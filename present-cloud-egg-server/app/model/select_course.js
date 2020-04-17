@@ -27,6 +27,10 @@ module.exports = app => {
 				key: 'course_id'
 			}
 		},
+		course_experience_point: {
+			type: INTEGER,
+			allowNull: true
+		},
 		create_time: {
 			type: DATE,
 			allowNull: true

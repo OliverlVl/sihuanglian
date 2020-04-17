@@ -2,11 +2,11 @@
 
 const Controller = require('egg').Controller;
 
-class ScoreController extends Controller {
+class TeacherSignInController extends Controller {
 	async index() {
 		const { ctx } = this;
 		ctx.body = 'hi, egg';
 	}
 }
 
-module.exports = ScoreController;
+module.exports = TeacherSignInController;

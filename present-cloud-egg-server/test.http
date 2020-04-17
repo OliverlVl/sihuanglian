@@ -7,7 +7,7 @@ POST {{url}}login
 Content-Type: application/json
 
 {
-    "name": "liho",
+    "name": "lihao",
     "password": "123456",
     "type": 1
 }

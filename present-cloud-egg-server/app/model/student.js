@@ -44,13 +44,9 @@ module.exports = app => {
 			type: STRING,
 			allowNull: false
 		},
-		student_class: {
+		total_experience_point: {
 			type: INTEGER,
-			allowNull: true,
-			references: {
-				model: 'class',
-				key: 'class_id'
-			}
+			allowNull: true
 		},
 		create_time: {
 			type: DATE,

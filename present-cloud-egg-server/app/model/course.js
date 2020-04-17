@@ -19,11 +19,7 @@ module.exports = app => {
 			type: STRING,
 			allowNull: false
 		},
-		course_school: {
-			type: STRING,
-			allowNull: false
-		},
-		course_college: {
+		course_class: {
 			type: STRING,
 			allowNull: false
 		},
@@ -35,20 +31,8 @@ module.exports = app => {
 				key: 'teacher_id'
 			}
 		},
-		course_term_time: {
+		course_image: {
 			type: STRING,
-			allowNull: false
-		},
-		course_week_time: {
-			type: STRING,
-			allowNull: false
-		},
-		course_introduction: {
-			type: STRING,
-			allowNull: true
-		},
-		course_exam_time: {
-			type: DATE,
 			allowNull: true
 		},
 		create_time: {
