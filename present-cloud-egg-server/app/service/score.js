@@ -2,10 +2,10 @@
 
 const Service = require('egg').Service;
 
-class XXXService extends Service {
-async index() {
-	
-}
+class ScoreService extends Service {
+	async index() {
+
+	}
 }
 
-module.exports = XXXService;
+module.exports = ScoreService;

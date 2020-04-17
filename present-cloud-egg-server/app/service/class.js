@@ -3,9 +3,9 @@
 const Service = require('egg').Service;
 
 class ClassService extends Service {
-async index() {
-	
-}
+	async index() {
+
+	}
 }
 
 module.exports = ClassService;

@@ -3,9 +3,9 @@
 const Service = require('egg').Service;
 
 class InformationService extends Service {
-async index() {
-	
-}
+	async index() {
+
+	}
 }
 
 module.exports = InformationService;
