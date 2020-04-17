@@ -1,12 +1,10 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.04.02 18:31:06                          */
+/* Created on:     2020.04.17 20:49:52                          */
 /*==============================================================*/
 
 
 drop table if exists admin;
-
-drop table if exists class;
 
 drop table if exists course;
 
@@ -16,8 +14,6 @@ drop table if exists information;
 
 drop table if exists login;
 
-drop table if exists score;
-
 drop table if exists select_course;
 
 drop table if exists sign_in;
@@ -25,6 +21,8 @@ drop table if exists sign_in;
 drop table if exists student;
 
 drop table if exists teacher;
+
+drop table if exists teacher_sign_in;
 
 /*==============================================================*/
 /* Table: admin                                                 */
@@ -42,35 +40,16 @@ create table admin
 );
 
 /*==============================================================*/
-/* Table: class                                                 */
-/*==============================================================*/
-create table class
-(
-   class_id             int not null auto_increment,
-   class_name           varchar(20) not null,
-   class_life_time      date,
-   create_time          datetime,
-   creator              varchar(20),
-   update_time          datetime,
-   updater              varchar(20),
-   primary key (class_id)
-);
-
-/*==============================================================*/
 /* Table: course                                                */
 /*==============================================================*/
 create table course
 (
    course_id            int not null auto_increment,
-   course_number        int not null,
    course_name          varchar(255) not null,
-   course_school        varchar(255) not null,
-   course_college       varchar(255) not null,
+   course_number        int,
+   course_class         varchar(20) not null,
    course_teacher_id    int not null,
-   course_term_time     varchar(255) not null,
-   course_week_time     varchar(255) not null,
-   course_introduction  varchar(255),
-   course_exam_time     datetime,
+   course_image         varchar(255),
    create_time          datetime,
    creator              varchar(20),
    update_time          datetime,
@@ -124,24 +103,6 @@ create table login
 );
 
 /*==============================================================*/
-/* Table: score                                                 */
-/*==============================================================*/
-create table score
-(
-   score_id             int not null auto_increment,
-   student_id           int not null,
-   course_id            int not null,
-   usual_score          decimal(5,2) not null,
-   exam_score           decimal(5,2) not null,
-   final_score          decimal(5,2) not null,
-   create_time          datetime,
-   creator              varchar(20),
-   update_time          datetime,
-   updater              varchar(20),
-   primary key (score_id)
-);
-
-/*==============================================================*/
 /* Table: select_course                                         */
 /*==============================================================*/
 create table select_course
@@ -149,6 +110,7 @@ create table select_course
    select_course_id     int not null auto_increment,
    student_id           int not null,
    course_id            int not null,
+   course_experience_point int,
    create_time          datetime,
    creator              varchar(20),
    update_time          datetime,
@@ -163,12 +125,8 @@ create table sign_in
 (
    sign_id              int not null auto_increment,
    student_id           int,
-   course_id            int not null,
-   teacher_id           int,
+   teacher_sign_id      int,
    student_place        varchar(255),
-   sign_student_time    datetime,
-   sign_teacher_time    datetime,
-   sign_state           int,
    create_time          datetime,
    creator              varchar(20),
    update_time          datetime,
@@ -190,7 +148,7 @@ create table student
    student_born_time    date,
    student_school       varchar(20) not null,
    student_college      varchar(20) not null,
-   student_class        int,
+   total_experience_point int,
    create_time          datetime,
    creator              varchar(20),
    update_time          datetime,
@@ -221,17 +179,29 @@ create table teacher
    unique key UNQ_User_telephone (teacher_telephone)
 );
 
+/*==============================================================*/
+/* Table: teacher_sign_in                                       */
+/*==============================================================*/
+create table teacher_sign_in
+(
+   teacher_sign_id      int not null,
+   course_id            int,
+   teacher_place        varchar(255),
+   teacher_id           int,
+   gesture              varchar(20),
+   state                int comment '1代表正在签到，0代表结束签到',
+   create_time          datetime,
+   creator              varchar(20),
+   update_time          datetime,
+   updater              varchar(20),
+   primary key (teacher_sign_id)
+);
+
 alter table course add constraint FK_Reference_9 foreign key (course_teacher_id)
       references teacher (teacher_id) on delete restrict on update restrict;
 
 alter table information add constraint FK_Reference_10 foreign key (admin_id)
       references admin (admin_id) on delete restrict on update restrict;
-
-alter table score add constraint FK_Reference_2 foreign key (course_id)
-      references course (course_id) on delete restrict on update restrict;
-
-alter table score add constraint FK_Reference_8 foreign key (student_id)
-      references student (student_id) on delete restrict on update restrict;
 
 alter table select_course add constraint FK_Reference_3 foreign key (student_id)
       references student (student_id) on delete restrict on update restrict;
@@ -239,15 +209,15 @@ alter table select_course add constraint FK_Reference_3 foreign key (student_id)
 alter table select_course add constraint FK_Reference_4 foreign key (course_id)
       references course (course_id) on delete restrict on update restrict;
 
-alter table sign_in add constraint FK_Reference_11 foreign key (course_id)
-      references course (course_id) on delete restrict on update restrict;
-
-alter table sign_in add constraint FK_Reference_6 foreign key (teacher_id)
-      references teacher (teacher_id) on delete restrict on update restrict;
+alter table sign_in add constraint FK_Reference_13 foreign key (teacher_sign_id)
+      references teacher_sign_in (teacher_sign_id) on delete restrict on update restrict;
 
 alter table sign_in add constraint FK_Reference_7 foreign key (student_id)
       references student (student_id) on delete restrict on update restrict;
 
-alter table student add constraint FK_Reference_5 foreign key (student_class)
-      references class (class_id) on delete restrict on update restrict;
+alter table teacher_sign_in add constraint FK_Reference_12 foreign key (course_id)
+      references course (course_id) on delete restrict on update restrict;
+
+alter table teacher_sign_in add constraint FK_Reference_8 foreign key (teacher_id)
+      references teacher (teacher_id) on delete restrict on update restrict;
 
