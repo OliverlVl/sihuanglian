@@ -9,4 +9,7 @@ module.exports = app => {
 
   // 配置路由
   router.get('/user', controller.home.getUserInfo)
+
+  // 登录
+  router.post('/login', controller.login.login)
 };
