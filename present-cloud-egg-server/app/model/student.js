@@ -13,19 +13,19 @@ module.exports = app => {
 		},
 		student_number: {
 			type: INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		student_name: {
 			type: STRING,
-			allowNull: false
+			allowNull: true
 		},
 		student_sex: {
 			type: STRING,
-			allowNull: false
+			allowNull: true
 		},
 		student_telephone: {
 			type: INTEGER,
-			allowNull: false,
+			allowNull: true,
 			unique: true
 		},
 		student_mailbox: {
@@ -38,11 +38,11 @@ module.exports = app => {
 		},
 		student_school: {
 			type: STRING,
-			allowNull: false
+			allowNull: true
 		},
 		student_college: {
 			type: STRING,
-			allowNull: false
+			allowNull: true
 		},
 		total_experience_point: {
 			type: INTEGER,

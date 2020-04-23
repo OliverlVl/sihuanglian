@@ -13,52 +13,64 @@ module.exports = app => {
 		},
 		teacher_number: {
 			type: INTEGER,
-			allowNull: false
+			allowNull: true,
+			defaultValue: null
 		},
 		teacher_name: {
 			type: STRING,
-			allowNull: false
+			allowNull: true,
+			defaultValue: null
 		},
 		teacher_sex: {
 			type: STRING,
-			allowNull: false
+			allowNull: true,
+			defaultValue: null
 		},
 		teacher_telephone: {
 			type: INTEGER,
-			allowNull: false,
+			allowNull: true,
+			defaultValue: null,
 			unique: true
 		},
 		student_mailbox: {
 			type: STRING,
-			allowNull: true
+			allowNull: true,
+			defaultValue: null
 		},
 		teacher_born_time: {
 			type: DATEONLY,
-			allowNull: true
+			allowNull: true,
+			defaultValue: null
 		},
 		teacher_school: {
 			type: STRING,
-			allowNull: false
+			allowNull: true,
+			defaultValue: null
 		},
 		teacher_college: {
 			type: STRING,
-			allowNull: false
+			allowNull: true,
+			defaultValue: null
 		},
 		create_time: {
 			type: DATE,
-			allowNull: true
+			allowNull: true,
+			defaultValue: null
 		},
 		creator: {
 			type: STRING,
-			allowNull: true
+			allowNull: true,
+			defaultValue: null
 		},
 		update_time: {
 			type: DATE,
-			allowNull: true
+			allowNull: true,
+			defaultValue: null
 		},
 		updater: {
 			type: STRING,
-			allowNull: true
+			allowNull: true,
+			defaultValue: null
 		}
 	}, {
 		tableName: 'teacher'

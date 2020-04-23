@@ -15,4 +15,10 @@ module.exports = app => {
 
   // 注册
   router.post('/register', controller.login.register)
+
+  // 完善老师信息
+  router.post('/updateTeacherInfo', controller.teacher.updateTeacherInfo)
+
+  // 完善学生信息
+  router.post('/updateStudentInfo', controller.student.updateStudentInfo)
 };
