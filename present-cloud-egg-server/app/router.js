@@ -12,4 +12,7 @@ module.exports = app => {
 
   // 登录
   router.post('/login', controller.login.login)
+
+  // 注册
+  router.post('/register', controller.login.register)
 };

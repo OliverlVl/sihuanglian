@@ -30,6 +30,12 @@ class LoginService extends Service {
     }
 
     // 注册
+    async register(user) {
+        const { ctx } = this;
+        console.log(JSON.stringify(user))
+        const result = await ctx.model.Login.create(user);
+        return result.dataValues;
+    }
 }
 
 module.exports = LoginService;
