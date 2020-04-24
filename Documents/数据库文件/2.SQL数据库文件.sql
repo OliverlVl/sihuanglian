@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.04.24 17:00:18                          */
+/* Created on:     2020.04.24 17:22:16                          */
 /*==============================================================*/
 
 
@@ -181,7 +181,7 @@ create table student
    student_number       int not null,
    student_name         varchar(20) not null,
    student_sex          int not null,
-   student_telephone    int not null,
+   student_telephone    varchar(11) not null,
    student_mailbox      varchar(20),
    student_born_time    date,
    student_school       varchar(20) not null,
@@ -204,7 +204,7 @@ create table teacher
    teacher_number       int not null,
    teacher_name         varchar(20) not null,
    teacher_sex          int not null,
-   teacher_telephone    int not null,
+   teacher_telephone    varchar(11) not null,
    student_mailbox      varchar(20),
    teacher_born_time    date,
    teacher_school       varchar(20) not null,
