@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.04.24 17:22:16                          */
+/* Created on:     2020.04.24 17:32:35                          */
 /*==============================================================*/
 
 
@@ -66,7 +66,7 @@ create table course
 /*==============================================================*/
 create table dictionary
 (
-   dictionary_id        int not null,
+   dictionary_id        int not null auto_increment,
    name                 varchar(20),
    code                 varchar(20),
    create_time          datetime,
@@ -81,7 +81,7 @@ create table dictionary
 /*==============================================================*/
 create table dictionary_detail
 (
-   detail_id            int not null,
+   detail_id            int not null auto_increment,
    code                 varchar(20),
    item_key             int,
    item_value           varchar(20),
@@ -116,7 +116,7 @@ create table feedback
 /*==============================================================*/
 create table information
 (
-   information_id       int not null,
+   information_id       int not null auto_increment,
    information_name     varchar(20) not null,
    information_context  text not null,
    admin_id             int not null,
@@ -132,7 +132,7 @@ create table information
 /*==============================================================*/
 create table login
 (
-   login_id             int not null,
+   login_id             int not null auto_increment,
    login_name           varchar(20),
    login_password       varchar(20),
    login_type           int,
@@ -222,7 +222,7 @@ create table teacher
 /*==============================================================*/
 create table teacher_sign_in
 (
-   teacher_sign_id      int not null,
+   teacher_sign_id      int not null auto_increment,
    course_id            int,
    teacher_place        varchar(255),
    teacher_id           int,
