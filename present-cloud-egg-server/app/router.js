@@ -21,4 +21,7 @@ module.exports = app => {
 
   // 完善学生信息
   router.post('/updateStudentInfo', controller.student.updateStudentInfo)
+
+  // 查询班课(学生通过班课编号查) 地址加问号传入course_number
+  router.get('/selectCourse', controller.course.selectCourse)
 };

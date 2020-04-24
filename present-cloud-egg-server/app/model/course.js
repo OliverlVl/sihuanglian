@@ -13,7 +13,7 @@ module.exports = app => {
 		},
 		course_number: {
 			type: INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		course_name: {
 			type: STRING,
@@ -21,11 +21,11 @@ module.exports = app => {
 		},
 		course_class: {
 			type: STRING,
-			allowNull: false
+			allowNull: true
 		},
 		course_teacher_id: {
 			type: INTEGER,
-			allowNull: false,
+			allowNull: true,
 			references: {
 				model: 'teacher',
 				key: 'teacher_id'
