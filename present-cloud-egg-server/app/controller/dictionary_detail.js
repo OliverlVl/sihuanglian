@@ -13,6 +13,7 @@ class DictionaryDetailController extends Controller {
 		const { ctx } = this
 		// get 传值
 		const code = ctx.query.code
+
 		const result = await ctx.service.dictionaryDetail.selectDictionaryDetail(code)
 		// 返回对象数组
 		ctx.body = result
