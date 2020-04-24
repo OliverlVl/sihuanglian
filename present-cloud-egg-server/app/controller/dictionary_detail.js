@@ -30,6 +30,35 @@ class DictionaryDetailController extends Controller {
 		)
 		ctx.body = result
 	}
+
+	// 根据code增加记录
+	async insertDictionaryDetail() {
+		const { ctx } = this
+		// post 数据
+		const info = ctx.request.body
+		console.log(info)
+		const result = await ctx.service.dictionaryDetail.insertDictionaryDetail(
+			info.code,
+			info.item_key,
+			info.item_value,
+			info.order_number,
+			info.is_default,
+			info.dictionary_id
+		)
+		ctx.body = result
+	}
+
+	// 根据id删除记录
+	async deleteDictionaryDetail() {
+		const { ctx } = this
+		// get 传值
+		const id = ctx.query.idid
+		const result = await ctx.service.dictionaryDetail.deleteDictionaryDetail(id)
+		ctx.body = result
+	}
+
+
+
 }
 
 module.exports = DictionaryDetailController;
