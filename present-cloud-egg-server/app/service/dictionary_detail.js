@@ -37,12 +37,12 @@ class DictionaryDetailService extends Service {
 
 			})
 		// console.log(result[0])
-		if(result[0] != 0){
+		if (result[0] != 0) {
 			return {
 				code: 200,
 				msg: "修改成功"
 			}
-		} else{
+		} else {
 			return {
 				code: -1,
 				msg: "修改失败"
@@ -51,7 +51,7 @@ class DictionaryDetailService extends Service {
 	}
 
 	// 根据code增加记录
-	async insertDictionaryDetail(code,item_key, item_value,order_number,is_default,dictionary_id) {
+	async insertDictionaryDetail(code, item_key, item_value, order_number, is_default, dictionary_id) {
 		const { ctx } = this
 
 		const result = await ctx.model.DictionaryDetail.create({
@@ -60,26 +60,27 @@ class DictionaryDetailService extends Service {
 			item_value: item_value,
 			order_number: order_number,
 			is_default: is_default,
-			dictionary_id:dictionary_id
+			dictionary_id: dictionary_id
 		})
 		// console.log(result[0])
-		if(result[0] != 0){
+		if (result[0] != 0) {
 			return {
 				code: 200,
 				msg: "增加成功"
 			}
-		} else{
+		} else {
 			return {
 				code: -1,
 				msg: "增加失败"
 			}
 		}
 	}
-	
+
 	// 根据id删除记录
-	async deleteDictionaryDetail(id) {id
+	async deleteDictionaryDetail(id) {
+		id
 		const { ctx } = this
-		
+
 		const result = await ctx.model.DictionaryDetail.destroy({
 			where: {
 				detail_id: id
