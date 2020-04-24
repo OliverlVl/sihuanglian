@@ -14,10 +14,9 @@ class SelectCourseController extends Controller {
 		// user_id 从session中获取
 		const user_id = 1
 		// course_number 由Get传入
-		const course_number = ctx.query
-		console.log(user_id, course_number)
-		const result = await ctx.service.selectCourse.addCourse(user_id, course_number.course_number)
-
+		const c_id = ctx.query
+		const result = await ctx.service.selectCourse.addCourse(user_id, c_id.course_id)
+		ctx.body = result
 	}
 }
 
