@@ -4,13 +4,14 @@ import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
 
-const s_course = resolve => require(['../components/page/S_course.vue'], resolve)
+
 const table = resolve => require(['../components/page/BaseTable.vue'], resolve)
 const login = resolve => require(['../components/page/login.vue'], resolve)
 const forget = resolve => require(['../components/page/ForgetForm.vue'], resolve)
 const err403 = resolve => require(['../components/page/403.vue'], resolve)
 const err404 = resolve => require(['../components/page/404.vue'], resolve)
 const err500 = resolve => require(['../components/page/500.vue'], resolve)
+const list = resolve => require(['../components/page/List.vue'], resolve)
 
 export default new Router({
   mode: 'history',  //把Router的mode修改为history模式,VueRouter默认的模式为HASH模式
@@ -20,16 +21,7 @@ export default new Router({
       name: 'HelloWorld',
       component: HelloWorld
     },
-    {
-      // 课程管理页面
-      path: '/s_course',
-      component: s_course,
-      name: 's_course',
-      meta: {
-        title: '课程管理',
-        requireAuth: true
-      }
-    },
+   
     {
       path: '/table',
       component: table,
@@ -81,6 +73,16 @@ export default new Router({
       name: 'err500',
       meta: {
         title: '500',
+        requireAuth: true
+      }
+    },
+     {
+      // 课程管理页面
+      path: '/list',
+      component: list,
+      name: 'list',
+      meta: {
+        title: '课程列表页',
         requireAuth: true
       }
     }
