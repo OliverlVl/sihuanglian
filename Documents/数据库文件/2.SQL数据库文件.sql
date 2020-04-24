@@ -1,12 +1,16 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.04.17 20:49:52                          */
+/* Created on:     2020.04.24 17:00:18                          */
 /*==============================================================*/
 
 
 drop table if exists admin;
 
 drop table if exists course;
+
+drop table if exists dictionary;
+
+drop table if exists dictionary_detail;
 
 drop table if exists feedback;
 
@@ -55,6 +59,40 @@ create table course
    update_time          datetime,
    updater              varchar(20),
    primary key (course_id)
+);
+
+/*==============================================================*/
+/* Table: dictionary                                            */
+/*==============================================================*/
+create table dictionary
+(
+   dictionary_id        int not null,
+   name                 varchar(20),
+   code                 varchar(20),
+   create_time          datetime,
+   creator              varchar(20),
+   update_time          datetime,
+   updater              varchar(20),
+   primary key (dictionary_id)
+);
+
+/*==============================================================*/
+/* Table: dictionary_detail                                     */
+/*==============================================================*/
+create table dictionary_detail
+(
+   detail_id            int not null,
+   code                 varchar(20),
+   item_key             int,
+   item_value           varchar(20),
+   order_number         int,
+   is_default           int comment '1代表是，0代表不是',
+   dictionary_id        int,
+   create_time          datetime,
+   creator              varchar(20),
+   update_time          datetime,
+   updater              varchar(20),
+   primary key (detail_id)
 );
 
 /*==============================================================*/
@@ -142,7 +180,7 @@ create table student
    student_id           int not null auto_increment,
    student_number       int not null,
    student_name         varchar(20) not null,
-   student_sex          varchar(10) not null,
+   student_sex          int not null,
    student_telephone    int not null,
    student_mailbox      varchar(20),
    student_born_time    date,
@@ -165,7 +203,7 @@ create table teacher
    teacher_id           int not null auto_increment,
    teacher_number       int not null,
    teacher_name         varchar(20) not null,
-   teacher_sex          varchar(10) not null,
+   teacher_sex          int not null,
    teacher_telephone    int not null,
    student_mailbox      varchar(20),
    teacher_born_time    date,
@@ -199,6 +237,9 @@ create table teacher_sign_in
 
 alter table course add constraint FK_Reference_9 foreign key (course_teacher_id)
       references teacher (teacher_id) on delete restrict on update restrict;
+
+alter table dictionary_detail add constraint FK_Reference_11 foreign key (dictionary_id)
+      references dictionary (dictionary_id) on delete restrict on update restrict;
 
 alter table information add constraint FK_Reference_10 foreign key (admin_id)
       references admin (admin_id) on delete restrict on update restrict;
