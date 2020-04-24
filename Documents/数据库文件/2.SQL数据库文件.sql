@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.04.24 16:55:56                          */
+/* Created on:     2020.04.24 17:00:18                          */
 /*==============================================================*/
 
 
@@ -85,7 +85,7 @@ create table dictionary_detail
    code                 varchar(20),
    item_key             int,
    item_value           varchar(20),
-   "order"              int,
+   order_number         int,
    is_default           int comment '1代表是，0代表不是',
    dictionary_id        int,
    create_time          datetime,
