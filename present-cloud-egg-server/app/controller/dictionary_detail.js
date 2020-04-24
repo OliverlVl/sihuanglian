@@ -53,7 +53,7 @@ class DictionaryDetailController extends Controller {
 	async deleteDictionaryDetail() {
 		const { ctx } = this
 		// get 传值
-		const id = ctx.query.idid
+		const id = ctx.query.id
 		const result = await ctx.service.dictionaryDetail.deleteDictionaryDetail(id)
 		ctx.body = result
 	}
