@@ -12,6 +12,8 @@ const err403 = resolve => require(['../components/page/403.vue'], resolve)
 const err404 = resolve => require(['../components/page/404.vue'], resolve)
 const err500 = resolve => require(['../components/page/500.vue'], resolve)
 const list = resolve => require(['../components/page/List.vue'], resolve)
+const dict = resolve => require(['../components/page/dataDictionary/DictionaryContainer.vue'], resolve)
+
 
 export default new Router({
   mode: 'history',  //把Router的mode修改为history模式,VueRouter默认的模式为HASH模式
@@ -21,7 +23,7 @@ export default new Router({
       name: 'HelloWorld',
       component: HelloWorld
     },
-   
+
     {
       path: '/table',
       component: table,
@@ -76,7 +78,7 @@ export default new Router({
         requireAuth: true
       }
     },
-     {
+    {
       // 课程管理页面
       path: '/list',
       component: list,
@@ -85,6 +87,16 @@ export default new Router({
         title: '课程列表页',
         requireAuth: true
       }
+    },
+    {
+      path: '/dict',
+      component: dict,
+      name: 'dataDictionary',
+      hidden: false,
+      meta: { title: '数据字典', 
+        requireAuth: true,
+      noCache: true 
+      },
     }
 
   ]
