@@ -20,11 +20,11 @@ module.exports = app => {
 			allowNull: true
 		},
 		student_sex: {
-			type: STRING,
+			type: INTEGER,
 			allowNull: true
 		},
 		student_telephone: {
-			type: INTEGER,
+			type: STRING,
 			allowNull: true,
 			unique: true
 		},

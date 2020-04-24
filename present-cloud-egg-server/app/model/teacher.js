@@ -22,12 +22,12 @@ module.exports = app => {
 			defaultValue: null
 		},
 		teacher_sex: {
-			type: STRING,
+			type: INTEGER,
 			allowNull: true,
 			defaultValue: null
 		},
 		teacher_telephone: {
-			type: INTEGER,
+			type: STRING,
 			allowNull: true,
 			defaultValue: null,
 			unique: true

@@ -23,7 +23,7 @@ module.exports = appInfo => {
     dialect: 'mysql', // 表示使用mysql
     host: '127.0.0.1', // 连接的数据库主机地址
     port: 3306, // mysql服务端口
-    database: 'present-cloud', // 数据库名
+    database: 'present_cloud', // 数据库名
     username: 'root', // 数据库用户名
     password: 'Admin888', // 数据库密码
     pool: {
