@@ -50,6 +50,56 @@ class DictionaryDetailService extends Service {
 		}
 	}
 
+	// 根据code增加记录
+	async insertDictionaryDetail(code,item_key, item_value,order_number,is_default,dictionary_id) {
+		const { ctx } = this
+
+		const result = await ctx.model.DictionaryDetail.create({
+			code: code,
+			item_key: item_key,
+			item_value: item_value,
+			order_number: order_number,
+			is_default: is_default,
+			dictionary_id:dictionary_id
+		})
+		// console.log(result[0])
+		if(result[0] != 0){
+			return {
+				code: 200,
+				msg: "增加成功"
+			}
+		} else{
+			return {
+				code: -1,
+				msg: "增加失败"
+			}
+		}
+	}
+	
+	// 根据id删除记录
+	async deleteDictionaryDetail(id) {id
+		const { ctx } = this
+		
+		const result = await ctx.model.DictionaryDetail.destroy({
+			where: {
+				detail_id: id
+			}
+		})
+		console.log(result)
+		if (result != 0) {
+			return result
+		} else {
+			return {
+				code: -1,
+				msg: "删除失败"
+			}
+		}
+	}
+
+
+
+
+
 }
 
 module.exports = DictionaryDetailService;
