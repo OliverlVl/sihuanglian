@@ -1,0 +1,162 @@
+@import './variables.less';
+
+html {
+  height: 100%;
+}
+// 主要颜色
+.red {
+  color: red !important;
+}
+
+//主要页面css样式
+.mce-statusbar {
+  display: none !important;
+}
+
+.svg-icon {
+  margin-right: 5px;
+}
+
+.blank-line {
+  margin-bottom: 10px;
+}
+
+.main-wrapper {
+  //margin: 10px 10px 0;
+  //min-height: 600px;
+}
+
+.main-tab-wrapper {
+
+}
+
+.table-wrapper {
+  //background: #ffffff;
+  //padding: 5px;
+  padding-bottom: 30px;
+}
+
+.search-wrapper-right {
+  padding: 5px 0 0;
+  background-color: #ffffff;
+  margin-bottom: 10px;
+  float: right;
+}
+
+.pagination-wrapper {
+  text-align: right;
+  padding-top: 10px;
+}
+
+.table-btn {
+  padding: 0;
+}
+
+.edit-dialog-form {
+  //margin:0 30px;
+}
+
+p {
+  margin: 0;
+}
+
+.el-table .warning-row {
+  background: #fdf6ec;
+}
+
+.el-table .primary-row {
+  background: #b3d8ff;
+}
+
+.el-table .success-row {
+  background: #c2e7b0;
+}
+
+.router-link {
+  color: #20a0ff;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: .5em;
+  color: #abb2bf;
+  background: #282c34;
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  border: 5px solid transparent;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, .2) inset;
+}
+
+::-webkit-scrollbar-thumb {
+  min-height: 20px;
+  background-clip: content-box;
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, .2) inset;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.search-form {
+  .el-form-item {
+    margin-bottom: 3px;
+  }
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.el-card-tight {
+  .el-card__header {
+    padding: 5px;
+  }
+
+  .el-card__body {
+    padding: 0;
+  }
+}
+
+.page-header {
+  background: #fff;
+  h2 {
+    padding: 12px 0;
+    margin: 0;
+  }
+}
+
+.page-body {
+  //padding: 0 6px;
+  //padding-bottom: 12px;
+  background: #ffffff;
+  margin: 15px;
+  padding: 20px;
+}
+
+//小屏幕样式
+@media screen and (max-width: 400px) {
+  .el-dialog {
+    width: 95%
+  }
+  .page-body {
+    padding: 6px 10px 0;
+  }
+}
+
+.model_file_btn {
+  color: #20a0ff;
+  text-decoration: underline;
+  cursor: pointer;
+}

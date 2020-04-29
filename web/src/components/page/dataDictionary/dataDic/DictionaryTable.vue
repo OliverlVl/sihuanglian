@@ -102,10 +102,7 @@
                 if (a === undefined || a === null) return false;
                 return a.indexOf(tmp) >= 0;
             },
-            setdataKey (data) {
-                if (data === 'System') return '系统参数';
-                else return '标准参数';
-            }
+
         }
     }
 </script>

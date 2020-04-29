@@ -4,7 +4,8 @@ import {setToken, getToken, removeToken} from '../utils/auth';
 import store from '../store/index'
 
 const service = axios.create({
-    baseURL: 'http://59.77.134.232/star/api', // process.env.VUE_APP_BASE_API, // api的base_url
+    baseURL: 'http://59.77.134.232/star/api', 
+    // process.env.VUE_APP_BASE_API, // api的base_url
     timeout: 5000
 })
 
@@ -38,8 +39,9 @@ service.interceptors.response.use(
     // response => response,
     error => {
         console.log(error);
+    
         if (constant.ERROR_CODE_NETWORK_ERROR === error.code) {
-            message.showError('网络错误!');
+            message.showError('123!');
             return;
             // return Promise.reject();
         }
@@ -48,6 +50,7 @@ service.interceptors.response.use(
             message.showError(data.msg);
         } else {
             message.showError(error.message);
+            
         }
     }
 );

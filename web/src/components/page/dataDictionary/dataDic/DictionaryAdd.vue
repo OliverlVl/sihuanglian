@@ -6,7 +6,7 @@
                 ref="dictAddForm"
                 :model="dictData"
                 size="small"
-                :rules="rules"
+                
                 v-loading="showLoading"
                 label-width="100px"
                 label-position="right"

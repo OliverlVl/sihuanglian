@@ -2,7 +2,7 @@ import request from '@/api/request'
 import {setToken, getToken, removeToken} from '@/utils/auth';
 
 const dictionaryMainAPI = {
-    base_url: '/dic/',
+    base_url: '/dict/',
     getAllDictList: function () {
         return request({
             url: this.base_url + 'data',
