@@ -13,8 +13,8 @@ const err404 = resolve => require(['../components/page/404.vue'], resolve)
 const err500 = resolve => require(['../components/page/500.vue'], resolve)
 const list = resolve => require(['../components/page/List.vue'], resolve)
 const dict = resolve => require(['../components/page/dataDictionary/DictionaryContainer.vue'], resolve)
-
-
+const user = resolve => require(['../components/page/userManage/UserIndex.vue'], resolve)
+const role = resolve => require(['../components/page/roleManage/RoleMainIndex.vue'], resolve)
 export default new Router({
   mode: 'history',  //把Router的mode修改为history模式,VueRouter默认的模式为HASH模式
   routes: [
@@ -97,6 +97,21 @@ export default new Router({
         requireAuth: true,
       noCache: true 
       },
+    },
+    {
+      path: '/user',
+      component: user,
+      name: 'userManage',
+      hidden: false,
+      meta: { title: '用户管理', noCache: true, icon: 'account'
+      },
+    },
+     {
+      path: '/role',
+      component: role,
+      name: 'userManage',
+      hidden: false,
+      meta: { title: '角色管理', noCache: true, icon: 'edit'},
     }
 
   ]

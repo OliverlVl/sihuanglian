@@ -41,7 +41,7 @@ service.interceptors.response.use(
         console.log(error);
     
         if (constant.ERROR_CODE_NETWORK_ERROR === error.code) {
-            message.showError('123!');
+            message.showError('连接错误!');
             return;
             // return Promise.reject();
         }
