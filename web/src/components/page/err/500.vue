@@ -1,16 +1,16 @@
 <template>
-    <div class="img404"></div>
+    <div class="img500"></div>
 </template>
 
 <script>
     export default {
-        name: 'page404'
+        name: 'Page500'
     }
 </script>
 
 <style scoped>
-    .img404{
-        background: url("../../assets/page404.png") no-repeat center;
+    .img500{
+        background: url("../../../assets/page500.png") no-repeat center;
         background-size: cover;
         width:100%;
         height: 100%;

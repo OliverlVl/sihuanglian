@@ -6,15 +6,16 @@ Vue.use(Router)
 
 
 const table = resolve => require(['../components/page/BaseTable.vue'], resolve)
-const login = resolve => require(['../components/page/login.vue'], resolve)
-const forget = resolve => require(['../components/page/ForgetForm.vue'], resolve)
-const err403 = resolve => require(['../components/page/403.vue'], resolve)
-const err404 = resolve => require(['../components/page/404.vue'], resolve)
-const err500 = resolve => require(['../components/page/500.vue'], resolve)
+const login = resolve => require(['../components/page/loginManage/login.vue'], resolve)
+const forget = resolve => require(['../components/page/loginManage/ForgetForm.vue'], resolve)
+const err403 = resolve => require(['../components/page/err/403.vue'], resolve)
+const err404 = resolve => require(['../components/page/err/404.vue'], resolve)
+const err500 = resolve => require(['../components/page/err/500.vue'], resolve)
 const list = resolve => require(['../components/page/List.vue'], resolve)
 const dict = resolve => require(['../components/page/dataDictionary/DictionaryContainer.vue'], resolve)
 const user = resolve => require(['../components/page/userManage/UserIndex.vue'], resolve)
 const role = resolve => require(['../components/page/roleManage/RoleMainIndex.vue'], resolve)
+const menu = resolve => require(['../components/page/menuManage/MenuIndex.vue'], resolve)
 export default new Router({
   mode: 'history',  //把Router的mode修改为history模式,VueRouter默认的模式为HASH模式
   routes: [
@@ -109,9 +110,16 @@ export default new Router({
      {
       path: '/role',
       component: role,
-      name: 'userManage',
+      name: 'rolerManage',
       hidden: false,
       meta: { title: '角色管理', noCache: true, icon: 'edit'},
+    },
+     {
+      path: '/menu',
+      component: menu,
+      name: 'menuManage',
+      hidden: false,
+      meta: {title: '菜单管理', noCache: true},
     }
 
   ]
