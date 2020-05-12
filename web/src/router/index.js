@@ -6,6 +6,7 @@ Vue.use(Router)
 
 
 const table = resolve => require(['../components/page/BaseTable.vue'], resolve)
+const form = resolve => require(['../components/page/BaseForm.vue'], resolve)
 const login = resolve => require(['../components/page/loginManage/login.vue'], resolve)
 const forget = resolve => require(['../components/page/loginManage/ForgetForm.vue'], resolve)
 const err403 = resolve => require(['../components/page/err/403.vue'], resolve)
@@ -16,6 +17,7 @@ const dict = resolve => require(['../components/page/dataDictionary/DictionaryCo
 const user = resolve => require(['../components/page/userManage/UserIndex.vue'], resolve)
 const role = resolve => require(['../components/page/roleManage/RoleMainIndex.vue'], resolve)
 const menu = resolve => require(['../components/page/menuManage/MenuIndex.vue'], resolve)
+const organ = resolve => require(['../components/page/organManage.vue'], resolve)
 export default new Router({
   mode: 'history',  //把Router的mode修改为history模式,VueRouter默认的模式为HASH模式
   routes: [
@@ -29,6 +31,15 @@ export default new Router({
       path: '/table',
       component: table,
       name: 'table',
+      meta: {
+        title: '基础表格',
+        requireAuth: true
+      }
+    },   
+    {
+      path: '/form',
+      component: form,
+      name: 'form',
       meta: {
         title: '基础表格',
         requireAuth: true
@@ -120,6 +131,13 @@ export default new Router({
       name: 'menuManage',
       hidden: false,
       meta: {title: '菜单管理', noCache: true},
+    },
+    {
+      path: '/organ',
+      component: organ,
+      name: 'organManage',
+      hidden: false,
+      meta: {title: '组织管理', noCache: true},
     }
 
   ]
