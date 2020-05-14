@@ -12,52 +12,18 @@
                 label-position="right"
                 @keyup.enter.native="editSubmit">
             <el-row :gutter="20">
+
                 <el-col :md="12" :sm="24">
-                    <el-form-item label="字典名称:" prop="dataValue">
-                        {{dataSelectData.dictionary.dataValue}}
+                    <el-form-item label="经验:">
+                        <el-input v-model="dataSelectData.exp"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :md="12" :sm="24">
-                    <el-form-item label="字典key:" prop="dictionary">
-                        {{dataSelectData.dictionary.dataKey}}
+                 <el-col :md="12" :sm="24">
+                    <el-form-item label="距离:">
+                        <el-input v-model="dataSelectData.distance"></el-input>
                     </el-form-item>
                 </el-col>
-                <el-col :md="12" :sm="24">
-                    <el-form-item label="参数名称:" prop="contentValue">
-                        <el-input v-model="dataSelectData.contentValue"></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :md="12" :sm="24">
-                    <el-form-item label="参数值:" prop="contentKey">
-                        <el-input v-model="dataSelectData.contentKey"></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :md="12" :sm="24">
-                    <el-form-item label="序列:" prop="sequence">
-                        <el-input v-model="dataSelectData.sequence"></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :md="12" :sm="24">
-                    <el-form-item label="状态:" prop="status">
-                        <el-select v-model="dataSelectData.status">
-                            <el-option v-for="item in statusOptionsList"
-                                       :key="item.value"
-                                       :label="item.label"
-                                       :value="item.value"
-                                       placeholder="请选择">
-                            </el-option>
-                        </el-select>
-                    </el-form-item>
-                </el-col>
-                <el-col :md="24" :sm="24">
-                    <el-form-item label="描述:" prop="describe">
-                        <el-input
-                                type="textarea"
-                                :rows="3"
-                                placeholder="请输入内容"
-                                v-model="dataSelectData.describe"></el-input>
-                    </el-form-item>
-                </el-col>
+
             </el-row>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -72,11 +38,12 @@
     import {showMessage, showSimpleConfirm, showSuccess, showInfo} from '@/utils/message';
 
     export default {
-        name: 'DataSelectEdi',
+        name: 'DataSelectEdit',
         data () {
             return {
                 dataSelectData: {
-                    dictionary: {}
+                   exp:'',
+                   distance:''
                 },
                 dialogVisible: false, // 控制添加用户的弹出框是否显示
                 showLoading: false, // 控制组件加载动画
