@@ -1,6 +1,6 @@
 <template>
   <div class="dict-manage-container">
-    <page-header title="数据字典管理"></page-header>
+    <page-header title="数据字典与系统参数管理"></page-header>
     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
       <el-tab-pane label="数据字典" name="first">
         <dictionary-index></dictionary-index>

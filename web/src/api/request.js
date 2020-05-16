@@ -6,7 +6,7 @@ import store from '../store/index'
 const service = axios.create({
     baseURL: 'http://59.77.134.232/star/api', 
     // process.env.VUE_APP_BASE_API, // api的base_url
-    timeout: 5000
+    timeout: 10
 })
 
 const NOT_LOGIN = constant.ERROR_CODE_NOT_LOGIN;
@@ -41,7 +41,7 @@ service.interceptors.response.use(
         console.log(error);
     
         if (constant.ERROR_CODE_NETWORK_ERROR === error.code) {
-            message.showError('连接错误!');
+            // message.showError('连接错误!');
             return;
             // return Promise.reject();
         }
