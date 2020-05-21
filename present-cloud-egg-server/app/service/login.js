@@ -49,7 +49,7 @@ class LoginService extends Service {
 
 
     //查找用户
-    async selectUser(user){
+    async selectUser(user) {
         const { ctx } = this;
         const result = await ctx.model.Login.findOne({
             where: {
@@ -58,29 +58,26 @@ class LoginService extends Service {
         })
         if (result == null) {
             return false // 用户不存在
-        } 
+        }
         return result.dataValues;
-        
+
     }
-    
+
     // 修改密码
-    async updatePassword(password){
+    async updatePassword(md5Password, user) {
         const { ctx } = this;
-        const result = await ctx.model.Login.update(password,
-            {
-                where: {
-                    login_password: password
-                }
-            })
+        const result = await ctx.model.Login.update({
+            login_password: md5Password
+        }, {
+            where: { login_password: user.name }
+        })
         return result;
-
-
     }
 
 
 
 
-    
+
 }
 
 module.exports = LoginService;

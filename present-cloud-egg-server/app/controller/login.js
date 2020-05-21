@@ -24,13 +24,13 @@ class LoginController extends Controller {
             // 验证token，请求时在header配置 Authorization=`Bearer ${token}`
             // 特别注意：token不能直接发送，要在前面加上Bearer字符串和一个空格
             ctx.body = { ...result, token } // 返回给前端
-        } else{
-            ctx.body =  {
+        } else {
+            ctx.body = {
                 "code": "404",
                 "msg": "用戶不存在"
-              }
+            }
         }
-        
+
     }
 
     // 注册方法
@@ -55,25 +55,25 @@ class LoginController extends Controller {
 
 
     //修改密码
-	async updatePassword(){
-		const { ctx } = this;
-		const password = ctx.request.body.password;
-		//md5加密
-		const md5Password = await ctx.service.login.getMd5Data(password);
+    async updatePassword() {
+        const { ctx } = this;
+        const password = ctx.request.body.password;
+        //md5加密
+        const md5Password = await ctx.service.login.getMd5Data(password);
         //查找密码
         const user = ctx.request.body;
-        const result1 = await ctx.service.login.selectPassword(user);
+        const user1 = await ctx.service.login.selectPassword(user);
         //修改
-        if(result1 == false){
-            ctx.body = result; //用户不存在
-        }else if(md5Password != result1.login_password){
-            ctx.body = result; //密码错误
-        }else{
-            const result2 = await ctx.service.login.updatePassword(result1)
-            ctx.body = result[0]; 
+        if (user1 == false) {
+            ctx.body = { status: "用户不存在" }; //用户不存在
+        } else if (md5Password != user1.login_password) {
+            ctx.body = { status: "密码错误" }; //密码错误
+        } else {
+            const result = await ctx.service.login.updatePassword(md5Password, user)
+            ctx.body = { status: "修改成功" };
         }
 
-	}
+    }
 
 }
 
