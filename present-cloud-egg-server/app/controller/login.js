@@ -53,6 +53,28 @@ class LoginController extends Controller {
         ctx.body = await ctx.service.login.getMd5Data(ctx.params.data);
     }
 
+
+    //修改密码
+	async updatePassword(){
+		const { ctx } = this;
+		const password = ctx.request.body.password;
+		//md5加密
+		const md5Password = await ctx.service.login.getMd5Data(password);
+        //查找密码
+        const user = ctx.request.body;
+        const result1 = await ctx.service.login.selectPassword(user);
+        //修改
+        if(result1 == false){
+            ctx.body = result; //用户不存在
+        }else if(md5Password != result1.login_password){
+            ctx.body = result; //密码错误
+        }else{
+            const result2 = await ctx.service.login.updatePassword(result1)
+            ctx.body = result[0]; 
+        }
+
+	}
+
 }
 
 module.exports = LoginController;

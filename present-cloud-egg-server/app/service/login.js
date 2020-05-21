@@ -44,6 +44,43 @@ class LoginService extends Service {
     getMd5Data(data) {
         return crypto.createHash('md5').update(data).digest('hex');
     }
+
+
+
+
+    //查找用户
+    async selectUser(user){
+        const { ctx } = this;
+        const result = await ctx.model.Login.findOne({
+            where: {
+                login_name: user.name,
+            },
+        })
+        if (result == null) {
+            return false // 用户不存在
+        } 
+        return result.dataValues;
+        
+    }
+    
+    // 修改密码
+    async updatePassword(password){
+        const { ctx } = this;
+        const result = await ctx.model.Login.update(password,
+            {
+                where: {
+                    login_password: password
+                }
+            })
+        return result;
+
+
+    }
+
+
+
+
+    
 }
 
 module.exports = LoginService;
