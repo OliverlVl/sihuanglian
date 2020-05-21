@@ -16,17 +16,41 @@ class LoginController extends Controller {
         console.log("LoginController: " + JSON.stringify(user));
         const result = await ctx.service.login.login(user);
         console.log(result);
-        ctx.body = result // 返回给前端
+        if (result != false) {
+            //token
+            const token = this.app.jwt.sign({
+                login_name: user.login_name,
+            }, this.app.config.jwt.secret);
+            // 验证token，请求时在header配置 Authorization=`Bearer ${token}`
+            // 特别注意：token不能直接发送，要在前面加上Bearer字符串和一个空格
+            ctx.body = { ...result, token } // 返回给前端
+        } else{
+            ctx.body =  {
+                "code": "404",
+                "msg": "用戶不存在"
+              }
+        }
+        
     }
 
     // 注册方法
     async register() {
         const { ctx } = this;
         const user = ctx.request.body;
+        console.log(user.login_password)
+        user.login_password = await ctx.service.login.getMd5Data(user.login_password)
+        console.log(user.login_password)
         const result = await ctx.service.login.register(user);
         console.log("注册结果", result);
         ctx.body = result;
 
+    }
+
+    // MD5加密方法
+    async getMd5Data() {
+        const { ctx } = this;
+        // 斜杠传值
+        ctx.body = await ctx.service.login.getMd5Data(ctx.params.data);
     }
 
 }

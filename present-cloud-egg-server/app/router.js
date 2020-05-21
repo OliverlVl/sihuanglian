@@ -4,7 +4,7 @@
  * @param {Egg.Application} app - egg application
  */
 module.exports = app => {
-  const { router, controller } = app;
+  const { router, controller, jwt } = app;
   router.get('/', controller.home.index);
 
   // 配置路由
@@ -12,6 +12,8 @@ module.exports = app => {
 
   // 登录
   router.post('/login', controller.login.login)
+  router.post('/login/index', jwt, controller.login.index)
+  router.get('/getMD5/:data', controller.login.getMd5Data)
 
   // 注册
   router.post('/register', controller.login.register)

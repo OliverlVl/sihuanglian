@@ -57,11 +57,18 @@ module.exports = appInfo => {
     csrf: {
       enable: false //允许跨域访问,关闭csrf认证
     }
+    // 允许访问接口的白名单
+    // ,domainWhiteList: [ 'http://localhost:8080' ],
   };
   config.cors = {
     origin: '*',
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
   };
+
+  // jwt json web token认证
+  config.jwt = {
+    secret: '123456'
+  }
 
   // add your user config here
   const userConfig = {

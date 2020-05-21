@@ -1,8 +1,11 @@
 'use strict';
 
 const Service = require('egg').Service;
+// 引入加密
+const crypto = require('crypto');
 
 class LoginService extends Service {
+
 
     // 登录
     async login(login) {
@@ -10,10 +13,10 @@ class LoginService extends Service {
         const { ctx } = this
         // console.log("LoginService: " + login.name )
         const result = await ctx.model.Login.findOne({
-            where: { 
+            where: {
                 login_name: login.name,
                 login_password: login.password
-            }, 
+            },
             // attributes: ['login_id', 'login_type'] // 指定元素
         })
         // .then(result => {
@@ -21,9 +24,9 @@ class LoginService extends Service {
         // }).catch(err => {
         //     console.log(err)
         // });
-        if(result == null){
+        if (result == null) {
             return false // 用户密码错误
-        } else{
+        } else {
             // console.log(result.dataValues)
             return result.dataValues
         }
@@ -35,6 +38,11 @@ class LoginService extends Service {
         console.log(JSON.stringify(user))
         const result = await ctx.model.Login.create(user);
         return result.dataValues;
+    }
+
+    // 专门对数据进行md5加密的方法，输入明文返回密文
+    getMd5Data(data) {
+        return crypto.createHash('md5').update(data).digest('hex');
     }
 }
 
