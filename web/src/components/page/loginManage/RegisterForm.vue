@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="login_name">
-            <p>签到Star注册</p>
+            <p>注册</p>
         </div>
         <el-form class="login-form" autoComplete="on" ref="registerForm" :model="registerForm" :rules="registerFormRules">
             <el-form-item prop="account">
@@ -23,7 +23,6 @@
                     <div class="svg-container" slot="prefix">
                         <icon name="email" :w="16" :h="16"></icon>
                     </div>
-                    <!--<div slot="suffix" @click="getVercode" class="login-get-code">获取验证码</div>-->
                 </el-input>
                 <clock-click-button type="plain"
                                       style="float: right;width: 35%"

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="login_name">
-            <!--<p>签到Star登录</p>-->
+            <!--<p>登录</p>-->
             
         </div>
         <el-form class="login-form" autoComplete="on" ref="loginForm" :model="loginForm" :rules="loginFormRules">

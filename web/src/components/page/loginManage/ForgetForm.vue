@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="login_name">
-            <p>签到Star忘记密码</p>
+            <p>忘记密码</p>
         </div>
         <el-form class="login-form" autoComplete="on" ref="forgetForm" :model="forgetForm" :rules="forgetFormRules">
             <el-form-item prop="account">
