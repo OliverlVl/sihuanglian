@@ -17,7 +17,7 @@ class LoginController extends Controller {
         //     password: { type: 'string', required: true, message: '必填项' },
         //   };
         // await ctx.validate(rule, loginMsg); // 验证登陆信息是否合法
-        
+
         // 为当前输入的密码加密
         loginMsg.password = await ctx.service.login.getMd5Data(loginMsg.password)
         // 从service文件中拿到返回结果

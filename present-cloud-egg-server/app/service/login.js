@@ -36,7 +36,7 @@ class LoginService extends Service {
         const res = {};
         // 在当前数据库中验证此用户思否存在
         const queryResult = await ctx.model.Login.findOne({
-            where:{
+            where: {
                 login_name: loginMsg.account,
             }
         });
@@ -47,7 +47,7 @@ class LoginService extends Service {
             res.status = 'failed';
         } else {
             const result = await ctx.model.Login.findOne({
-                where:{
+                where: {
                     login_name: loginMsg.account,
                     login_password: loginMsg.password
                 }
