@@ -18,6 +18,9 @@ module.exports = app => {
   // 注册
   router.post('/register', controller.login.register)
 
+  //修改密码
+  router.post('/updatePassword',controller.login.updatePassword)
+
   // 完善老师信息
   router.post('/updateTeacherInfo', controller.teacher.updateTeacherInfo)
 
