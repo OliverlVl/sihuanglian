@@ -75,19 +75,24 @@ class LoginController extends Controller {
     //修改密码
     async updatePassword() {
         const { ctx } = this;
-        const password = ctx.request.body.password;
+        const updateMsg = ctx.request.body;
+        const originalPassword = updateMsg.originalPassword; //原密码
+        const newPassword = updateMsg.newPassword; //新密码
+
         //md5加密
-        const md5Password = await ctx.service.login.getMd5Data(password);
-        //查找密码
-        const user = ctx.request.body;
-        const user1 = await ctx.service.login.selectPassword(user);
-        //修改
-        if (user1 == false) {
+        const md5OriginalPassword = await ctx.service.login.getMd5Data(originalPassword);
+
+        //查找用户
+        const user = await ctx.service.login.selectUser(updateMsg);
+
+        //比较更新
+        if (user == false) {
             ctx.body = { status: "用户不存在" }; //用户不存在
-        } else if (md5Password != user1.login_password) {
+        } else if (md5OriginalPassword != user.login_password) {
             ctx.body = { status: "密码错误" }; //密码错误
         } else {
-            const result = await ctx.service.login.updatePassword(md5Password, user)
+            const md5NewPassword = await ctx.service.login.getMd5Data(newPassword);
+            const result = await ctx.service.login.updatePassword(md5NewPassword, user)
             ctx.body = { status: "修改成功" };
         }
 
