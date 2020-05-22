@@ -99,32 +99,7 @@
             resetForm (formName) {
                 this.$refs[formName].resetFields();
             },
-            // createOpen () {
-            //     if (this.selectOptions === undefined ||
-            //         this.selectOptions === null ||
-            //         this.selectOptions === 0 ||
-            //         this.selectOptions === '请选择') {
-            //         showMessage('error', '请先选择父级字典');
-            //         return;
-            //     }
-            //     this.$refs.dataSelectAdd.openCreate();
-            // },
-            // removeOpen () {
-            //     var row = this.getSelected();
-            //     if (row === undefined) {
-            //         return;
-            //     }
-            //     const _this = this;
-            //     showSimpleConfirm('是否确定删除键值' + row.contentValue + '?', function () {
-            //         console.log(row);
-            //         dictionaryMainAPI.delDataItem(row.id).then(res => {
-            //             showSuccess('删除成功!');
-            //             _this.load();
-            //         })
-            //     }, function () {
-            //         showInfo('取消删除');
-            //     })
-            // },
+          
             // 获取选择列
             getSelected () {
                 var row = this.$refs.dataSelectTable.getSelected();

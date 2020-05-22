@@ -40,7 +40,7 @@
         },
         data () {
             return {
-                username: '庄金惠'
+                username: ''
             }
         },
         methods: {

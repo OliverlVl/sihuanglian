@@ -11,18 +11,7 @@
         <el-table-column prop="sequence" label="序列" align="center" sortable></el-table-column>
         <el-table-column prop="exp" label="签到经验" align="center" ></el-table-column>
         <el-table-column prop="distance" label="签到距离" align="center" ></el-table-column>
-        <!-- <el-table-column prop="status"  width="120"
-                         label="状态"
-                         align="center"
-                         :filters="[{ text: '正常', value: 'Normal' }, { text: '禁用', value: 'Disabled' }]"
-                         :filter-method="filterTag"
-                         filter-placement="bottom-end">
-            <template slot-scope="scope">
-                <el-tag
-                        :type="scope.row.status === 'Disabled' ? 'danger' : 'success'"
-                        close-transition >{{ setDataStatus(scope.row.status) }}</el-tag>
-            </template>
-        </el-table-column> -->
+     
         <el-table-column label="操作" align="center">
             <template slot-scope="scope">
                 <el-button
@@ -49,17 +38,7 @@
         },
         computed: {
             dataInfoList () {
-                // let page = this.search.page !== undefined ? this.search.page : 1;
-                // let pageSize = this.search.pageSize !== undefined ? this.search.pageSize : 15;
-                // // console.log( this.search.query.text)
-                // let tmpList = this.dataInfo.filter((item) => {
-                //     return this.checkStringIn(item.contentKey, this.search.query.text) ||
-                //         this.checkStringIn(item.contentValue, this.search.query.text)
-                //     // return true;
-                // })
-                // let total = tmpList.length;
-                // this.search.total = total;
-                // return tmpList.slice((page - 1) * pageSize, page * pageSize > total ? total : page * pageSize);
+       
             },
             tableIndex () {
                 let page = this.search.page !== undefined ? this.search.page : 1;
