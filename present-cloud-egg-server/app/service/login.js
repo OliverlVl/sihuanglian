@@ -106,12 +106,12 @@ class LoginService extends Service {
     }
 
     // 修改密码
-    async updatePassword(md5Password, user) {
+    async updatePassword(md5NewPassword, user) {
         const { ctx } = this;
         const result = await ctx.model.Login.update({
-            login_password: md5Password
+            login_password: md5NewPassword
         }, {
-            where: { login_password: user.name }
+            where: { login_name: user.login_name }
         })
         return result;
     }
