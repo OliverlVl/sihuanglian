@@ -9,11 +9,16 @@ module.exports = {
   // 数据库ORM
   sequelize: {
     enable: true,
-    package: 'egg-sequelize'
+    package: 'egg-sequelize',
   },
   // 跨域请求
   cors: {
     enable: true,
     package: 'egg-cors',
+  },
+  // token 认证
+  jwt: {
+    enable: true,
+    package: 'egg-jwt',
   }
 };

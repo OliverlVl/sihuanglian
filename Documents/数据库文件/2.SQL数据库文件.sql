@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.04.24 17:32:35                          */
+/* Created on:     2020.05.22 17:17:28                          */
 /*==============================================================*/
 
 
@@ -23,6 +23,8 @@ drop table if exists select_course;
 drop table if exists sign_in;
 
 drop table if exists student;
+
+drop table if exists system_parameter;
 
 drop table if exists teacher;
 
@@ -193,6 +195,17 @@ create table student
    updater              varchar(20),
    primary key (student_id),
    unique key UNQ_User_telephone (student_telephone)
+);
+
+/*==============================================================*/
+/* Table: system_parameter                                      */
+/*==============================================================*/
+create table system_parameter
+(
+   id                   int not null,
+   parameter_name       varchar(20),
+   parameter_value      varchar(20),
+   primary key (id)
 );
 
 /*==============================================================*/
