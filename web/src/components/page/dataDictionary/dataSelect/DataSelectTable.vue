@@ -40,11 +40,11 @@
             dataInfoList () {
        
             },
-            tableIndex () {
-                let page = this.search.page !== undefined ? this.search.page : 1;
-                let pageSize = this.search.pageSize !== undefined ? this.search.pageSize : 15;
-                return pageSize * (page - 1);
-            }
+            // tableIndex () {
+            //     let page = this.search.page !== undefined ? this.search.page : 1;
+            //     let pageSize = this.search.pageSize !== undefined ? this.search.pageSize : 15;
+            //     return pageSize * (page - 1);
+            // }
         },
         data () {
             return {
@@ -61,17 +61,18 @@
             load (event) {
                 if (event === undefined || event === null || event === '请选择') { return; }
                 this.loadingStart();
-                dictionaryMainAPI.getDataInfo(event).then(res => {
+                dictionaryMainAPI.getDataInfo().
+                then(res => {
                     this.loadingEnd();
-                    this.dataInfo = res.data;
+                    this.tableData = res.data;
                 }).catch(error => {
                     console.log(error);
                     this.loadingEnd();
                 });
             },
             // 打开编辑窗口
-            openEdit (row) {
-                this.$emit('openEdit', row);
+            openEdit () {
+                this.$emit('openEdit');
             },
             // 开始加载的动画
             loadingStart () {

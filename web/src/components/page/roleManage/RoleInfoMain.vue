@@ -33,12 +33,7 @@
                                    :options="typeOptionsList" :disabled="!editable"></simple-select>
                     </el-form-item>
                 </el-col>
-                <!--<el-col :md="24" :sm="24">-->
-                    <!--<el-form-item label="分组:" prop="group">-->
-                    <!--<simple-select v-model="roleData.group" :options="groupOptionsList" :allowCreate="true" v-if="editable"></simple-select>-->
-                    <!--<span v-else>{{roleData.group}}</span>-->
-                    <!--</el-form-item>-->
-                <!--</el-col>-->
+            
                 <el-col :md="24" :sm="24">
                     <el-form-item label="说明:" prop="detail">
                         <el-input v-model="roleData.detail" v-if="editable"></el-input>

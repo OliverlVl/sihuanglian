@@ -42,8 +42,8 @@
         data () {
             return {
                 dataSelectData: {
-                   exp:'',
-                   distance:''
+                //    exp:'',
+                //    distance:''
                 },
                 dialogVisible: false, // 控制添加用户的弹出框是否显示
                 showLoading: false, // 控制组件加载动画
@@ -85,11 +85,11 @@
                 })
             },
             // 打开编辑用户信息窗口
-            openEdit (dataId) {
-                this.dataId = dataId;
+            openEdit () {
+                
                 this.loadingStart();
-                console.log(dataId)
-                dictionaryMainAPI.getDataItem(dataId).then(res => {
+                
+                dictionaryMainAPI.getDataInfo().then(res => {
                     console.log(res)
                     this.dataSelectData = res.data;
                     this.loadingEnd();

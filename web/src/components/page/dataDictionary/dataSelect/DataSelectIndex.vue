@@ -64,8 +64,8 @@
             //     this.selectOptions = data;
             //     this.$refs.dataSelectTable.load(data);
             // },
-            openEdit (row) {
-                this.$refs.dataSelectEdit.openEdit(row.id);
+            openEdit () {
+                this.$refs.dataSelectEdit.openEdit();
             },
             // 开始加载的动画
             loadingStart () {
