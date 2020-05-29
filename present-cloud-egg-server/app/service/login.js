@@ -3,6 +3,7 @@
 const Service = require('egg').Service;
 // 引入加密
 const crypto = require('crypto');
+const JWT = require('jsonwebtoken');
 
 class LoginService extends Service {
 
@@ -59,11 +60,12 @@ class LoginService extends Service {
                 res.status = 'failed';
             } else {
                 // 签发token
-                const token = this.app.jwt.sign({
+                // const token = this.app.jwt.sign({
+                const token = JWT.sign({
                     account: result.login_name,
                 },
-                    this.app.config.jwt.secret, {
-                    expiresIn: 60 * 60,
+                    this.config.jwts.secret, {
+                    expiresIn: "30 days",
                 });
                 res.data = result;
                 res.code = 1;

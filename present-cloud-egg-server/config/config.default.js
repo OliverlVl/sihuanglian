@@ -16,7 +16,9 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1587018386698_6134';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = [
+    'jwts'
+  ];
 
   //数据库ORM
   config.sequelize = {
@@ -67,6 +69,10 @@ module.exports = appInfo => {
 
   // jwt json web token认证
   config.jwt = {
+    secret: '123456'
+  }
+
+  config.jwts = {
     secret: '123456'
   }
 
