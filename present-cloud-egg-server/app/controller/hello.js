@@ -57,7 +57,6 @@ class helloController extends Controller {
 		const { ctx } = this
 		// get 传值
 		const code = ctx.query.code
-
 		const result = await ctx.service.dictionaryDetail.selectDictionaryDetail(code)
 		// 返回对象数组
 		ctx.body = result
@@ -99,6 +98,30 @@ class helloController extends Controller {
 		const result = await ctx.service.dictionaryDetail.deleteDictionaryDetail(id)
 		ctx.body = result
 	}
+
+	// ------------------------系统参数------------------------
+
+	// 
+	async selcetSystemParameterAll(){
+		const { ctx } = this;
+		const result = await ctx.service.systemParameter.selcetSystemParameterAll();
+		ctx.body = result;
+
+	}
+
+	// 修改某个系统参数值
+	async updateSystemParameter() {
+		const { ctx } = this
+		// post 数据
+		const systemParameter = ctx.request.body
+		const result = await ctx.service.systemParameter.updateSystemParameter(
+			systemParameter.exp,
+			systemParameter.distance
+		)
+		ctx.body = result
+	}		
+
+	
 
 
 
