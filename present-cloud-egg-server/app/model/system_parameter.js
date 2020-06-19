@@ -14,12 +14,12 @@ module.exports = app => {
 		parameter_name: {
 			type: STRING,
 			allowNull: true
-        },
-        parameter_value: {
+		},
+		parameter_value: {
 			type: STRING,
 			allowNull: true
 		},
-		
+
 	}, {
 		tableName: 'system_parameter'
 	});
