@@ -35,6 +35,8 @@ class LoginService extends Service {
     async login(loginMsg) {
         const { ctx } = this;
         const res = {};
+        // 为当前输入的密码加密 ### md5加密
+        loginMsg.password = crypto.createHash('md5').update(loginMsg.password).digest('hex')
         // 在当前数据库中验证此用户思否存在
         const queryResult = await ctx.model.Login.findOne({
             where: {
@@ -79,7 +81,9 @@ class LoginService extends Service {
     // 注册
     async register(user) {
         const { ctx } = this;
-        console.log(JSON.stringify(user))
+        console.log(JSON.stringify(user));
+        // md5加密
+        user.login_password =  crypto.createHash('md5').update(user.login_password).digest('hex');
         const result = await ctx.model.Login.create(user);
         return result.dataValues;
     }
