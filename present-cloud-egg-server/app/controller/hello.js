@@ -101,8 +101,8 @@ class helloController extends Controller {
 
 	// ------------------------系统参数------------------------
 
-	// 
-	async selcetSystemParameterAll(){
+	// 查询系统参数
+	async selcetSystemParameterAll() {
 		const { ctx } = this;
 		const result = await ctx.service.systemParameter.selcetSystemParameterAll();
 		ctx.body = result;
@@ -119,9 +119,9 @@ class helloController extends Controller {
 			systemParameter.distance
 		)
 		ctx.body = result
-	}		
+	}
 
-	
+
 
 
 
