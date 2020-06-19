@@ -8,32 +8,51 @@ class helloController extends Controller {
 		ctx.body = 'hi, egg';
 	}
 
+	// ------------------------登入------------------------
+
 	// 登录方法
-    async login() {
-        const { ctx } = this;
-        const loginMsg = ctx.request.body; // request.body获取前端post值
-        const result = await ctx.service.login.login(loginMsg);
-        ctx.body = result;
+	async login() {
+		const { ctx } = this;
+		const loginMsg = ctx.request.body; // request.body获取前端post值
+		const result = await ctx.service.login.login(loginMsg);
+		ctx.body = result;
 	}
-	
-	 // 注册方法
-	 async register() {
-        const { ctx } = this;
-        const registerMsg = ctx.request.body;
-        const result = await ctx.service.login.register(registerMsg);
-        ctx.body = result;
+
+	// 注册方法
+	async register() {
+		const { ctx } = this;
+		const registerMsg = ctx.request.body;
+		const result = await ctx.service.login.register(registerMsg);
+		ctx.body = result;
 	}
-	
-    //修改密码
-    async updatePassword() {
-        const { ctx } = this;
+
+	// 修改密码
+	async updatePassword() {
+		const { ctx } = this;
 		const passwordMsg = ctx.request.body;
 		const result = await ctx.service.login.updatePassword(passwordMsg);
-        ctx.body = result;
+		ctx.body = result;
 
-    }
+	}
 
-    // 数据字典  查询字典 详情
+	// ------------------------数据字典------------------------
+
+	// 获取所有字典详情信息
+	async selectDictionaryDetailAll() {
+		const { ctx } = this;
+		const result = await ctx.service.dictionaryDetail.selectDictionaryDetailAll();
+		ctx.body = result;
+	}
+
+	// 查询具体id字典详情信息
+	async selectDictionaryDetailById(id) {
+		const { ctx } = this;
+		const DictionaryDetailId = ctx.request.body;
+		const result = await ctx.service.dictionaryDetail.selectDictionaryDetailById(DictionaryDetailId.detail_id);
+		ctx.body = result;
+	}
+
+	// 查询字典详情
 	async selectDictionaryDetail() {
 		const { ctx } = this
 		// get 传值
@@ -42,9 +61,9 @@ class helloController extends Controller {
 		const result = await ctx.service.dictionaryDetail.selectDictionaryDetail(code)
 		// 返回对象数组
 		ctx.body = result
-    }
-    
-    // 数据字典 根据id修改item_value
+	}
+
+	// 根据id修改item_value
 	async updateDictionaryDetail() {
 		const { ctx } = this
 		// post 数据
@@ -56,7 +75,7 @@ class helloController extends Controller {
 		ctx.body = result
 	}
 
-    // 数据字典 根据code增加记录
+	// 根据code增加记录
 	async insertDictionaryDetail() {
 		const { ctx } = this
 		// post 数据
@@ -72,7 +91,7 @@ class helloController extends Controller {
 		ctx.body = result
 	}
 
-	// 数据字典 根据id删除记录
+	// 根据id删除记录
 	async deleteDictionaryDetail() {
 		const { ctx } = this
 		// get 传值
