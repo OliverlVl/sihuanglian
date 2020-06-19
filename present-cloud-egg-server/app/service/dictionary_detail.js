@@ -7,18 +7,14 @@ class DictionaryDetailService extends Service {
 	//获取所有字典详情信息
 	async selectDictionaryDetailAll(){
 		const { ctx } = this
-		const result = await ctx.model.DictionaryDetail.findAll({})
+		const result = await ctx.model.DictionaryDetail.findAll()
 		return result;
 	}
 
 	//查询具体id字典详情信息
 	async selectDictionaryDetailById(detail_id){
 		const { ctx } = this
-		const result = await ctx.model.DictionaryDetail.findAll({
-			where: {
-				detail_id: detail_id
-			}
-		})
+		const result = await ctx.model.DictionaryDetail.findById(detail_id)
 		if (result != 0) {
 			return result
 		} else {
@@ -105,9 +101,7 @@ class DictionaryDetailService extends Service {
 
 	// 根据id删除记录
 	async deleteDictionaryDetail(id) {
-		id
 		const { ctx } = this
-
 		const result = await ctx.model.DictionaryDetail.destroy({
 			where: {
 				detail_id: id
