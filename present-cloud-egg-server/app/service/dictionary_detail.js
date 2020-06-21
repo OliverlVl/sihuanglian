@@ -3,6 +3,29 @@
 const Service = require('egg').Service;
 
 class DictionaryDetailService extends Service {
+
+	//获取所有字典详情信息
+	async selectDictionaryDetailAll(){
+		const { ctx } = this
+		const result = await ctx.model.DictionaryDetail.findAll()
+		return result;
+	}
+
+	//查询具体id字典详情信息
+	async selectDictionaryDetailById(detail_id){
+		const { ctx } = this
+		const result = await ctx.model.DictionaryDetail.findById(detail_id)
+		if (result != 0) {
+			return result
+		} else {
+			return {
+				code: -1,
+				msg: "查询失败"
+			}
+		}
+	}
+
+	
 	// 查询字典 详情
 	async selectDictionaryDetail(code) {
 		const { ctx } = this
@@ -78,9 +101,7 @@ class DictionaryDetailService extends Service {
 
 	// 根据id删除记录
 	async deleteDictionaryDetail(id) {
-		id
 		const { ctx } = this
-
 		const result = await ctx.model.DictionaryDetail.destroy({
 			where: {
 				detail_id: id

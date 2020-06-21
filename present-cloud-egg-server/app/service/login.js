@@ -35,6 +35,8 @@ class LoginService extends Service {
     async login(loginMsg) {
         const { ctx } = this;
         const res = {};
+        // 为当前输入的密码加密 ### md5加密
+        loginMsg.password = crypto.createHash('md5').update(loginMsg.password).digest('hex')
         // 在当前数据库中验证此用户思否存在
         const queryResult = await ctx.model.Login.findOne({
             where: {
@@ -79,7 +81,9 @@ class LoginService extends Service {
     // 注册
     async register(user) {
         const { ctx } = this;
-        console.log(JSON.stringify(user))
+        console.log(JSON.stringify(user));
+        // md5加密
+        user.login_password =  crypto.createHash('md5').update(user.login_password).digest('hex');
         const result = await ctx.model.Login.create(user);
         return result.dataValues;
     }
@@ -88,7 +92,12 @@ class LoginService extends Service {
     getMd5Data(data) {
         return crypto.createHash('md5').update(data).digest('hex');
     }
-
+    // // MD5加密方法
+    // async getMd5Data() {
+    //     const { ctx } = this;
+    //     // 斜杠传值
+    //     ctx.body = await ctx.service.login.getMd5Data(ctx.params.data);
+    // }
 
 
 
@@ -120,6 +129,35 @@ class LoginService extends Service {
 
 
 
+    //修改密码
+    async updatePassword(passwordMsg) {
+        const { ctx } = this;
+        const resutlt;
+        // const updateMsg = ctx.request.body;
+        const originalPassword = passwordMsg.originalPassword; //原密码
+        const newPassword = passwordMsg.newPassword; //新密码
+        
+        // 1.对原密码进行md5加密与数据库中密码比较
+        //md5加密
+        const md5OriginalPassword = await getMd5Data(originalPassword);
+        //查找用户
+        const user = await selectUser(passwordMsg);
+        //比较更新
+        if (user == false) {
+            resutlt = { status: "用户不存在" }; //用户不存在
+        } else if (md5OriginalPassword != user.login_password) {
+            resutlt = { status: "密码错误" }; //密码错误
+        } else {
+            const md5NewPassword = await getMd5Data(newPassword);
+            result = await update({
+                login_password: md5NewPassword
+            }, {
+                where: { login_name: user.login_name }
+            })
+            result = { status: "修改成功" };
+        }
+        return resutlt;
+    }
 
 
 }

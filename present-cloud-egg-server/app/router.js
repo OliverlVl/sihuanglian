@@ -11,15 +11,15 @@ module.exports = app => {
   router.get('/user', controller.home.getUserInfo)
 
   // 登录
-  router.post('/login', controller.login.login)
-  router.post('/login/index', jwt, controller.login.index)
-  router.get('/getMD5/:data', controller.login.getMd5Data)
+  router.post('/login', controller.hello.login)
+  router.post('/login/index', jwt, controller.hello.index)
+  // router.get('/getMD5/:data', controller.hello.getMd5Data)
 
   // 注册
-  router.post('/register', controller.login.register)
+  router.post('/register', controller.hello.register)
 
   //修改密码
-  router.post('/updatePassword',controller.login.updatePassword)
+  router.post('/updatePassword',controller.hello.updatePassword)
 
   // 完善老师信息
   router.post('/updateTeacherInfo', controller.teacher.updateTeacherInfo)
