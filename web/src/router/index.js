@@ -14,18 +14,18 @@ const defaultRoute = [
   }
 ]
 export const routes = [
-    {
-        path: '/',
-        component: Container,
-        redirect: 'home',
-        hidden: false,
-        children: [{
-            path: '/home',
-            component: () => import('../components/page/HomeIndex.vue'),
-            name: 'home',
-            hidden: false,
-            meta: {title: '首页', icon: 'all', noCache: true, authFilter: false}
-        },{
+  {
+    path: '/',
+    component: Container,
+    redirect: 'home',
+    hidden: false,
+    children: [{
+      path: '/home',
+      component: () => import('../components/page/HomeIndex.vue'),
+      name: 'home',
+      hidden: false,
+      meta: { title: '首页', icon: 'all', noCache: true, authFilter: false }
+    }, {
       path: '/errPage',
       component: Container,
       hidden: false,
@@ -102,11 +102,18 @@ export const routes = [
       name: 'organManage',
       hidden: false,
       meta: { title: '组织管理', noCache: true },
-    }
-        ]
     },
-   
-  ];
+     {
+      path: '/courage',
+      component: () => import('../components/page/courageManage/CourageIndex.vue'),
+      name: 'courageManage',
+      hidden: false,
+      meta: { title: '课程管理', noCache: true },
+    },
+    ]
+  },
+
+];
 
 export default new Router({
   routes: routes,

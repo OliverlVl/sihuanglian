@@ -57,7 +57,12 @@ export default {
           title: "首页",
           
         },
-        
+        {
+          icon: "el-icon-date",
+          index: "courage",
+          title: "课程管理",
+          
+        },
         {
           icon: "el-icon-date",
           index: "dict",

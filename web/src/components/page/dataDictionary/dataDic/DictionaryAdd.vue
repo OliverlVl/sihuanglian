@@ -13,13 +13,13 @@
                 @keyup.enter.native="addSubmit">
             <el-row :gutter="20">
                 <el-col :md="12" :sm="24">
-                    <el-form-item label="参数名称:" prop="dataValue">
-                        <el-input v-model="dictData.dataValue" placeholder="请输入参数名称"></el-input>
+                    <el-form-item label="参数名称:" prop="dataKey">
+                        <el-input v-model="dictData.dataKey" placeholder="请输入参数名称"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :md="12" :sm="24">
-                    <el-form-item label="参数Key:" prop="dataKey">
-                        <el-input v-model="dictData.dataKey" placeholder="请输入参数key值"></el-input>
+                    <el-form-item label="参数值:" prop="dataValue">
+                        <el-input v-model="dictData.dataValue" placeholder="请输入参数值"></el-input>
                     </el-form-item>
                 </el-col>
 

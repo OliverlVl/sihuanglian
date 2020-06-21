@@ -36,11 +36,12 @@ const userMainAPI = {
     editUser: function (userData) {
         const data = {
             userName: userData.userName,
-            id: userData.id,
+            account: userData.account,
             email: userData.email,
             phone: userData.phone,
             sex: userData.sex,
-            status: userData.status
+            status: userData.status,
+            userType: userData.userType
         }
         return request({
             url: this.base_url + 'userInfo',

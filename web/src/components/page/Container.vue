@@ -16,7 +16,7 @@
                         <router-view/>
                     </transition>
                 </el-main>
-                <el-footer class="app-footer">Copyright © 第9小组</el-footer>
+                <el-footer class="app-footer"></el-footer>
             </el-container>
         </el-container>
     </div>

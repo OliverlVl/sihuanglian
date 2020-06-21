@@ -88,12 +88,12 @@ const menuMainAPI = {
         });
     },
     //  获取用户侧边栏菜单
-    getUserMenu: function () {
-        return request({
-            url: this.base_url + '/sider',
-            method: 'get'
-        });
-    }
+    // getUserMenu: function () {
+    //     return request({
+    //         url: this.base_url + '/sider',
+    //         method: 'get'
+    //     });
+    // }
 }
 
 export default menuMainAPI

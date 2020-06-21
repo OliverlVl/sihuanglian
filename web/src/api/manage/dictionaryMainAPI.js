@@ -1,5 +1,5 @@
 import request from '@/api/request'
-import {setToken, getToken, removeToken} from '@/utils/auth';
+import { setToken, getToken, removeToken } from '@/utils/auth';
 
 const dictionaryMainAPI = {
     base_url: '/dict/',
@@ -51,37 +51,6 @@ const dictionaryMainAPI = {
             }
         });
     },
-  
-    getDataInfo: function () {
-        return request({
-            url: this.base_url + 'dataContent',
-            method: 'get',
-            
-        });
-    },
-    // 根据ID修改字典内容
-    editDataItem: function (data) {
-        return request({
-            url: this.base_url + 'dataContent',
-            method: 'put',
-            params: {
-                exp:data.exp,
-                distance:data.distane
-            }
-        });
-    },
-    
-
-    // 根据字典内容ID返回数据
-    getDataItem: function () {
-        return request({
-            url: this.base_url + 'dicCnt/dicCntId',
-            method: 'get',
-            params: {
-                dicCntID: ID
-            }
-        });
-    },
     // 根据字典Key，返回字典内容的key和value
     getDataItemByType: function (key) {
         return request({
@@ -91,8 +60,39 @@ const dictionaryMainAPI = {
                 dicKey: key
             }
         });
-    }
-    
+    },
+    getDataInfo: function () {
+        return request({
+            url: this.base_url + 'dataContent',
+            method: 'get',
+
+        });
+    },
+    // 根据ID修改字典内容
+    editDataItem: function (data) {
+        return request({
+            url: this.base_url + 'dataContent',
+            method: 'put',
+            params: {
+                exp: data.exp,
+                distance: data.distane
+            }
+        });
+    },
+
+
+    // 根据字典内容ID返回数据
+    // getDataItem: function () {
+    //     return request({
+    //         url: this.base_url + 'dicCnt/dicCntId',
+    //         method: 'get',
+    //         params: {
+    //             dicCntID: ID
+    //         }
+    //     });
+    // }
+
+
 }
 
 export default dictionaryMainAPI

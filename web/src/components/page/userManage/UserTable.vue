@@ -29,12 +29,12 @@
         </el-table-column>
         <el-table-column prop="phone" label="手机号" align="center"></el-table-column>
         <el-table-column prop="email" label="邮箱" align="center"></el-table-column>
-        <el-table-column prop="role"
+        <el-table-column prop="userType"
                          width="200"
                          label="用户角色"
                          align="center">
             <template slot-scope="scope">
-                <span>{{setUserRole(scope.row.role)}}</span>
+                <span>{{setUserRole(scope.row.userType)}}</span>
             </template>
             <!--<template slot-scope="scope">-->
                 <!--<div v-for="item in scope.row.role" :key="item" class="role-name-tag">-->

@@ -59,7 +59,7 @@
                     </el-form-item>
                 </el-col>
                 <el-col :md="12" :sm="24">
-                    <el-form-item label="用户角色:" prop="status">
+                    <el-form-item label="用户角色:" prop="userType">
                         <simple-select v-model="userData.userType"
                                        item-key="roleId" item-text="label"
                                        :options="roleList"  ></simple-select>

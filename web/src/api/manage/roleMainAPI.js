@@ -3,7 +3,7 @@ import {setToken, getToken, removeToken} from '@/utils/auth';
 
 const roleMainAPI = {
     base_url: '/role/',
-    // 获取角色树
+    // 获取所有角色
     getAllRole: function () {
         return request({
             url: this.base_url + 'all',
@@ -21,7 +21,7 @@ const roleMainAPI = {
             }
         });
     },
-    // 获取所有角色
+    // 增加角色
     addRole: function (data) {
         return request({
             url: this.base_url + 'roleInfo',
@@ -29,7 +29,7 @@ const roleMainAPI = {
             params: data
         });
     },
-    // 增加角色
+    // 修改角色
     editRole: function (roleData) {
         const data = {
             roleName: roleData.roleName,
@@ -42,7 +42,8 @@ const roleMainAPI = {
             method: 'put',
             params: data
         });
-    }, // 修改
+    }, 
+    // 删除角色
     remove: function (ID) {
         return request({
             url: this.base_url + 'roleInfo',
@@ -51,16 +52,9 @@ const roleMainAPI = {
                 id: ID
             }
         });
-    }, // 删除角色
-    getRole: function (ID) {
-        return request({
-            url: this.base_url + 'roleInfo',
-            method: 'put',
-            params: {
-                roleId: ID
-            }
-        });
-    } // 获得角色信息
+    }
+
+   
 }
 
 export default roleMainAPI

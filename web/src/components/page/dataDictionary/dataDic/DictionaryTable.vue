@@ -9,10 +9,10 @@
                 fit highlight-current-row stripe
                 size="mini"
                 :default-sort="{prop: 'id', order: 'descending'}">
-            <el-table-column prop="dataValue" label="参数名称" align="center" sortable></el-table-column>
+            <el-table-column prop="code" label="参数名称" align="center" sortable></el-table-column>
             <el-table-column prop="dataKey" label="参数key" align="center" ></el-table-column>
 
-            <el-table-column prop="dataDesc" label="描述" align="center" ></el-table-column>
+            <el-table-column prop="dataValue" label="参数value" align="center" ></el-table-column>
             <el-table-column label="操作" align="center">
                 <template slot-scope="scope">
                     <el-button
