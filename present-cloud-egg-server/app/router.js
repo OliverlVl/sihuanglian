@@ -44,4 +44,8 @@ module.exports = app => {
 
   // 根据id删除记录
   router.get('/deleteDictionaryDetail', controller.dictionaryDetail.deleteDictionaryDetail)
+
+
+  // 查看所有菜单
+  router.get('/findAll', controller.hello.findAll)
 };

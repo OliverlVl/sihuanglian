@@ -127,6 +127,21 @@ class helloController extends Controller {
 
 
 
+	// 获取所有菜单 get
+	async findAll() {
+		const { ctx } = this
+		// post 数据
+		// const menu = ctx.request.body
+		const result = await ctx.service.menu.findAll()
+
+
+		ctx.body = result
+	}
+	
+
+
+
+
 
 
 
