@@ -44,4 +44,11 @@ module.exports = app => {
 
   // 根据id删除记录
   router.get('/deleteDictionaryDetail', controller.dictionaryDetail.deleteDictionaryDetail)
+
+  // ---------------------角色--------------
+
+  // 获取所有角色
+  router.get('/selectRoleAll',controller.hello.selectRoleAll)
+
+  
 };
