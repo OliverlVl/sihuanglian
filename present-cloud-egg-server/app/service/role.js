@@ -7,14 +7,14 @@ class RoleService extends Service {
 	//获取所有角色
 	async selectRoleAll() {
 		const { ctx } = this
-		const result = await ctx.model.role.findAll()
+		const result = await ctx.model.Role.findAll()
 		return result;
 	}
 
 	//查询具体id角色信息
 	async selectRoleById(roleId) {
 		const { ctx } = this
-		const result = await ctx.model.role.findOne({
+		const result = await ctx.model.Role.findOne({
 			where: {
 				id: roleId
 			}
@@ -32,7 +32,7 @@ class RoleService extends Service {
 
 	// 添加角色
 	async insertRole(role_name, role_type, detail) {
-		const result = await ctx.model.role.create({
+		const result = await ctx.model.Role.create({
 			role_name: role_name,
 			role_type: role_type,
 			detail: detail
@@ -84,7 +84,7 @@ class RoleService extends Service {
 	// 根据id删除角色
 	async deleteRoleById(id) {
 		const { ctx } = this
-		const result = await ctx.model.role.destroy({
+		const result = await ctx.model.Role.destroy({
 			where: {
 				id: idid
 			}
