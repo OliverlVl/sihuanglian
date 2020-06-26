@@ -127,6 +127,63 @@ class helloController extends Controller {
 
 
 
+	// 删除菜单
+	async deleteMenu() {
+		const { ctx } = this
+		// get 传值
+		const id = ctx.query.id
+		const result = await ctx.service.menu.deleteMenu(id)
+		ctx.body = result
+	}
+
+
+	// 添加菜单
+	async insertMenu() {
+		const { ctx } = this
+		// post 数据
+		const menu = ctx.request.body
+		const result = await ctx.service.menu.insertMenu(
+			menu.name,
+			menu.submenu,
+		)
+		ctx.body = result
+	}
+
+	// 添加页面
+	async insertPage() {
+		const { ctx } = this
+		// post 数据
+		const page = ctx.request.body
+		const result = await ctx.service.menu.insertPage(
+			page.menuname,
+			page.supermenu,
+			page.buttons
+		)
+		ctx.body = result
+	}
+
+
+	// 添加按钮
+	async insertButton() {
+		const { ctx } = this
+		// post 数据
+		const button = ctx.request.body
+		for (j = 0, len = button.lengt; j < len; j++) {
+			const result = await ctx.service.menu.insertButton(
+				button[j].button,
+				button[j].supermenu
+			)
+		}
+
+		ctx.body = result
+	}
+
+
+
+
+
+
+
 
 
 
@@ -138,7 +195,7 @@ class helloController extends Controller {
 
 
 
-	
+
 
 	// ------------------------用户------------------------
 
