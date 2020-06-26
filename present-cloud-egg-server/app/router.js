@@ -51,10 +51,8 @@ module.exports = app => {
   // 获取所有角色
   router.get('/selectRoleAll',controller.hello.selectRoleAll)
 
-  
-
 
   // 查看所有菜单
-  router.get('/findAll', controller.hello.findAll)
+  router.get('/selectMenuAll', controller.hello.selectMenuAll)
 
 };
