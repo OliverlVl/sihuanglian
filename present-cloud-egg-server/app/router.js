@@ -34,7 +34,7 @@ module.exports = app => {
   router.get('/addCourse', controller.selectCourse.addCourse)
 
   // 查询字典 详情
-  router.get('/selectDictionaryDetail', controller.dictionaryDetail.selectDictionaryDetail)
+  router.get('/selectDictionaryDetail', controller.hello.selectDictionaryDetail)
 
   // 根据id修改item_value
   router.post('/updateDictionaryDetail', controller.dictionaryDetail.updateDictionaryDetail)
