@@ -5,14 +5,14 @@ const Service = require('egg').Service;
 class RoleService extends Service {
 
 	//获取所有角色
-	async selectRollAll() {
+	async selectRoleAll() {
 		const { ctx } = this
-		const result = await ctx.model.roll.findAll()
+		const result = await ctx.model.role.findAll()
 		return result;
 	}
 
 	//查询具体id角色信息
-	async selectRollById(roleId) {
+	async selectRoleById(roleId) {
 		const { ctx } = this
 		const result = await ctx.model.role.findOne({
 			where: {
