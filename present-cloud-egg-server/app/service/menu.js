@@ -70,11 +70,11 @@ class MenuService extends Service {
 		return result;
 	}
 
-	
+
 	// 根据id删除菜单
 	async deleteMenu(id) {
 		const { ctx } = this
-		const result = await ctx.model.menu.findOne({
+		const result = await ctx.model.Menu.findOne({
 			where: {
 				id: id
 			}
@@ -82,7 +82,7 @@ class MenuService extends Service {
 		const sub = result.sub;
 		if (sub == null) {
 			//删除
-			result = await ctx.model.menu.destroy({
+			result = await ctx.model.Menu.destroy({
 				where: {
 					id: id
 				}
@@ -94,7 +94,7 @@ class MenuService extends Service {
 			for (j = 0, len = arr.length; j < len; j++) {
 				result = await this.deleteMenu(arr[j])
 			}
-			result = await ctx.model.menu.destroy({
+			result = await ctx.model.Menu.destroy({
 				where: {
 					id: id
 				}
@@ -112,7 +112,7 @@ class MenuService extends Service {
 		for (j = 0, len = subArry.length; j < len; j++) {
 			sub.concat(subArry[j]);
 		}
-		const result = await ctx.model.menu.create({
+		const result = await ctx.model.Menu.create({
 			name: name,
 			layer: 3,
 			sub: sub,
@@ -139,13 +139,13 @@ class MenuService extends Service {
 		for (j = 0, len = buttons.length; j < len; j++) {
 			sub.concat(buttons[j]);
 		}
-		const result = await ctx.model.menu.create({
+		const result = await ctx.model.Menu.create({
 			name: menuname,
 			layer: 2,
 			sub: buttons,
 		})
 		// 查找id
-		const page = await ctx.model.Login.findOne({
+		const page = await ctx.model.Menu.findOne({
 			where: {
 				name: menuname,
 			}
@@ -169,14 +169,14 @@ class MenuService extends Service {
 
 	// 修改sub
 	async updateSub(superMenuId, pageId) {
-		const result = await ctx.model.menu.findOne({
+		const result = await ctx.model.Menu.findOne({
 			where: {
 				id: superMenuId
 			}
 		})
 		const sub = resutl.sub;
 		sub.concat("a", pageId)
-		const result = await ctx.model.menu.update({
+		const result = await ctx.model.Menu.update({
 			sub: sub
 		}, {
 			where: { id: superMenuId }
@@ -190,12 +190,12 @@ class MenuService extends Service {
 	// 插入button
 	async insertButton(buttonName, supermenu) {
 		const { ctx } = this
-		const result = await ctx.model.menu.create({
+		const result = await ctx.model.Menu.create({
 			name: buttonName,
 			layer: 3,
 		})
 		// 查找id
-		const button = await ctx.model.Login.findOne({
+		const button = await ctx.model.Menu.findOne({
 			where: {
 				name: buttonName,
 			}
