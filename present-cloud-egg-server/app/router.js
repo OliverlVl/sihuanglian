@@ -19,7 +19,7 @@ module.exports = app => {
   router.post('/register', controller.hello.register)
 
   //修改密码
-  router.post('/updatePassword',controller.hello.updatePassword)
+  // router.post('/updatePassword',controller.hello.updatePassword)
 
   // 完善老师信息
   router.post('/updateTeacherInfo', controller.teacher.updateTeacherInfo)
