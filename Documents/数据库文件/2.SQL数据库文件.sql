@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.06.26 21:25:24                          */
+/* Created on:     2020.06.26 21:39:23                          */
 /*==============================================================*/
 
 
@@ -19,6 +19,8 @@ drop table if exists information;
 drop table if exists login;
 
 drop table if exists menu;
+
+drop table if exists role;
 
 drop table if exists select_course;
 
@@ -154,6 +156,21 @@ create table menu
    state                int,
    layer                int,
    sub                  varchar(100)
+);
+
+/*==============================================================*/
+/* Table: role                                                  */
+/*==============================================================*/
+create table role
+(
+   id                   int,
+   role_name            varchar(20),
+   role_type            int,
+   detail               varchar(100),
+   create_time          datetime,
+   creator              varchar(20),
+   update_time          datetime,
+   updater              varchar(20)
 );
 
 /*==============================================================*/
