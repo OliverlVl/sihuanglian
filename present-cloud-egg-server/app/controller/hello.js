@@ -27,13 +27,13 @@ class helloController extends Controller {
 	}
 
 	// 修改密码
-	async updatePassword() {
-		const { ctx } = this;
-		const passwordMsg = ctx.request.body;
-		const result = await ctx.service.login.updatePassword(passwordMsg);
-		ctx.body = result;
+	// async updatePassword() {
+	// 	const { ctx } = this;
+	// 	const passwordMsg = ctx.request.body;
+	// 	const result = await ctx.service.login.updatePassword(passwordMsg);
+	// 	ctx.body = result;
 
-	}
+	// }
 
 	// ------------------------数据字典------------------------
 
