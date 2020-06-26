@@ -122,7 +122,17 @@ class helloController extends Controller {
 	}
 
 	// ------------------------菜单管理------------------------
+	
+	// 获取所有菜单 get
+	async selectMenuAll() {
+		const { ctx } = this
+		// post 数据
+		// const menu = ctx.request.body
+		const result = await ctx.service.menu.selectMenuAll()
 
+
+		ctx.body = result
+	}
 
 	// 删除菜单
 	async deleteMenu() {
@@ -158,23 +168,6 @@ class helloController extends Controller {
 		ctx.body = result
 	}
 
-
-	// 获取所有菜单 get
-	async findAll() {
-		const { ctx } = this
-		// post 数据
-		// const menu = ctx.request.body
-		const result = await ctx.service.menu.findAll()
-
-
-		ctx.body = result
-	}
-	
-
-
-
-
-
 	// 添加按钮
 	async insertButton() {
 		const { ctx } = this
@@ -186,8 +179,6 @@ class helloController extends Controller {
 				button[j].supermenu
 			)
 		}
-
-
 		ctx.body = result
 	}
 
