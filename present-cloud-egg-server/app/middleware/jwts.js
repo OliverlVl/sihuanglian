@@ -12,7 +12,8 @@ module.exports = (options, app) => {
       // 当前token值不存在的时候
     } else if (!token) {
       //  不验证token的页面
-      if (ctx.path === '/login' || ctx.path === '/register') {
+      // if (ctx.path === '/login' || ctx.path === '/register') {
+      if (true) {  // 取消jwt 测试
         await next();
       } else {
         ctx.throw(401, '未登录， 请先登录');
