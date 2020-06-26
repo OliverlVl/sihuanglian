@@ -45,7 +45,7 @@ class helloController extends Controller {
 	}
 
 	// 查询具体id字典详情信息
-	async selectDictionaryDetailById(id) {
+	async selectDictionaryDetailById() {
 		const { ctx } = this;
 		const DictionaryDetailId = ctx.request.body;
 		const result = await ctx.service.dictionaryDetail.selectDictionaryDetailById(DictionaryDetailId.detail_id);
@@ -124,9 +124,6 @@ class helloController extends Controller {
 	// ------------------------菜单管理------------------------
 
 
-
-
-
 	// 删除菜单
 	async deleteMenu() {
 		const { ctx } = this
@@ -135,7 +132,6 @@ class helloController extends Controller {
 		const result = await ctx.service.menu.deleteMenu(id)
 		ctx.body = result
 	}
-
 
 	// 添加菜单
 	async insertMenu() {
@@ -162,7 +158,6 @@ class helloController extends Controller {
 		ctx.body = result
 	}
 
-
 	// 添加按钮
 	async insertButton() {
 		const { ctx } = this
@@ -178,24 +173,56 @@ class helloController extends Controller {
 		ctx.body = result
 	}
 
-
-
-
-
-
-
-
-
-
 	// ------------------------角色------------------------
 
+	// 获取所有角色
+	async selectRoleAll() {
+		const { ctx } = this;
+		const result = await ctx.service.role.selectRoleAll();
+		ctx.body = result;
+	}
 
+	// 查询具体id字典详情信息
+	async selectRoleById(id) {
+		const { ctx } = this;
+		const roleId = ctx.request.body;
+		const result = await ctx.service.role.selectRoleById(roleId.roleId);
+		ctx.body = result;
+	}
 
+	// 添加角色
+	async insertRole(){
+		const { ctx } = this;
+		const role = ctx.request.body;
+		const result = await ctx.service.role.insertRole(
+			role.name,
+			role.type,
+			role.detail
+		)
+	}
 
+	// 修改角色
+	async updateRole() {
+		const { ctx } = this
+		// post 数据
+		const role = ctx.request.body
+		const result = await ctx.service.role.updateRole(
+			role.id,
+			role.name,
+			role.type,
+			role.detail
+		)
+		ctx.body = result
+	}
 
-
-
-
+	// 根据id删除角色
+	async deleteRoleById() {
+		const { ctx } = this
+		// get 传值
+		const id = ctx.query.id
+		const result = await ctx.service.role.deleteRoleById(id)
+		ctx.body = result
+	}
 
 	// ------------------------用户------------------------
 
