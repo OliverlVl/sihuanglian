@@ -179,6 +179,7 @@ class helloController extends Controller {
 	async selectRoleAll() {
 		const { ctx } = this;
 		const result = await ctx.service.role.selectRoleAll();
+		console.log(result);
 		ctx.body = result;
 	}
 
