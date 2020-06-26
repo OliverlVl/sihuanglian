@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.05.22 17:17:28                          */
+/* Created on:     2020.06.26 21:25:24                          */
 /*==============================================================*/
 
 
@@ -17,6 +17,8 @@ drop table if exists feedback;
 drop table if exists information;
 
 drop table if exists login;
+
+drop table if exists menu;
 
 drop table if exists select_course;
 
@@ -140,6 +142,18 @@ create table login
    login_type           int,
    user_id              int,
    primary key (login_id)
+);
+
+/*==============================================================*/
+/* Table: menu                                                  */
+/*==============================================================*/
+create table menu
+(
+   id                   int,
+   name                 varchar(50),
+   state                int,
+   layer                int,
+   sub                  varchar(100)
 );
 
 /*==============================================================*/
