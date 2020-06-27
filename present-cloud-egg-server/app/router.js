@@ -26,7 +26,13 @@ module.exports = app => {
 
   // ------------------------数据字典------------------------
 
-  // 查询字典 详情
+  // 获取所有字典详情信息
+  router.get('/selectDictionaryDetailAll', controller.hello.selectDictionaryDetailAll)
+
+  // 查询具体id字典详情信息
+  router.get('/selectDictionaryDetailById', controller.hello.selectDictionaryDetailById)
+
+  // 查询字典详情
   router.get('/selectDictionaryDetail', controller.hello.selectDictionaryDetail)
 
   // 根据id修改item_value
@@ -37,6 +43,8 @@ module.exports = app => {
 
   // 根据id删除记录
   router.get('/deleteDictionaryDetail', controller.dictionaryDetail.deleteDictionaryDetail)
+
+  
 
 
   // ------------------------系统参数------------------------
