@@ -175,12 +175,12 @@ class helloController extends Controller {
 		const { ctx } = this
 		// post 数据
 		const button = ctx.request.body
-		for (j = 0, len = button.lengt; j < len; j++) {
+		// for (j = 0, len = button.lengt; j < len; j++) {
 			const result = await ctx.service.menu.insertButton(
-				button[j].button,
-				button[j].supermenu
+				button.button,
+				button.supermenu
 			)
-		}
+		// }
 		ctx.body = result
 	}
 
@@ -190,12 +190,11 @@ class helloController extends Controller {
 	async selectRoleAll() {
 		const { ctx } = this;
 		const result = await ctx.service.role.selectRoleAll();
-		console.log(result);
 		ctx.body = result;
 	}
 
-	// 查询具体id字典详情信息
-	async selectRoleById(id) {
+	// 根据id查询角色信息
+	async selectRoleById() {
 		const { ctx } = this;
 		const roleId = ctx.request.body;
 		const result = await ctx.service.role.selectRoleById(roleId.roleId);
@@ -211,6 +210,7 @@ class helloController extends Controller {
 			role.type,
 			role.detail
 		)
+		ctx.body = result
 	}
 
 	// 修改角色

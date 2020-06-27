@@ -32,6 +32,7 @@ class RoleService extends Service {
 
 	// 添加角色
 	async insertRole(role_name, role_type, detail) {
+		const { ctx } = this
 		const result = await ctx.model.Role.create({
 			role_name: role_name,
 			role_type: role_type,
@@ -54,7 +55,7 @@ class RoleService extends Service {
 	// 修改角色
 	async updateRole(id, role_name, role_type, detail) {
 		const { ctx } = this
-		const result0 = await ctx.model.SystemParameter.update(
+		const result = await ctx.model.Role.update(
 			{
 				role_name: role_name,
 				role_type: role_type,
@@ -66,8 +67,7 @@ class RoleService extends Service {
 				}
 
 			})
-
-		if (result0 != 0) {
+		if (result != 0) {
 			return {
 				code: 200,
 				msg: "修改成功"
@@ -86,11 +86,14 @@ class RoleService extends Service {
 		const { ctx } = this
 		const result = await ctx.model.Role.destroy({
 			where: {
-				id: idid
+				id: id
 			}
 		})
 		if (result != 0) {
-			return result
+			return {
+				code: 200,
+				msg: "删除成功"
+			}
 		} else {
 			return {
 				code: -1,

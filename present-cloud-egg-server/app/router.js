@@ -49,6 +49,13 @@ module.exports = app => {
 
   // 查看所有菜单
   router.get('/selectMenuAll', controller.hello.selectMenuAll)
+  
+
+  // 添加page
+  router.post('/insertPage', controller.hello.insertPage)
+
+  // 添加按钮
+  router.post('/insertButton', controller.hello.insertButton)
 
   // 删除菜单
   router.get('/deleteMenu', controller.hello.deleteMenu)
@@ -64,6 +71,17 @@ module.exports = app => {
   // 获取所有角色
   router.get('/selectRoleAll',controller.hello.selectRoleAll)
 
+  // 根据id查询角色信息
+  router.get('/selectRoleById',controller.hello.selectRoleById)
+
+  // 添加角色
+  router.post('/insertRole',controller.hello.insertRole)
+
+  // 修改角色
+  router.put('/updateRole',controller.hello.updateRole)
+
+  // 根据id删除角色
+  router.delete('/deleteRoleById',controller.hello.deleteRoleById)
 
 
 
