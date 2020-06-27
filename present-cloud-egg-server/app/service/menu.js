@@ -18,7 +18,7 @@ class MenuService extends Service {
 		return result.dataValues;
 	}
 
-	
+
 	// 获取所有菜单 (一级菜单)
 	async selectMenuAll() {
 		const { ctx } = this
@@ -132,14 +132,15 @@ class MenuService extends Service {
 
 
 	// 增加页面
-	async insertPage(menuname, supermenu, buttons) {
+	async insertPage(menuname, supermenuId, buttons) {
 		const { ctx } = this
-		const sub = '';
-		for (j = 0, len = buttons.length; j < len; j++) {
-			sub.concat(buttons[j]);
-		}
+		// var sub = '';
+		// for (j = 0, len = buttons.length; j < len; j++) {
+		// 	sub.concat(buttons[j]);
+		// }
 		const result = await ctx.model.Menu.create({
 			name: menuname,
+			state: 1,
 			layer: 2,
 			sub: buttons,
 		})
@@ -150,7 +151,7 @@ class MenuService extends Service {
 			}
 		});
 		// 父菜单修改sub
-		const result1 = await this.updateSub(supermenu, page.id)
+		const result1 = await this.updateSub(supermenuId, page.id)
 
 		if (result1 != null) {
 			return {
