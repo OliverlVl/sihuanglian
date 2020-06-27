@@ -10,6 +10,9 @@ module.exports = app => {
   // 配置路由
   router.get('/user', controller.home.getUserInfo)
 
+
+  // ------------------------登入------------------------
+
   // 登录
   router.post('/login', controller.hello.login)
   router.post('/login/index', jwt, controller.hello.index)
@@ -21,17 +24,7 @@ module.exports = app => {
   //修改密码
   // router.post('/updatePassword',controller.hello.updatePassword)
 
-  // 完善老师信息
-  router.post('/updateTeacherInfo', controller.teacher.updateTeacherInfo)
-
-  // 完善学生信息
-  router.post('/updateStudentInfo', controller.student.updateStudentInfo)
-
-  // 查询班课(学生通过班课编号查) 地址加问号传入course_number
-  router.get('/selectCourse', controller.course.selectCourse)
-
-  // 学生加入班课 地址加问号传入course_number
-  router.get('/addCourse', controller.selectCourse.addCourse)
+  // ------------------------数据字典------------------------
 
   // 查询字典 详情
   router.get('/selectDictionaryDetail', controller.hello.selectDictionaryDetail)
@@ -46,13 +39,40 @@ module.exports = app => {
   router.get('/deleteDictionaryDetail', controller.dictionaryDetail.deleteDictionaryDetail)
 
 
-  // ---------------------角色--------------
+  // ------------------------系统参数------------------------
+
+  // 查询系统参数
+  router.get('/selcetSystemParameterAll', controller.hello.selcetSystemParameterAll)
+
+
+  // ------------------------菜单管理------------------------
+
+  // 查看所有菜单
+  router.get('/selectMenuAll', controller.hello.selectMenuAll)
+
+
+  // ------------------------角色------------------------
 
   // 获取所有角色
   router.get('/selectRoleAll',controller.hello.selectRoleAll)
 
 
-  // 查看所有菜单
-  router.get('/selectMenuAll', controller.hello.selectMenuAll)
+
+
+
+
+    // 完善老师信息
+    router.post('/updateTeacherInfo', controller.teacher.updateTeacherInfo)
+
+    // 完善学生信息
+    router.post('/updateStudentInfo', controller.student.updateStudentInfo)
+  
+    // 查询班课(学生通过班课编号查) 地址加问号传入course_number
+    router.get('/selectCourse', controller.course.selectCourse)
+  
+    // 学生加入班课 地址加问号传入course_number
+    router.get('/addCourse', controller.selectCourse.addCourse)
+
+  
 
 };
