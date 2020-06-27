@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.06.26 21:39:23                          */
+/* Created on:     2020.06.27 17:32:27                          */
 /*==============================================================*/
 
 
@@ -151,11 +151,12 @@ create table login
 /*==============================================================*/
 create table menu
 (
-   id                   int,
+   id                   int not null auto_increment,
    name                 varchar(50),
    state                int,
    layer                int,
-   sub                  varchar(100)
+   sub                  varchar(100),
+   primary key (id)
 );
 
 /*==============================================================*/
@@ -163,14 +164,15 @@ create table menu
 /*==============================================================*/
 create table role
 (
-   id                   int,
+   id                   int not null auto_increment,
    role_name            varchar(20),
    role_type            int,
    detail               varchar(100),
    create_time          datetime,
    creator              varchar(20),
    update_time          datetime,
-   updater              varchar(20)
+   updater              varchar(20),
+   primary key (id)
 );
 
 /*==============================================================*/
