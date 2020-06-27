@@ -28,6 +28,14 @@ module.exports = app => {
 
   // 查询字典 详情
   router.get('/getAllDictList', controller.hello.selectDictionaryDetailAll)
+  // 获取所有字典详情信息
+  router.get('/selectDictionaryDetailAll', controller.hello.selectDictionaryDetailAll)
+
+  // 查询具体id字典详情信息
+  router.get('/selectDictionaryDetailById', controller.hello.selectDictionaryDetailById)
+
+  // 查询字典详情
+  router.get('/selectDictionaryDetail', controller.hello.selectDictionaryDetail)
 
   // 根据id修改item_value
   router.post('/editDictItem', controller.hello.updateDictionaryDetail)
@@ -36,13 +44,20 @@ module.exports = app => {
   router.post('/addDict', controller.hello.insertDictionaryDetail)
 
   // 根据id删除记录
+
   router.get('/deleteDictionaryDetail', controller.hello.deleteDictionaryDetail)
+
+  router.delete('/deleteDictionaryDetail', controller.dictionaryDetail.deleteDictionaryDetail)
+
 
 
   // ------------------------系统参数------------------------
 
   // 查询系统参数
   router.get('/selcetSystemParameterAll', controller.hello.selcetSystemParameterAll)
+
+  // 修改系统参数
+  router.put('/updateSystemParameter', controller.hello.updateSystemParameter)
 
 
   // ------------------------菜单管理------------------------

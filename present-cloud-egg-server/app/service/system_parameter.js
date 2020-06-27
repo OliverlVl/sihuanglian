@@ -24,7 +24,7 @@ class SystemParameterService extends Service {
             },
             {
                 where: {
-                    parameter_name: exp
+                    parameter_name: "exp"
                 }
 
             })
@@ -35,7 +35,7 @@ class SystemParameterService extends Service {
             },
             {
                 where: {
-                    parameter_name: distance
+                    parameter_name: "distance"
                 }
 
             })

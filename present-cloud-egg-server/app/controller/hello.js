@@ -125,7 +125,7 @@ class helloController extends Controller {
 	}
 
 	// ------------------------菜单管理------------------------
-	
+
 	// 获取所有菜单 get
 	async selectMenuAll() {
 		const { ctx } = this
@@ -179,10 +179,10 @@ class helloController extends Controller {
 		// post 数据
 		const button = ctx.request.body
 		// for (j = 0, len = button.lengt; j < len; j++) {
-			const result = await ctx.service.menu.insertButton(
-				button.button,
-				button.supermenu
-			)
+		const result = await ctx.service.menu.insertButton(
+			button.button,
+			button.supermenu
+		)
 		// }
 		ctx.body = result
 	}
@@ -205,7 +205,7 @@ class helloController extends Controller {
 	}
 
 	// 添加角色
-	async insertRole(){
+	async insertRole() {
 		const { ctx } = this;
 		const role = ctx.request.body;
 		const result = await ctx.service.role.insertRole(

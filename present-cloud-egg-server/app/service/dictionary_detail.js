@@ -14,7 +14,12 @@ class DictionaryDetailService extends Service {
 	//查询具体id字典详情信息
 	async selectDictionaryDetailById(detail_id){
 		const { ctx } = this
-		const result = await ctx.model.DictionaryDetail.findById(detail_id)
+		const result = await ctx.model.DictionaryDetail.findOne({
+			where:{
+				detail_id:detail_id
+			}
+		}
+		)
 		if (result != 0) {
 			return result
 		} else {
@@ -109,7 +114,10 @@ class DictionaryDetailService extends Service {
 		})
 		console.log(result)
 		if (result != 0) {
-			return result
+			return {
+				code: 200,
+				msg: "删除成功"
+			}
 		} else {
 			return {
 				code: -1,
