@@ -42,7 +42,7 @@ module.exports = app => {
   router.post('/insertDictionaryDetail', controller.dictionaryDetail.insertDictionaryDetail)
 
   // 根据id删除记录
-  router.get('/deleteDictionaryDetail', controller.dictionaryDetail.deleteDictionaryDetail)
+  router.delete('/deleteDictionaryDetail', controller.dictionaryDetail.deleteDictionaryDetail)
 
   
 
