@@ -51,6 +51,8 @@ module.exports = app => {
   router.get('/selectMenuAll', controller.hello.selectMenuAll)
   
 
+  // 添加page
+  router.post('/insertPage', controller.hello.insertPage)
 
   // 添加按钮
   router.post('/insertButton', controller.hello.insertButton)
