@@ -27,16 +27,16 @@ module.exports = app => {
   // ------------------------数据字典------------------------
 
   // 查询字典 详情
-  router.get('/selectDictionaryDetail', controller.hello.selectDictionaryDetail)
+  router.get('/getAllDictList', controller.hello.selectDictionaryDetailAll)
 
   // 根据id修改item_value
-  router.post('/updateDictionaryDetail', controller.dictionaryDetail.updateDictionaryDetail)
+  router.post('/editDictItem', controller.hello.updateDictionaryDetail)
 
   // 根据code增加记录
-  router.post('/insertDictionaryDetail', controller.dictionaryDetail.insertDictionaryDetail)
+  router.post('/addDict', controller.hello.insertDictionaryDetail)
 
   // 根据id删除记录
-  router.get('/deleteDictionaryDetail', controller.dictionaryDetail.deleteDictionaryDetail)
+  router.get('/deleteDictionaryDetail', controller.hello.deleteDictionaryDetail)
 
 
   // ------------------------系统参数------------------------

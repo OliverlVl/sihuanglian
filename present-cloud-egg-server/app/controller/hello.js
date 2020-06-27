@@ -68,8 +68,8 @@ class helloController extends Controller {
 		// post 数据
 		const info = ctx.request.body
 		const result = await ctx.service.dictionaryDetail.updateDictionaryDetail(
-			info.detail_id,
-			info.item_value
+			info.id,
+			info.dataValue
 		)
 		ctx.body = result
 	}
@@ -81,11 +81,14 @@ class helloController extends Controller {
 		const info = ctx.request.body
 		const result = await ctx.service.dictionaryDetail.insertDictionaryDetail(
 			info.code,
-			info.item_key,
-			info.item_value,
-			info.order_number,
-			info.is_default,
-			info.dictionary_id
+			info.dataKey,
+			info.dataValue,
+			// info.order_number,
+			// info.is_default,
+			// info.dictionary_id
+			1,
+			0,
+			0
 		)
 		ctx.body = result
 	}
