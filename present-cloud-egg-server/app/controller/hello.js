@@ -188,12 +188,11 @@ class helloController extends Controller {
 	async selectRoleAll() {
 		const { ctx } = this;
 		const result = await ctx.service.role.selectRoleAll();
-		console.log(result);
 		ctx.body = result;
 	}
 
-	// 查询具体id字典详情信息
-	async selectRoleById(id) {
+	// 根据id查询角色信息
+	async selectRoleById() {
 		const { ctx } = this;
 		const roleId = ctx.request.body;
 		const result = await ctx.service.role.selectRoleById(roleId.roleId);
@@ -209,6 +208,7 @@ class helloController extends Controller {
 			role.type,
 			role.detail
 		)
+		ctx.body = result
 	}
 
 	// 修改角色
