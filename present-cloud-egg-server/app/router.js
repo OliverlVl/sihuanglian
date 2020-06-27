@@ -50,6 +50,14 @@ module.exports = app => {
   // 查看所有菜单
   router.get('/selectMenuAll', controller.hello.selectMenuAll)
 
+  // 删除菜单
+  router.get('/deleteMenu', controller.hello.deleteMenu)
+
+  // 添加菜单
+  router.post('/insertMenu', controller.hello.insertMenu)
+
+ 
+
 
   // ------------------------角色------------------------
 

@@ -148,6 +148,8 @@ class helloController extends Controller {
 		const { ctx } = this
 		// post 数据
 		const menu = ctx.request.body
+		console.log("添加菜单")
+		console.log(menu)
 		const result = await ctx.service.menu.insertMenu(
 			menu.name,
 			menu.submenu,

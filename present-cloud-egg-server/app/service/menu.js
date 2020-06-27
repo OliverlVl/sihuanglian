@@ -74,27 +74,34 @@ class MenuService extends Service {
 	// 根据id删除菜单
 	async deleteMenu(id) {
 		const { ctx } = this
+		console.log('删除id号====')
+		console.log(id)
 		const result = await ctx.model.Menu.findOne({
 			where: {
 				id: id
 			}
 		})
+		console.log(result.dataValues)
 		const sub = result.sub;
-		if (sub == null) {
+		console.log(sub)
+		if (sub == 0) {
 			//删除
-			result = await ctx.model.Menu.destroy({
+			const result1 = await ctx.model.Menu.destroy({
 				where: {
 					id: id
 				}
 			})
-			return result
+			return result1
 		} else {
 			const sub1 = result.sub
 			const arr = sub1.split('a')
-			for (j = 0, len = arr.length; j < len; j++) {
-				result = await this.deleteMenu(arr[j])
+			console.log(arr)
+			var j = 0
+			var len = arr.length
+			for (j = 0; j < len; j++) {
+				var result2 = await this.deleteMenu(arr[j])
 			}
-			result = await ctx.model.Menu.destroy({
+			result2 = await ctx.model.Menu.destroy({
 				where: {
 					id: id
 				}
@@ -108,16 +115,20 @@ class MenuService extends Service {
 	// 增加菜单
 	async insertMenu(name, subArry) {
 		const { ctx } = this
-		const sub = '';
-		for (j = 0, len = subArry.length; j < len; j++) {
-			sub.concat(subArry[j]);
-		}
+		// var sub = '';
+		// var j = 0
+		// var len = subArry.length
+		// for (j = 0; j < len; j++) {
+		// 	sub.concat(subArry[j]);
+		// }
+		console.log(subArry)
 		const result = await ctx.model.Menu.create({
 			name: name,
+			state: 0,
 			layer: 3,
-			sub: sub,
+			sub: subArry,
 		})
-		// console.log(result[0])
+		console.log(result[0])
 		if (result != null) {
 			return {
 				code: 200,

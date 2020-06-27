@@ -17,7 +17,7 @@ module.exports = app => {
 		},
 		state: {
 			type: INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		layer: {
 			type: INTEGER,
