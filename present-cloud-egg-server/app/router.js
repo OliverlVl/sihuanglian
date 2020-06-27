@@ -44,6 +44,9 @@ module.exports = app => {
   // 查询系统参数
   router.get('/selcetSystemParameterAll', controller.hello.selcetSystemParameterAll)
 
+  // 修改系统参数
+  router.put('/updateSystemParameter', controller.hello.updateSystemParameter)
+
 
   // ------------------------菜单管理------------------------
 
