@@ -49,6 +49,11 @@ module.exports = app => {
 
   // 查看所有菜单
   router.get('/selectMenuAll', controller.hello.selectMenuAll)
+  
+
+
+  // 添加按钮
+  router.post('/insertButton', controller.hello.insertButton)
 
 
   // ------------------------角色------------------------
