@@ -114,7 +114,10 @@ class DictionaryDetailService extends Service {
 		})
 		console.log(result)
 		if (result != 0) {
-			return result
+			return {
+				code: 200,
+				msg: "删除成功"
+			}
 		} else {
 			return {
 				code: -1,
