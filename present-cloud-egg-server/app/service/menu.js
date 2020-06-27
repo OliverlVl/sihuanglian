@@ -169,14 +169,15 @@ class MenuService extends Service {
 
 	// 修改sub
 	async updateSub(superMenuId, pageId) {
-		const result = await ctx.model.Menu.findOne({
+		const { ctx } = this
+		var result = await ctx.model.Menu.findOne({
 			where: {
 				id: superMenuId
 			}
 		})
-		const sub = resutl.sub;
-		sub.concat("a", pageId)
-		const result = await ctx.model.Menu.update({
+		var sub = result.sub;
+		sub = sub.concat("a", pageId.toString())
+		result = await ctx.model.Menu.update({
 			sub: sub
 		}, {
 			where: { id: superMenuId }
@@ -188,10 +189,11 @@ class MenuService extends Service {
 
 
 	// 插入button
-	async insertButton(buttonName, supermenu) {
+	async insertButton(buttonName, supermenuId) {
 		const { ctx } = this
 		const result = await ctx.model.Menu.create({
 			name: buttonName,
+			state: 1,
 			layer: 3,
 		})
 		// 查找id
@@ -201,7 +203,7 @@ class MenuService extends Service {
 			}
 		});
 		// 父菜单修改sub
-		const result1 = await this.updateSub(supermenu, button.id)
+		const result1 = await this.updateSub(supermenuId, button.id)
 
 		if (result1 != null) {
 			return {
