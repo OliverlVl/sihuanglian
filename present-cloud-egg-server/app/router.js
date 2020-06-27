@@ -26,10 +26,8 @@ module.exports = app => {
 
   // ------------------------数据字典------------------------
 
-  // 查询字典 详情
-  router.get('/getAllDictList', controller.hello.selectDictionaryDetailAll)
   // 获取所有字典详情信息
-  router.get('/selectDictionaryDetailAll', controller.hello.selectDictionaryDetailAll)
+  router.get('/getAllDictList', controller.hello.selectDictionaryDetailAll)
 
   // 查询具体id字典详情信息
   router.get('/selectDictionaryDetailById', controller.hello.selectDictionaryDetailById)
@@ -44,9 +42,6 @@ module.exports = app => {
   router.post('/addDict', controller.hello.insertDictionaryDetail)
 
   // 根据id删除记录
-
-  router.get('/deleteDictionaryDetail', controller.hello.deleteDictionaryDetail)
-
   router.delete('/deleteDictionaryDetail', controller.dictionaryDetail.deleteDictionaryDetail)
 
 
