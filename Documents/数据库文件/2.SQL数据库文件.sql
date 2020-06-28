@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.06.27 17:32:27                          */
+/* Created on:     2020.06.29 1:02:31                           */
 /*==============================================================*/
 
 
@@ -140,7 +140,7 @@ create table login
 (
    login_id             int not null auto_increment,
    login_name           varchar(20),
-   login_password       varchar(20),
+   login_password       varchar(100),
    login_type           int,
    user_id              int,
    primary key (login_id)
