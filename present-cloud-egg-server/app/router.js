@@ -10,6 +10,7 @@ module.exports = app => {
   // 配置路由
   router.get('/user', controller.home.getUserInfo)
 
+  //----------------------------------------------------------web----------------------------------------------------------
 
   // ------------------------登入------------------------
 
@@ -43,7 +44,6 @@ module.exports = app => {
 
   // 根据id删除记录
   router.delete('/deleteDictionaryDetail', controller.dictionaryDetail.deleteDictionaryDetail)
-
 
 
   // ------------------------系统参数------------------------
@@ -106,31 +106,34 @@ module.exports = app => {
   router.delete('/deleteUser',controller.hello.deleteStudentById)
 
 
-
-
-
-
   // ------------------------课程管理------------------------
 
   // 获取十条班课信息
   router.get('/selectCourInfoByPage',controller.hello.selectCourInfoByPage)
+
+
+
+
+  //----------------------------------------------------------APP----------------------------------------------------------
+
+
   
 
 
 
-  
 
-    // 完善老师信息
-    router.post('/updateTeacherInfo', controller.teacher.updateTeacherInfo)
 
-    // 完善学生信息
-    router.post('/updateStudentInfo', controller.student.updateStudentInfo)
-  
-    // 查询班课(学生通过班课编号查) 地址加问号传入course_number
-    router.get('/selectCourse', controller.course.selectCourse)
-  
-    // 学生加入班课 地址加问号传入course_number
-    router.get('/addCourse', controller.selectCourse.addCourse)
+  // 完善老师信息
+  router.post('/updateTeacherInfo', controller.teacher.updateTeacherInfo)
+
+  // 完善学生信息
+  router.post('/updateStudentInfo', controller.student.updateStudentInfo)
+
+  // 查询班课(学生通过班课编号查) 地址加问号传入course_number
+  router.get('/selectCourse', controller.course.selectCourse)
+
+  // 学生加入班课 地址加问号传入course_number
+  router.get('/addCourse', controller.selectCourse.addCourse)
 
   
 
