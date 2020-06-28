@@ -83,7 +83,7 @@ class LoginService extends Service {
         const { ctx } = this;
         console.log(JSON.stringify(user));
         // md5加密
-        user.login_password =  crypto.createHash('md5').update(user.pwd).digest('hex');
+        user.pwd =  crypto.createHash('md5').update(user.pwd).digest('hex');
         // const result = await ctx.model.Login.create(user);
         // 1、添加用户相关信息 获取用户id (老师)
         const result = await ctx.model.Teacher.create({
