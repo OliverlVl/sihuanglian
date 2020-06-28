@@ -239,16 +239,52 @@ class helloController extends Controller {
 		ctx.body = result
 	}
 
-	// ------------------------用户------------------------
+	// ------------------------学生用户管理------------------------
 
+	// 获取所有学生
+	async selectStudentAll() {
+		const { ctx } = this;
+		const result = await ctx.service.student.selectStudentAll();
+		ctx.body = result;
+	}
 
+	// 根据id查询学生信息
+	async selectStudentById() {
+		const { ctx } = this;
+		const studentId = ctx.request.body.userId;
+		const result = await ctx.service.student.selectStudentById(studentId);
+		ctx.body = result;
+	}
 
+	// 修改学生信息
+	async updateStudent() {
+		const { ctx } = this
+		// post 数据
+		const student = ctx.request.body
+		const result = await ctx.service.student.updateStudent(
+			student.id,
+			student.account,
+			student.userName,
+			student.sex,
+			student.email,
+			student.phone
+		)
+		ctx.body = result
+	}
 
-
-
+	// 根据id删除学生
+	async deleteStudentById() {
+		const { ctx } = this
+		// get 传值
+		const id = ctx.query.id
+		const result = await ctx.service.student.deleteStudentById(id)
+		ctx.body = result
+	}
 
 	// ------------------------课程管理------------------------
 
+	//获取十条班课信息
+	
 
 
 
