@@ -94,6 +94,18 @@ module.exports = app => {
 
 
 
+
+
+  // ------------------------课程管理------------------------
+
+  // 获取十条班课信息
+  router.get('/selectCourInfoByPage',controller.hello.selectCourInfoByPage)
+  
+
+
+
+  
+
     // 完善老师信息
     router.post('/updateTeacherInfo', controller.teacher.updateTeacherInfo)
 
