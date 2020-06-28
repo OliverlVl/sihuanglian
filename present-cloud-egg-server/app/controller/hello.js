@@ -35,6 +35,18 @@ class helloController extends Controller {
 
 	// }
 
+	// 忘记密码
+	async resetPassword(){
+		const { ctx } = this;
+		const passwordMsg = ctx.request.body;
+		const result = await ctx.service.login.resetPassword(
+			passwordMsg.account,
+			passwordMsg.password,
+			passwordMsg.repassword,
+		)
+		ctx.body = result
+	}
+
 	// ------------------------数据字典------------------------
 
 	// 获取所有字典详情信息

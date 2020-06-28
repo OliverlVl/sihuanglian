@@ -15,6 +15,7 @@ class SelectCourseService extends Service {
 					select_course_id: page
 				}
 			})
+			console.log(container)
 			if (container != null) {
 				const student = await ctx.model.Student.findOne({
 					where: {

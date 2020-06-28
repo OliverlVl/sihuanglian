@@ -25,6 +25,11 @@ module.exports = app => {
   //修改密码
   // router.post('/updatePassword',controller.hello.updatePassword)
 
+  // 忘记密码
+  router.post('/resetPassword', controller.hello.resetPassword)
+  
+
+
   // ------------------------数据字典------------------------
 
   // 获取所有字典详情信息
