@@ -115,16 +115,70 @@ class LoginService extends Service {
 
     }
 
-    // 修改密码
-    async updatePassword(md5NewPassword, user) {
+
+    // 忘记密码
+    async resetPassword(account,password,repassword){
         const { ctx } = this;
-        const result = await ctx.model.Login.update({
-            login_password: md5NewPassword
-        }, {
-            where: { login_name: user.login_name }
+        if(password != repassword){
+            return {
+				code: -1,
+				msg: "密码不一致"
+			}
+        }
+        // 查找账户
+        const container = await ctx.model.Login.findOne({
+            where:{
+                login_name:account
+            }
         })
-        return result;
+
+        if(container == null){
+            return {
+				code: -1,
+				msg: "用户不存在"
+			}
+        }
+        //加密
+        const md5Password = await this.getMd5Data(password)
+        // console.log(typeof(md5Password))
+
+        console.log(typeof(container.user_id))
+        const result = await ctx.model.Login.update(
+            {
+                login_password:md5Password
+            },
+            {
+                where:{
+                    user_id: container.user_id
+                }
+
+            }
+        )
+        if (result != 0) {
+			return {
+				code: 200,
+				msg: "成功"
+			}
+		} else {
+			return {
+				code: -1,
+				msg: "失败"
+			}
+		} 
+
+
     }
+
+    // // 修改密码
+    // async updatePassword(md5NewPassword, user) {
+    //     const { ctx } = this;
+    //     const result = await ctx.model.Login.update({
+    //         login_password: md5NewPassword
+    //     }, {
+    //         where: { login_name: user.login_name }
+    //     })
+    //     return result;
+    // }
 
 
 
