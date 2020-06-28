@@ -251,7 +251,8 @@ class helloController extends Controller {
 	// 根据id查询学生信息
 	async selectStudentById() {
 		const { ctx } = this;
-		const studentId = ctx.request.body.userId;
+		const studentId = ctx.query.userId
+		console.log(studentId)
 		const result = await ctx.service.student.selectStudentById(studentId);
 		ctx.body = result;
 	}
@@ -261,6 +262,7 @@ class helloController extends Controller {
 		const { ctx } = this
 		// post 数据
 		const student = ctx.request.body
+		// console.log(student)
 		const result = await ctx.service.student.updateStudent(
 			student.id,
 			student.account,
@@ -276,7 +278,7 @@ class helloController extends Controller {
 	async deleteStudentById() {
 		const { ctx } = this
 		// get 传值
-		const id = ctx.query.id
+		const id = ctx.query.uid
 		const result = await ctx.service.student.deleteStudentById(id)
 		ctx.body = result
 	}

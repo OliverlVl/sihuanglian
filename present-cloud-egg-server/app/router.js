@@ -90,6 +90,20 @@ module.exports = app => {
   // 根据id删除角色
   router.delete('/deleteRoleById',controller.hello.deleteRoleById)
 
+  
+  // ------------------------学生用户管理------------------------
+  
+  // 获取所有学生 #获取所有用户
+  router.get('/getAllList',controller.hello.selectStudentAll)
+
+  // 根据id查询学生信息 #获取用户
+  router.get('/getUser',controller.hello.selectStudentById)
+
+  // 修改学生信息 #编辑用户
+  router.put('/editUser',controller.hello.updateStudent)
+
+  // 根据id删除学生 #删除用户
+  router.delete('/deleteUser',controller.hello.deleteStudentById)
 
 
 
