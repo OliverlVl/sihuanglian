@@ -122,6 +122,13 @@ module.exports = app => {
   //----------------------------------------------------------APP----------------------------------------------------------
 
 
+  // 登录
+  const url = '/app' // 加一个url前缀
+
+  router.get(url+'/index', controller.appController.index)
+
+
+
   
 
 
