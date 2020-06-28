@@ -283,8 +283,13 @@ class helloController extends Controller {
 
 	// ------------------------课程管理------------------------
 
-	//获取十条班课信息
-	
+	// 获取十条班课信息
+	async selectCourInfoByPage() {
+		const { ctx } = this;
+		const page = ctx.query.page
+		const result = await ctx.service.selectCourse.selectCourInfoByPage(page);
+		ctx.body = result;
+	}
 
 
 
