@@ -83,9 +83,59 @@ class LoginService extends Service {
         const { ctx } = this;
         console.log(JSON.stringify(user));
         // md5加密
-        user.login_password =  crypto.createHash('md5').update(user.login_password).digest('hex');
-        const result = await ctx.model.Login.create(user);
-        return result.dataValues;
+        user.login_password =  crypto.createHash('md5').update(user.pwd).digest('hex');
+        // const result = await ctx.model.Login.create(user);
+        // 1、添加用户相关信息 获取用户id (老师)
+        const result = await ctx.model.Teacher.create({
+            teacher_number: user.account,
+            teacher_name: user.userName,
+            teacher_telephone: user.phone,
+            student_mailbox: user.email
+        });
+        // console.log("老师注册")
+        // console.log(result.teacher_id)
+        const userId = result.teacher_id;
+
+        // 2、添加用户登录信息 
+        // a、账号 老师 type:2
+        await ctx.model.Login.create({
+            login_name: user.account,
+            login_password: user.pwd,
+            login_type: 2,
+            user_id: userId
+        })
+
+        // b、电话2
+        await ctx.model.Login.create({
+            login_name: user.phone,
+            login_password: user.pwd,
+            login_type: 2,
+            user_id: userId
+        })
+
+
+        // c、邮箱
+        await ctx.model.Login.create({
+            login_name: user.email,
+            login_password: user.pwd,
+            login_type: 2,
+            user_id: userId
+        })
+
+
+        if (result != null) {
+			return {
+				code: 200,
+				msg: "注册成功"
+			}
+		} else {
+			return {
+				code: -1,
+				msg: "注册失败"
+			}
+		}
+        // return result.dataValues;
+        
     }
 
     // 专门对数据进行md5加密的方法，输入明文返回密文
