@@ -5,95 +5,53 @@ import roleMainAPI from './roleMainAPI';
 const menuMainAPI = {
     base_url: '/menu/',
 
-    // 菜单树
-    getMenuTree: function () {
+    
+    findAll: function () {
         return request({
-            url: this.base_url + 'menuTree',
-            method: 'get'
-        });
-    },
-    // 根据菜单代码获取菜单信息
-    getMenuByKey: function (id) {
-        return request({
-            url: this.base_url + 'MenuInfo',
+            url: this.base_url + 'findAll',
             method: 'get',
+            
+        });
+    },
+    deletemenu: function (delSel) {
+        return request({
+            url: this.base_url + 'deletemenu',
+            method: 'post',
             params: {
-                menuValue: id
+                delSel: delSel
             }
         });
     },
-    // 根据菜单代码获取菜单所分配的用户列表
-    menuRoleList: function (id) {
+    
+    addmenu: function (Menu) {
         return request({
-            url: this.base_url + 'userTypeList',
-            method: 'get',
+            url: this.base_url + 'addmenu',
+            method: 'post',
             params: {
-                id: id
+                Menu: Menu
             }
         });
     },
-    getRoleMenus: function (roleId) {
+  
+    addpage: function (Page1) {
         return request({
-            url: this.base_url + 'menu/list',
-            method: 'get',
+            url: this.base_url + 'addpage',
+            method: 'post',
             params: {
-                id: roleId
+                Page: Page1
             }
         });
     },
-    allMenu: function () {
+    addbutton: function (button1) {
         return request({
-            url: this.base_url + 'MenuList/All',
-            method: 'POST'
-        });
-    },
-    // 获取所有的根菜单-用于选择上级菜单中，父级菜单的选择项
-    getSelectMenu: function () {
-        return request({
-            url: this.base_url + 'allRootMenu',
-            method: 'get'
-        });
-    },
-    save: function (data) {
-        return request({
-            url: this.base_url + 'roleMenu',
-            method: 'POST',
-            params: data
-        });
-    },
-    update: function (data) {
-        return request({
-            url: this.base_url + 'menuInfo',
-            method: 'PUT',
-            params: data
-        });
-    },
-    remove: function (id) {
-        return request({
-            url: this.base_url + 'roleMenu',
-            method: 'delete',
+            url: this.base_url + 'addbutton',
+            method: 'post',
             params: {
-                id: id
+                button: button1
             }
         });
     },
-    updateRoleMenu: function (roleId, menuList) {
-        return request({
-            url: this.base_url + '/MenuRole',
-            method: 'POST',
-            params: {
-                menuValue: menuList + '',
-                roleID: roleId
-            }
-        });
-    },
-    //  获取用户侧边栏菜单
-    // getUserMenu: function () {
-    //     return request({
-    //         url: this.base_url + '/sider',
-    //         method: 'get'
-    //     });
-    // }
+    
 }
 
 export default menuMainAPI

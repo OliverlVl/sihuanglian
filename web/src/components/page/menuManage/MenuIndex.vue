@@ -12,16 +12,16 @@
               <li v-for="(item2,index2) in datatable[index1].sub">
                 <el-checkbox :label="item2.name" :key="item2" border>{{item2.name}}</el-checkbox>
                 <ul>
-                <el-checkbox-group v-model="selected">
+                  <el-checkbox-group v-model="selected">
                     <ul>
-                  <el-checkbox
-                    v-for="item3 in datatable[index1].sub[index2].sub"
-                    :label="item3.name"
-                    :key="item3"
-                    border
-                  >{{item3.name}}</el-checkbox>
+                      <el-checkbox
+                        v-for="item3 in datatable[index1].sub[index2].sub"
+                        :label="item3.name"
+                        :key="item3"
+                        border
+                      >{{item3.name}}</el-checkbox>
                     </ul>
-                </el-checkbox-group>
+                  </el-checkbox-group>
                 </ul>
               </li>
             </ul>
@@ -112,11 +112,11 @@
       <el-button @click="dialogVisible3 = false">取 消</el-button>
       <el-button type="primary" @click="addbutton()">确 定</el-button>
     </el-dialog>
-
-   
   </div>
 </template>
 <script>
+import menuMainAPI from "@/api/manage/menuMainAPI";
+
 export default {
   data() {
     return {
@@ -241,21 +241,18 @@ export default {
   methods: {
     handdelete() {
       this.delSel.submenu = this.selected;
+      console.log(this.selected);
       console.log(this.delSel);
       const _this = this;
-      this.$axios
-        .post("http://localhost:8080/webmenu/deletemenu", this.delSel)
-        .then(res => {
-          _this.$axios
-            .get("http://localhost:8080/webmenu/findAll")
-            .then(res => {
-              _this.datatable = res.data;
-              this.$alert("删除成功", "删除", {
-                confirmButtonText: "确定",
-                callback: action => {}
-              });
-            });
+      menuMainAPI.deletemenu(this.delSel).then(res => {
+        menuMainAPI.findAll().then(res => {
+          _this.datatable = res.data;
+          this.$alert("删除成功", "删除", {
+            confirmButtonText: "确定",
+            callback: action => {}
+          });
         });
+      });
     },
     addbutton3() {
       this.dialogVisible3 = true;
@@ -268,54 +265,35 @@ export default {
       this.dialogVisible1 = false;
       this.Menu.menuname = this.menuname;
       this.Menu.submenus = this.submenus;
-      console.log(this.Menu);
       const _this = this;
-      this.$axios
-        .post("http://localhost:8080/webmenu/addmenu1/" + this.menuname)
-        .then(res => {
-          this.$axios
-            .post("http://localhost:8080/webmenu/addmenu", _this.Menu)
-            .then(res => {
-              _this.$axios
-                .get("http://localhost:8080/webmenu/findAll")
-                .then(res => {
-                  _this.datatable = res.data;
-                  this.$alert("分配权限成功", "分配权限", {
-                    confirmButtonText: "确定",
-                    callback: action => {}
-                  });
-                });
-            });
+      console.log(this.Menu);
+      menuMainAPI.addmenu(this.Menu).then(res => {
+        menuMainAPI.findAll().then(res => {
+          _this.datatable = res.data;
+          this.$alert("分配权限成功", "分配权限", {
+            confirmButtonText: "确定",
+            callback: action => {}
+          });
         });
+      });
     },
     addpage() {
       this.dialogVisible2 = false;
       this.buttons = this.submenus;
-      this.Page.menuname = this.menuname;
-      this.Page.supermenu = this.supermenu;
       this.Page1.buttons = this.buttons;
       this.Page1.menuname = this.menuname;
       this.Page1.supermenu = this.supermenu;
       const _this = this;
-      console.log(this.Page);
       console.log(this.Page1);
-      this.$axios
-        .post("http://localhost:8080/webmenu/addpage1", this.Page)
-        .then(res => {
-          this.$axios
-            .post("http://localhost:8080/webmenu/addpage", _this.Page1)
-            .then(res => {
-              this.$axios
-                .get("http://localhost:8080/webmenu/findAll")
-                .then(res => {
-                  _this.datatable = res.data;
-                  this.$alert("新增页面成功", "新增页面", {
-                    confirmButtonText: "确定",
-                    callback: action => {}
-                  });
-                });
-            });
+      menuMainAPI.addpage(this.Page1).then(res => {
+        menuMainAPI.findAll().then(res => {
+          _this.datatable = res.data;
+          this.$alert("新增页面成功", "新增页面", {
+            confirmButtonText: "确定",
+            callback: action => {}
+          });
         });
+      });
     },
     addbutton() {
       this.dialogVisible3 = false;
@@ -323,19 +301,15 @@ export default {
       this.button1.supermenu = this.supermenu;
       const _this = this;
       console.log(this.button1);
-      this.$axios
-        .post("http://localhost:8080/webmenu/addbutton", this.button1)
-        .then(res => {
-          _this.$axios
-            .get("http://localhost:8080/webmenu/findAll")
-            .then(res => {
-              _this.datatable = res.data;
-              this.$alert("新增按钮成功", "新增按钮", {
-                confirmButtonText: "确定",
-                callback: action => {}
-              });
-            });
+      menuMainAPI.addbutton(this.button1).then(res => {
+        menuMainAPI.findAll().then(res => {
+          _this.datatable = res.data;
+          this.$alert("新增按钮成功", "新增按钮", {
+            confirmButtonText: "确定",
+            callback: action => {}
+          });
         });
+      });
     },
     handleClose2(tag) {
       this.dialogVisible2 = false;
@@ -361,7 +335,7 @@ export default {
     }
   },
   created() {
-    this.$axios.get("http://localhost:8080/webmenu/findAll").then(res => {
+    menuMainAPI.findAll().then(res => {
       this.datatable = res.data;
       for (let i = 0; i < this.datatable.length; ++i) {
         if (this.datatable[i].state == "checked") {

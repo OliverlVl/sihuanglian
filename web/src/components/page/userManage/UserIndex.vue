@@ -1,6 +1,6 @@
 <template>
     <div class="user-manage-index">
-        <page-header title="用户信息管理"></page-header>
+        <page-header title="学生用户信息管理"></page-header>
         <container-search-group>
             <el-form :inline="true" :model="search" ref="userSearchForm" size="mini" >
                 <!--<el-form-item label="账号" prop="number">-->
@@ -21,8 +21,7 @@
 
         <div class="tool-wrapper">
             <el-button-group>
-                <el-button type="primary" icon="el-icon-plus" @click="createOpen" size="mini">新增</el-button>
-                <el-button type="primary" icon="el-icon-user-solid" @click="roleAssignmentOpen" size="mini">角色分配</el-button>
+               
                 <el-button type="danger" icon="el-icon-delete" @click="removeOpen" size="mini">删除</el-button>
             </el-button-group>
         </div>
@@ -53,11 +52,7 @@
                    :userTypeMap="userTypeMap"
                    :userStatusMap="userStatusMap">
         </user-show>
-        <user-add ref="UserAdd" @load="load"
-                  :sexMap="sexMap"
-                  :userTypeMap="userTypeMap"
-                  :userStatusMap="userStatusMap">
-        </user-add>
+        
         <user-role ref="UserRole"></user-role>
     </div>
 </template>
@@ -70,13 +65,13 @@
     import PageHeader from '../../common/PageHeader';
     import {showMessage, showSimpleConfirm, showSuccess, showInfo} from '@/utils/message';
     import UserShow from './UserShow';
-    import UserAdd from './UserAdd';
+    
     import userMainAPI from '@/api/manage/userMainAPI';
     import dictionaryMainAPI from '@/api/manage/dictionaryMainAPI';
     import UserRole from './UserRole';
     export default {
         name: 'UserIndex',
-        components: {UserRole, UserAdd, UserShow, UserEdit, UserTable, PageHeader, Pagination, ContainerSearchGroup},
+        components: {UserRole,  UserShow, UserEdit, UserTable, PageHeader, Pagination, ContainerSearchGroup},
         data () {
             return {
                 search: {
@@ -137,9 +132,7 @@
                 this.$refs.UserRole.openEdit();
             },
             // 打开创建用户页面
-            createOpen () {
-                this.$refs.UserAdd.openCreate();
-            },
+           
 
             // 打开编辑用户页面
             openEdit (row) {

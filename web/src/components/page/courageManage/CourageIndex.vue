@@ -8,35 +8,7 @@
       </el-breadcrumb>
     </div>
     <div class="container">
-      <div class="handle-box">
-        <el-form :model="selectForm" ref="selectForm">
-          学校：
-          <el-select
-            v-model="selectForm.selectSchool"
-            placeholder="全部学校"
-            class="handle-select mr10"
-          >
-            <el-option key="1" label="福州大学" value="福州大学"></el-option>
-            <el-option key="2" label="福建师范大学" value="福建师范大学"></el-option>
-          </el-select>学院：
-          <el-select
-            v-model="selectForm.selectCollege"
-            placeholder="全部学院"
-            class="handle-select mr10"
-          >
-            <el-option key="1" label="数学与计算机科学学院" value="数学与计算机科学学院"></el-option>
-            <el-option key="2" label="材料与化学学院" value="材料与化学学院"></el-option>
-          </el-select>课程：
-          <el-input
-            v-model="selectForm.selectCourse"
-            placeholder="请输入课程名称"
-            class="handle-input mr10"
-          ></el-input>
-
-          <el-button type="primary" icon="search" @click="search(selectForm)">查询</el-button>
-          <!--<el-button type="primary" icon="search" @click="addUser">添加</el-button>-->
-        </el-form>
-      </div>
+      
 
       <el-table
         :data="tableData"
@@ -46,20 +18,15 @@
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column prop="number" label="学/工号" sortable width="120"></el-table-column>
+        <el-table-column prop="number" label="学号" sortable width="120"></el-table-column>
         <el-table-column prop="name" label="姓名" sortable width="120"></el-table-column>
         <el-table-column prop="identity" label="身份" width="120"></el-table-column>
         <el-table-column prop="school" label="学校" width="160"></el-table-column>
         <el-table-column prop="course" label="课程" width="160"></el-table-column>
-        <el-table-column prop="class" label="班级" width="120"></el-table-column>
-        <el-table-column prop="access_goal" label="获得分数" width="120"></el-table-column>
-        <el-table-column prop="total_goal" label="总分数" width="120"></el-table-column>
-        <el-table-column label="操作" width="180">
-          <template slot-scope="scope">
-            <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-            <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-          </template>
-        </el-table-column>
+        
+        <el-table-column prop="access_goal" label="经验值" width="120"></el-table-column>
+        
+      
       </el-table>
       <div class="delAll">
         <el-button type="primary" icon="delete" class="handle-del" @click="delAll">批量删除</el-button>
@@ -291,10 +258,10 @@ export default {
       //         this.tableData = res.data.list;
       //     });
     },
-    search(formName) {
+    load() {//改过了628
       this.isSearch = true;
       const self = this;
-      courageMainAPI.getAllCourage(self.selectForm, this.curPage).then(res => {
+      courageMainAPI.getAllCourage(this.curPage).then(res => {
         console.log(res);
         for (let i in res.data) {
           this.tableData[i].number = res.data[i].User_No;
@@ -302,9 +269,9 @@ export default {
           this.tableData[i].identity = res.data[i].User_Type;
           this.tableData[i].school = res.data[i].User_School;
           this.tableData[i].course = res.data[i].Course_Name;
-          this.tableData[i].class = res.data[i].Class_Name;
+          
           this.tableData[i].access_goal = res.data[i].acc_goals;
-          this.tableData[i].total_goal = res.data[i].total;
+          
         }
       });
     },

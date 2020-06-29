@@ -9,11 +9,18 @@ const defaultRoute = [
     path: '/login',
     name: 'login',
     component: () => import('../components/page/loginManage/login.vue'),
-    hidden: true,
+    hidden: false,
     meta: { title: '签到Star', authFilter: false }
   }
 ]
 export const routes = [
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../components/page/loginManage/login.vue'),
+    hidden: false,
+    meta: { title: '签到Star', authFilter: false }
+  },
   {
     path: '/',
     component: Container,

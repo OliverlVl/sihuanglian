@@ -9,9 +9,9 @@
             fit highlight-current-row stripe
             size="mini"
             :default-sort="{prop: 'account', order: 'ascending'}">
-        <el-table-column prop="account" label="账号" align="center" width="120" sortable></el-table-column>
-        <el-table-column prop="userName" label="用户名" align="center" width="120"></el-table-column>
-        <el-table-column prop="status"  width="120"
+        <el-table-column prop="account" label="学号" align="center" width="120" sortable></el-table-column>
+        <el-table-column prop="userName" label="姓名" align="center" width="120"></el-table-column>
+        <!-- <el-table-column prop="status"  width="120"
                          label="状态"
                          align="center"
                          :filters="userStatusMap"
@@ -21,7 +21,7 @@
                 <el-tag :type="scope.row.status === 'Disabled_SYS' ? 'danger' : 'success'"
                         close-transition >{{ setUserStatus(scope.row.status) }}</el-tag>
             </template>
-        </el-table-column>
+        </el-table-column> -->
         <el-table-column prop="sex" label="性别" align="center" width="70" sortable>
             <template slot-scope="scope">
                 <span>{{sexText(scope.row.sex)}}</span>
@@ -29,13 +29,13 @@
         </el-table-column>
         <el-table-column prop="phone" label="手机号" align="center"></el-table-column>
         <el-table-column prop="email" label="邮箱" align="center"></el-table-column>
-        <el-table-column prop="userType"
+        <!-- <el-table-column prop="userType"
                          width="200"
                          label="用户角色"
                          align="center">
             <template slot-scope="scope">
                 <span>{{setUserRole(scope.row.userType)}}</span>
-            </template>
+            </template> -->
             <!--<template slot-scope="scope">-->
                 <!--<div v-for="item in scope.row.role" :key="item" class="role-name-tag">-->
                     <!--<el-tag type="warning" close-transition >{{ setUserRole(item) }}</el-tag>-->
@@ -47,9 +47,7 @@
                 <el-button
                         size="mini"
                         @click="openEdit(scope.row)">编辑</el-button>
-                <el-button type="primary"
-                        size="mini"
-                        @click="openResetPass(scope.row)">重置密码</el-button>
+                
             </template>
         </el-table-column>
     </el-table>
@@ -77,8 +75,8 @@
             },
             search: {type: Object},
             sexMap: {type: Array},
-            userTypeMap: {type: Array},
-            userStatusMap: {type: Array}
+            // userTypeMap: {type: Array},
+            // userStatusMap: {type: Array}
         },
         computed: {
             userInfoList () {
@@ -134,14 +132,14 @@
                 return '女'
             },
             // 将用户状态英文转为中文
-            setUserStatus (status) {
-                for (let item of this.userStatusMap) {
-                    if (item.value === status) {
-                        return item.text;
-                    }
-                }
-                return '未定义';
-            },
+            // setUserStatus (status) {
+            //     for (let item of this.userStatusMap) {
+            //         if (item.value === status) {
+            //             return item.text;
+            //         }
+            //     }
+            //     return '未定义';
+            // },
             formatter (row, column) {
                 return row.address;
             },

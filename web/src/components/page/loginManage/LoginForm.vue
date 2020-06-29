@@ -6,7 +6,7 @@
         </div>
         <el-form class="login-form" autoComplete="on" ref="loginForm" :model="loginForm" :rules="loginFormRules">
             <el-form-item prop="account">
-                <el-input name="account" type="text" v-model="loginForm.account" placeholder="请输入账号或邮箱">
+                <el-input name="account" type="text" v-model="loginForm.account" placeholder="请输入账号、邮箱或者手机号">
                     <div class="svg-container" slot="prefix">
                         <icon name="user" :w="16" :h="16"></icon>
                     </div>
