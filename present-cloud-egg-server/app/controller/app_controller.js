@@ -174,6 +174,8 @@ class AppController extends Controller {
 	async teachrerSignInInfo() {
 		const { ctx } = this;
 		const courseId = ctx.query.courseId;
+		const result = ctx.service.signIn.teachrerSignInInfo(courseId)
+		ctx.body = result
 	}
 
 	// 结束签到
@@ -186,14 +188,17 @@ class AppController extends Controller {
 
 	//------------------------13.签到记录页面------------------------
 
-	//a)签到记录接口
+	// 签到记录接口
 	async signInRecord() {
 		const { ctx } = this;
 		const courseId = ctx.query.courseId;// request.body获取前端post值
-		const result = await ctx.service.signIn.getSignInRecordByCourseId(courseId);
+		const result = await ctx.service.teacherSignIn.signInRecord(courseId);
 		ctx.body = result;
 	}
 
+	//------------------------14.单次学生签到详情页面------------------------
+
+	//单次学生签到详情接口
 
 
 
