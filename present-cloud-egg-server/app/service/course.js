@@ -12,7 +12,8 @@ class CourseService extends Service {
                 course_id: courseId,
             },
         })
-        if (result != 0) {
+        // console.log(result)
+        if (result != null) {
             return result
         } else {
             return {
