@@ -70,12 +70,12 @@ class TeacherSignInService extends Service {
 	async signInRecord(courseId) {
 		const { ctx } = this
 
+		// 根据课程id获取每次签到信息
 		var result = await ctx.model.TeacherSignIn.findAll({
 			where: {
 				course_id: courseId,
 			},
 		})
-		console.log(result.length)
 
 		if(result.length == 0){
 			return {
@@ -84,20 +84,36 @@ class TeacherSignInService extends Service {
 			}
 		}
 
+		const course = await ctx.model.Course.findOne({
+			where:{
+				course_id:courseId
+			}
+		})
+
+
 		for (var i = 0; i < result.length; i++) {
+
+			// 根据教师签到id 获取学生签到信息
 			var signIn = await ctx.model.SignIn.findAll({
 				where: {
 					teacher_sign_id: result[i].teacher_sign_id
 				}
 			})
+
+			// 成功签到人数
 			result[i].dataValues["signInNumber"] = signIn.length
 
-			var selectCourse = await ctx.model.SelectCourse.findAll({
-				where: {
-					course_id: courseId
-				}
-			})
-			result[i].dataValues["noSignInNumber"] = selectCourse.length - signIn.length
+			// 总人数
+			result[i].dataValues["studentTotalNumber"] = course.student_total_number
+
+			// 删除不要的属性
+			delete result[i].dataValues.longitude
+			delete result[i].dataValues.latitude
+			delete result[i].dataValues.state
+			delete result[i].dataValues.creator
+			delete result[i].dataValues.updater
+
+			console.log(result[i])
 		}
 		return result
 	
@@ -111,16 +127,39 @@ class TeacherSignInService extends Service {
 	 */
 	async teachrerSignInInfo(courseId){
 		const { ctx } = this;
+
+		// 根据课程id获取课程总人数
 		const course = await ctx.model.Course.findOne({
 			where:{
 				course_id:courseId
 			}
 		})
-		var signIn = await ctx.model.TeacherSignIn.findAll({
+
+		// 获取当前签到的id
+		var teacherSignIn = await ctx.model.TeacherSignIn.findOne(
+			{
+				'order': [
+					['teacher_sign_id', 'DESC'],
+				]
+			},
+			{
+				where:{
+				course_id: courseId,
+				}
+				
+			}
+		)
+
+		var signIn = await ctx.model.SignIn.findAll({
 			where: {
-				course: result[i].teacher_sign_id
+				teacher_sign_id: teacherSignIn.teacher_sign_id
 			}
 		})
+		
+		return {
+			signInNumber: signIn.length,
+			studentTotalNumber: course.student_total_number		
+		}
 
 
 

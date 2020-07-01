@@ -174,7 +174,8 @@ class AppController extends Controller {
 	async teachrerSignInInfo() {
 		const { ctx } = this;
 		const courseId = ctx.query.courseId;
-		const result = ctx.service.teacherSignIn.teachrerSignInInfo(courseId)
+		const result = await ctx.service.teacherSignIn.teachrerSignInInfo(courseId)
+
 		ctx.body = result
 	}
 
@@ -199,6 +200,7 @@ class AppController extends Controller {
 	//------------------------14.单次学生签到详情页面------------------------
 
 	//单次学生签到详情接口
+	
 
 
 
