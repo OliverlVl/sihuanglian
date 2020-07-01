@@ -125,24 +125,30 @@ module.exports = app => {
 
   const url = '/app' // 加一个url前缀
 
+  // ------------------------1.登录页面------------------------
+
   // 登录
   router.post(url + '/login', controller.appController.login)
+
+  // ------------------------2.注册页面------------------------
+
   // 注册
   router.post(url + '/regist', controller.appController.register)
+
+  // ------------------------3.忘记密码页面------------------------
 
   // 忘记密码
   router.post(url + '/resetPwd', controller.appController.appResetPassword)
 
-
-
-  // ------------------------学生主页页面------------------------
+  // ------------------------4.学生主页页面------------------------
 
   // 获取课程表
   router.get(url + '/courseList', controller.appController.selcetCourseList)
 
+  // 获取课程表信息
   router.get(url + '/getCourseInfo', controller.appController.selcetCourseInfoByCourseId)
 
-  // ------------------------学生课程信息页面------------------------
+  // ------------------------5.学生课程信息页面------------------------
 
   // a)获取班课信息接口
   // router.get(url+'/getCourseInfo', controller.appController.getCourseInfo)
@@ -150,13 +156,13 @@ module.exports = app => {
   router.post(url + '/signIn', controller.appController.signIn)
 
 
-  // ------------------------学生签到详情页面------------------------
+  // ------------------------6.学生签到详情页面------------------------
 
 
 
 
 
-  // ------------------------更改手机号码页面------------------------
+  // ------------------------7.更改手机号码页面------------------------
 
   // 验证密码
   router.post(url + '/verifyPwd', controller.appController.verifyPassword)
@@ -164,13 +170,13 @@ module.exports = app => {
   // 更改手机号
   router.post(url + '/changePhone', controller.appController.updatePhone)
 
-  // ------------------------修改密码页面------------------------
+  // ------------------------8.修改密码页面------------------------
 
-  
+
   // 修改密码
   router.post(url + '/changePwd', controller.appController.changePassword)
 
-  // ------------------------用户反馈页面------------------------
+  // ------------------------9.用户反馈页面------------------------
 
   router.post(url + '/feedback', controller.appController.feedback)
 
@@ -184,11 +190,11 @@ module.exports = app => {
   // 创建班课接口：
   router.post(url + '/createCourse', controller.appController.createCourse)
 
-  // ------------------------教师课程信息页面------------------------
+  // ------------------------12.教师课程信息页面------------------------
 
-	// 获取班课信息(同学生功能)
+  // 获取班课信息(同学生功能)
 
-	// 发起签到
+  // 发起签到
   router.post(url + '/launchSignIn', controller.appController.launchSignIn)
 
   // 签到详情
@@ -197,8 +203,8 @@ module.exports = app => {
   // 结束签到
   router.get(url + '/signInEnd', controller.appController.signInEnd)
 
-  
-  
+
+
 
 
   //------------------------13.签到记录页面------------------------

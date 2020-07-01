@@ -9,7 +9,7 @@ class AppController extends Controller {
 	}
 
 
-	// ------------------------登入------------------------
+	// ------------------------1.登入页面------------------------
 
 	// 登录方法
 	async login() {
@@ -19,6 +19,8 @@ class AppController extends Controller {
 		ctx.body = result;
 	}
 
+	// ------------------------2.注册页面------------------------
+
 	// 注册方法
 	async register() {
 		const { ctx } = this;
@@ -26,6 +28,8 @@ class AppController extends Controller {
 		const result = await ctx.service.login.appRegister(registerMsg);
 		ctx.body = result;
 	}
+
+	// ------------------------3.忘记密码页面------------------------
 
 	// 忘记密码
 	async appResetPassword() {
@@ -38,7 +42,7 @@ class AppController extends Controller {
 		ctx.body = result
 	}
 
-	// ------------------------学生主页页面------------------------
+	// ------------------------4.学生主页页面------------------------
 
 	// 获取课程表
 	async selcetCourseList() {
@@ -65,9 +69,7 @@ class AppController extends Controller {
 		ctx.body = result
 	}
 
-
-
-	// ------------------------学生课程信息页面------------------------
+	// ------------------------5.学生课程信息页面------------------------
 
 	// b)学生参与签到接口
 	async signIn() {
@@ -77,14 +79,14 @@ class AppController extends Controller {
 		ctx.body = result;
 	}
 
-	// ------------------------学生签到详情页面------------------------
+	// ------------------------6.学生签到详情页面------------------------
 
 
 
 
 
 
-	// ------------------------更改手机号码页面------------------------
+	// ------------------------7.更改手机号码页面------------------------
 
 	//验证密码
 	async verifyPassword() {
@@ -106,7 +108,7 @@ class AppController extends Controller {
 		ctx.body = result
 	}
 
-	// ------------------------修改密码页面------------------------
+	// ------------------------8.修改密码页面------------------------
 
 	// app修改密码
 	async changePassword() {
@@ -122,7 +124,7 @@ class AppController extends Controller {
 
 	}
 
-	// ------------------------用户反馈页面------------------------
+	// ------------------------9.用户反馈页面------------------------
 	async feedback() {
 		const { ctx } = this;
 		const feedbackMsg = ctx.request.body; // request.body获取前端post值
@@ -148,14 +150,14 @@ class AppController extends Controller {
 		const courseMsg = ctx.request.body; // request.body获取前端post值
 		const result = await ctx.service.course.createCourse(courseMsg);
 		ctx.body = result;
-	}	
+	}
 
-	// ------------------------教师课程信息页面------------------------
+	// ------------------------12.教师课程信息页面------------------------
 
 	// 获取班课信息(同学生功能)
 
 	// 发起签到
-	async launchSignIn(){
+	async launchSignIn() {
 		const { ctx } = this;
 		const signInMsg = ctx.request.body;
 		const token = JSON.parse(ctx.request.header.token);
@@ -163,42 +165,34 @@ class AppController extends Controller {
 			token.id,
 			signInMsg.courseId,
 			signInMsg.longitude,
-			signInMsg.latitude 
+			signInMsg.latitude
 		)
 		ctx.body = result
 
 	}
 	// 签到详情
-	async teachrerSignInInfo(){
+	async teachrerSignInInfo() {
 		const { ctx } = this;
 		const courseId = ctx.query.courseId;
 	}
 
 	// 结束签到
-	async signInEnd(){
+	async signInEnd() {
 		const { ctx } = this;
 		const teacherSignId = ctx.query.teacherSignId;
 		const result = await ctx.service.teacherSignIn.signInEnd(teacherSignId)
 		ctx.body = result
 	}
 
+	//------------------------13.签到记录页面------------------------
 
-
-
-
-
-  
-
-
-  
-  //------------------------13.签到记录页面------------------------
-  //a)签到记录接口
-  async signInRecord() {
-	const { ctx } = this;
-	const courseId  = ctx.query.courseId ;// request.body获取前端post值
-	const result = await ctx.service.signIn.getSignInRecordByCourseId(courseId);
-	ctx.body = result;
-  }
+	//a)签到记录接口
+	async signInRecord() {
+		const { ctx } = this;
+		const courseId = ctx.query.courseId;// request.body获取前端post值
+		const result = await ctx.service.signIn.getSignInRecordByCourseId(courseId);
+		ctx.body = result;
+	}
 
 
 
