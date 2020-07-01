@@ -103,6 +103,29 @@ class TeacherSignInService extends Service {
 	
 	}
 
+	// 教师签到详情
+	/**
+	 * 查询课程总人数
+	 * 查询成功签到人数
+	 * @param {*} courseId 
+	 */
+	async teachrerSignInInfo(courseId){
+		const { ctx } = this;
+		const course = await ctx.model.Course.findOne({
+			where:{
+				course_id:courseId
+			}
+		})
+		var signIn = await ctx.model.TeacherSignIn.findAll({
+			where: {
+				course: result[i].teacher_sign_id
+			}
+		})
+
+
+
+	}
+
 }
 
 module.exports = TeacherSignInService;
