@@ -174,7 +174,7 @@ class AppController extends Controller {
 	async teachrerSignInInfo() {
 		const { ctx } = this;
 		const courseId = ctx.query.courseId;
-		const result = ctx.service.signIn.teachrerSignInInfo(courseId)
+		const result = ctx.service.teacherSignIn.teachrerSignInInfo(courseId)
 		ctx.body = result
 	}
 
