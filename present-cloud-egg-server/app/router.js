@@ -126,9 +126,9 @@ module.exports = app => {
   const url = '/app' // 加一个url前缀
 
   // 登录
-  router.post(url+'/login', controller.appController.login)
+  router.post(url + '/login', controller.appController.login)
   // 注册
-  router.post(url+'/regist', controller.appController.register)
+  router.post(url + '/regist', controller.appController.register)
 
   // 忘记密码
   router.post(url + '/resetPwd', controller.appController.appResetPassword)
@@ -146,7 +146,28 @@ module.exports = app => {
   // a)获取班课信息接口
   // router.get(url+'/getCourseInfo', controller.appController.getCourseInfo)
   // b)学生参与签到接口
-  router.post(url+'/signIn', controller.appController.signIn)
+  router.post(url + '/signIn', controller.appController.signIn)
+
+
+  // ------------------------学生签到详情页面------------------------
+
+
+
+
+
+  // ------------------------更改手机号码页面------------------------
+
+
+
+
+
+  // ------------------------修改密码页面------------------------
+
+
+
+
+
+  // ------------------------用户反馈页面------------------------
 
 
 
