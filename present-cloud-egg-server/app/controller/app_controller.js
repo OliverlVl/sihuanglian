@@ -20,6 +20,21 @@ class AppController extends Controller {
 	}
 
 
+
+
+
+	// 忘记密码
+	async appResetPassword(){
+		const { ctx } = this;
+		const appPasswordMsg = ctx.request.body;
+		const result = await ctx.service.login.appResetPassword(
+			appPasswordMsg.phone,
+			appPasswordMsg.newPwd,
+		)
+		ctx.body = result
+	}
+
+
 }
 
 module.exports = AppController;
