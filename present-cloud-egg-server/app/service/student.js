@@ -83,6 +83,61 @@ class StudentService extends Service {
     }
 
 
+    //----------------------------------------------------------app----------------------------------------------------------
+
+    // 更改手机号
+    async updatePhone(id,newPhone){
+        const { ctx } = this
+        // 查看是否已存在手机号
+        const result = await ctx.model.Student.findOne({
+            where:{
+                student_telephone: newPhone
+            }
+        })
+        if(result != null){
+            return {
+                code: -2,
+                msg: "手机号已存在"
+            } 
+        }
+        // 修改学生表手机号
+        const result1 = await ctx.model.Student.update(
+            {
+                student_telephone: newPhone
+            },
+            {
+                where: {
+                    student_id: id
+                }
+            })
+        // 修改登入表手机号
+        const result2 = await ctx.model.Login.update(
+            {
+                login_name:newPhone
+            },
+            {
+                where:{
+                    user_id: id
+                }
+            }
+        )
+        if (result1 != 0 & result2 != 0) {
+            return {
+                code: 200,
+                msg: "修改成功"
+            }
+        } else {
+            return {
+                code: -1,
+                msg: "修改失败"
+            }
+        }
+
+
+
+    }
+
+
 
 }
 

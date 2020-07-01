@@ -421,6 +421,31 @@ class LoginService extends Service {
     }
 
 
+    // 验证密码
+    async verifyPassword(id,password){
+        const { ctx } = this;
+        const result = await ctx.model.Login.findOne({
+            where: {
+                user_id:id
+            }
+        })
+        //加密
+        const md5Password = await this.getMd5Data(password)
+        console.log(md5Password)
+        if(result.login_password != md5Password){
+            return {
+                code: -1,
+				msg: "密码错误"
+            }
+        }else{
+            return {
+				code: 200,
+				msg: "验证成功"
+			}
+        }
+    }
+
+
 }
 
 module.exports = LoginService;

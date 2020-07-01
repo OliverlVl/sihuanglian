@@ -157,6 +157,11 @@ module.exports = app => {
 
   // ------------------------更改手机号码页面------------------------
 
+  // 验证密码
+  router.post(url + '/verifyPwd', controller.appController.verifyPassword)
+
+  // 更改手机号
+  router.post(url + '/changePhone', controller.appController.updatePhone)
 
 
 

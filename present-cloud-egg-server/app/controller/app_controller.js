@@ -83,8 +83,29 @@ class AppController extends Controller {
 
 
 
+
 	// ------------------------更改手机号码页面------------------------
 
+	//验证密码
+	async verifyPassword(){
+		const { ctx } = this;
+		const password =ctx.query.password;
+		const token = JSON.parse(ctx.request.header.token);
+		const result = await ctx.service.login.verifyPassword(token.id,password)
+		ctx.body = result
+	}
+
+	//验证码
+
+	//更改手机号
+	async updatePhone(){
+		const { ctx } = this;
+		const phoneMsg = ctx.request.body;
+		const token = JSON.parse(ctx.request.header.token);
+		const result = await ctx.service.student.updatePhone(token.id, phoneMsg.newPhone)
+		ctx.body = result
+	}
+	
 
 
 
