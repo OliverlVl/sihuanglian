@@ -262,6 +262,123 @@ class LoginService extends Service {
     // }
 
 
+    // app登录
+    async appLogin(loginMsg) {
+        const { ctx } = this;
+        const res = {};
+        // 为当前输入的密码加密 ### md5加密
+        loginMsg.password = crypto.createHash('md5').update(loginMsg.password).digest('hex')
+        console.log(loginMsg)
+        // 在当前数据库中验证此用户思否存在
+        const queryResult = await ctx.model.Login.findOne({
+            where: {
+                login_name: loginMsg.phone,
+            }
+        });
+        if (!queryResult) {
+            res.code = -2;
+            res.msg = '用户不存在，请前去注册';
+            res.data = {};
+            res.status = 'failed';
+        } else {
+            const result = await ctx.model.Login.findOne({
+                where: {
+                    login_name: loginMsg.phone,
+                    login_password: loginMsg.password
+                }
+            });
+            if (!result) {
+                res.code = -1;
+                res.msg = '用户密码不正确';
+                res.data = {};
+                res.status = 'failed';
+            } else {
+                // 签发token
+                // const token = this.app.jwt.sign({
+                const token = JWT.sign({
+                    account: result.login_name,
+                },
+                    this.config.jwts.secret, {
+                    expiresIn: "30 days",
+                });
+                res.data = result;
+                res.code = 1;
+                res.token = token;
+                res.status = 'ok';
+            }
+        }
+        return res;
+    }
+
+    // app注册
+    async appRegister(user) {
+        const { ctx } = this;
+        console.log(JSON.stringify(user));
+        // md5加密
+        user.password =  crypto.createHash('md5').update(user.password).digest('hex');
+        // const result = await ctx.model.Login.create(user);
+        var userId=0
+        var result
+        if(user.role == 2) { // role==2老师
+             // 1、添加用户相关信息 获取用户id (老师)
+            result = await ctx.model.Teacher.create({
+                teacher_number: user.identity,
+                teacher_name: user.name,
+                teacher_telephone: user.phone,
+            });
+            userId = result.teacher_id;
+        }else (user.role == 1) ;{ // role==1学生
+            result = await ctx.model.Student.create({
+                student_number: user.identity,
+                student_name: user.name,
+                student_telephone: user.phone,
+            });
+            userId = result.student_id;
+        }
+       
+
+        // 2、添加用户登录信息 
+        // a、账号 
+        await ctx.model.Login.create({
+            login_name: user.name,
+            login_password: user.password,
+            login_type: user.role,
+            user_id: userId
+        })
+
+        // b、电话2
+        await ctx.model.Login.create({
+            login_name: user.phone,
+            login_password: user.pwd,
+            login_type: user.role,
+            user_id: userId
+        })
+
+
+        // // c、邮箱
+        // await ctx.model.Login.create({
+        //     login_name: user.email,
+        //     login_password: user.pwd,
+        //     login_type: user.role,
+        //     user_id: userId
+        // })
+
+
+        if (result != null) {
+			return {
+				code: 200,
+				msg: "注册成功"
+			}
+		} else {
+			return {
+				code: -1,
+				msg: "注册失败"
+			}
+		}
+        // return result.dataValues;
+    }
+
+
 }
 
 module.exports = LoginService;

@@ -125,8 +125,15 @@ module.exports = app => {
   // 登录
   const url = '/app' // 加一个url前缀
 
-  router.get(url+'/index', controller.appController.index)
+  router.post(url+'/login', controller.appController.login)
+  // 注册
+  router.post(url+'/regist', controller.appController.register)
+  // 
 
+  // a)获取班课信息接口
+  // router.get(url+'/getCourseInfo', controller.appController.getCourseInfo)
+  // b)学生参与签到接口
+  router.post(url+'/signIn', controller.appController.signIn)
 
 
   
