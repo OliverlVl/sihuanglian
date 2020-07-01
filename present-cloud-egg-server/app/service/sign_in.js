@@ -20,17 +20,6 @@ class SignInService extends Service {
 	}
 
 
-
-
-	// 教师签到详情
-	/**
-	 * 
-	 * @param {*} courseId 
-	 */
-	async teachrerSignInInfo(courseId){
-
-	}
-
 }
 
 module.exports = SignInService;
