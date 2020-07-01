@@ -69,6 +69,14 @@ class SignInService extends Service {
 	}
 
 
+
+	// 单次学生签到详情接口
+	async singleSignInRecord(teacherSingId){
+		const { ctx } = this;
+		// 
+	}
+
+
 }
 
 module.exports = SignInService;
