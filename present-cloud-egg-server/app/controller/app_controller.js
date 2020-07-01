@@ -131,6 +131,44 @@ class AppController extends Controller {
 	}
 
 
+	// ------------------------教师课程信息页面------------------------
+
+	// 获取班课信息(同学生功能)
+
+	// 发起签到
+	async launchSignIn(){
+		const { ctx } = this;
+		const signInMsg = ctx.request.body;
+		const token = JSON.parse(ctx.request.header.token);
+		const result = await ctx.service.teacherSignIn.launchSignIn(
+			token.id,
+			signInMsg.courseId,
+			signInMsg.longitude,
+			signInMsg.latitude 
+		)
+		ctx.body = result
+
+	}
+	// 签到详情
+	async teachrerSignInInfo(){
+		const { ctx } = this;
+		const courseId = ctx.query.courseId;
+	}
+
+	// 结束签到
+	async signInEnd(){
+		const { ctx } = this;
+		const teacherSignId = ctx.query.teacherSignId;
+		const result = await ctx.service.teacherSignIn.signInEnd(teacherSignId)
+		ctx.body = result
+	}
+
+
+
+
+
+
+
 
 
 

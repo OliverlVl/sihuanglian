@@ -173,7 +173,21 @@ module.exports = app => {
   router.post(url + '/feedback', controller.appController.feedback)
 
 
+  // ------------------------教师课程信息页面------------------------
 
+	// 获取班课信息(同学生功能)
+
+	// 发起签到
+  router.post(url + '/launchSignIn', controller.appController.launchSignIn)
+
+  // 签到详情
+  router.get(url + '/teachrerSignInInfo', controller.appController.teachrerSignInInfo)
+
+  // 结束签到
+  router.get(url + '/signInEnd', controller.appController.signInEnd)
+
+  
+  
 
 
   // 完善老师信息
