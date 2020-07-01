@@ -170,10 +170,18 @@ module.exports = app => {
   // ------------------------用户反馈页面------------------------
   router.post(url + '/feedback', controller.appController.feedback)
 
+  //------------------------10.教师主页页面------------------------
+  //a)课程表接口：
+  router.get(url + '/courseList', controller.appController.courseList)
+
+  //------------------------11.创建班课页面------------------------
+  // 创建班课接口：
+  router.post(url + '/createCourse', controller.appController.createCourse)
 
 
 
 
+  
   // 完善老师信息
   router.post('/updateTeacherInfo', controller.teacher.updateTeacherInfo)
 

@@ -46,6 +46,43 @@ class CourseService extends Service {
         }
     }
 
+    //根据教师id获取课程信息
+    async selcetCourseInfoByTeacher(teacherId) {
+        const { ctx } = this
+        const course_teacher_id = 1 // 用token解析出 教师id
+        const result = await ctx.model.Course.findAll({
+            where: {
+                course_teacher_id: course_teacher_id,
+            },
+        })
+        console.log(result)
+        if (result != null) {
+            return result
+        } else {
+            return {
+                code: -1,
+                msg: "班课不存在"
+            }
+        }
+
+    }
+
+
+	// 创建班课接口
+	async createCourse(courseMsg) {
+		const { ctx } = this;
+		console.log(courseMsg) // courseId 还没用到
+
+		const result = await ctx.model.Course.create({
+            course_name: courseMsg.course,
+            course_class: courseMsg.class,
+            course_teacher_id: courseMsg.teacher
+		})
+		if (result == null) {
+			return false // 错误
+		}
+		return result.dataValues;
+	}
 
 }
 

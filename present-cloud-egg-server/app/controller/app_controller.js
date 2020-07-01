@@ -104,6 +104,25 @@ class AppController extends Controller {
 	}
 
 
+  //------------------------10.教师主页页面------------------------
+  //a)课程表接口：???
+  async courseList() {
+	const { ctx } = this;
+	var teacherId = ctx.query.teacherId;// request.body获取前端post值
+	const result = await ctx.service.course.selcetCourseInfoByTeacher(teacherId);
+	ctx.body = result;
+  }
+
+  //------------------------11.创建班课页面------------------------
+  // 创建班课接口：
+  async createCourse() {
+	const { ctx } = this;
+	const courseMsg = ctx.request.body; // request.body获取前端post值
+	const result = await ctx.service.course.createCourse(courseMsg);
+	ctx.body = result;
+  }	
+
+
 
 
 
