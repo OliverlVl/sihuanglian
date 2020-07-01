@@ -27,7 +27,7 @@ module.exports = app => {
 
   // 忘记密码
   router.post('/resetPassword', controller.hello.resetPassword)
-  
+
 
 
   // ------------------------数据字典------------------------
@@ -64,7 +64,7 @@ module.exports = app => {
 
   // 查看所有菜单
   router.get('/selectMenuAll', controller.hello.selectMenuAll)
-  
+
   // 删除菜单
   router.get('/deleteMenu', controller.hello.deleteMenu)
 
@@ -81,40 +81,40 @@ module.exports = app => {
   // ------------------------角色------------------------
 
   // 获取所有角色
-  router.get('/selectRoleAll',controller.hello.selectRoleAll)
+  router.get('/selectRoleAll', controller.hello.selectRoleAll)
 
   // 根据id查询角色信息
-  router.get('/selectRoleById',controller.hello.selectRoleById)
+  router.get('/selectRoleById', controller.hello.selectRoleById)
 
   // 添加角色
-  router.post('/insertRole',controller.hello.insertRole)
+  router.post('/insertRole', controller.hello.insertRole)
 
   // 修改角色
-  router.put('/updateRole',controller.hello.updateRole)
+  router.put('/updateRole', controller.hello.updateRole)
 
   // 根据id删除角色
-  router.delete('/deleteRoleById',controller.hello.deleteRoleById)
+  router.delete('/deleteRoleById', controller.hello.deleteRoleById)
 
-  
+
   // ------------------------学生用户管理------------------------
-  
+
   // 获取所有学生 #获取所有用户
-  router.get('/getAllList',controller.hello.selectStudentAll)
+  router.get('/getAllList', controller.hello.selectStudentAll)
 
   // 根据id查询学生信息 #获取用户
-  router.get('/getUser',controller.hello.selectStudentById)
+  router.get('/getUser', controller.hello.selectStudentById)
 
   // 修改学生信息 #编辑用户
-  router.put('/editUser',controller.hello.updateStudent)
+  router.put('/editUser', controller.hello.updateStudent)
 
   // 根据id删除学生 #删除用户
-  router.delete('/deleteUser',controller.hello.deleteStudentById)
+  router.delete('/deleteUser', controller.hello.deleteStudentById)
 
 
   // ------------------------课程管理------------------------
 
   // 获取十条班课信息
-  router.get('/selectCourInfoByPage',controller.hello.selectCourInfoByPage)
+  router.get('/selectCourInfoByPage', controller.hello.selectCourInfoByPage)
 
 
 
@@ -122,23 +122,31 @@ module.exports = app => {
   //----------------------------------------------------------APP----------------------------------------------------------
 
 
-  // 登录
+
   const url = '/app' // 加一个url前缀
 
+  // 登录
   router.post(url+'/login', controller.appController.login)
   // 注册
   router.post(url+'/regist', controller.appController.register)
-  // 
 
+  // 忘记密码
+  router.post(url + '/resetPwd', controller.appController.appResetPassword)
+
+
+
+  // ------------------------学生主页页面------------------------
+
+  // 获取课程表
+  router.get(url + '/courseList', controller.appController.selcetCourseList)
+
+  router.get(url + '/getCourseInfo', controller.appController.selcetCourseInfoByCourseId)
+
+  // ------------------------学生课程信息页面------------------------
   // a)获取班课信息接口
   // router.get(url+'/getCourseInfo', controller.appController.getCourseInfo)
   // b)学生参与签到接口
   router.post(url+'/signIn', controller.appController.signIn)
-
-
-  
-
-
 
 
 
@@ -154,6 +162,6 @@ module.exports = app => {
   // 学生加入班课 地址加问号传入course_number
   router.get('/addCourse', controller.selectCourse.addCourse)
 
-  
+
 
 };
