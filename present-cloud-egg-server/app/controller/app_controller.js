@@ -18,8 +18,6 @@ class AppController extends Controller {
 		const result = await ctx.service.login.appLogin(loginMsg);
 		ctx.body = result;
 	}
-
-
 	
 	// 注册方法
 	async register() {
@@ -28,7 +26,6 @@ class AppController extends Controller {
 		const result = await ctx.service.login.appRegister(registerMsg);
 		ctx.body = result;
 	}
-
 
 	// 忘记密码
 	async appResetPassword() {
@@ -40,7 +37,6 @@ class AppController extends Controller {
 		)
 		ctx.body = result
 	}
-
 
 	// ------------------------学生主页页面------------------------
 
@@ -73,7 +69,6 @@ class AppController extends Controller {
 
 	// ------------------------学生课程信息页面------------------------
 
-
 	// b)学生参与签到接口
 	async signIn() {
 		const { ctx } = this;
@@ -81,6 +76,31 @@ class AppController extends Controller {
 		const result = await ctx.service.signIn.signIn(signMsg);
 		ctx.body = result;
 	}
+
+	// ------------------------学生签到详情页面------------------------
+	
+
+
+
+
+	// ------------------------更改手机号码页面------------------------
+
+
+
+
+
+	// ------------------------修改密码页面------------------------
+
+
+
+
+
+	// ------------------------用户反馈页面------------------------
+
+
+
+
+
 
 
 
