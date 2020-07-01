@@ -18,7 +18,7 @@ class AppController extends Controller {
 		const result = await ctx.service.login.appLogin(loginMsg);
 		ctx.body = result;
 	}
-	
+
 	// 注册方法
 	async register() {
 		const { ctx } = this;
@@ -78,7 +78,7 @@ class AppController extends Controller {
 	}
 
 	// ------------------------学生签到详情页面------------------------
-	
+
 
 
 
