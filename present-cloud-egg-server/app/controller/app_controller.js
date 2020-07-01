@@ -199,8 +199,14 @@ class AppController extends Controller {
 
 	//------------------------14.单次学生签到详情页面------------------------
 
-	//单次学生签到详情接口
-	
+	// 单次学生签到详情接口
+	async singleSignInRecord(){
+		const { ctx } = this;
+		const teacherSingId = ctx.query.teacherSingId;// request.body获取前端post值
+		const result = await ctx.service.signIn.singleSignInRecord(teacherSingId);
+		ctx.body = result;
+	}
+
 
 
 
