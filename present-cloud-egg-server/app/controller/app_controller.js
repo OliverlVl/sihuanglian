@@ -96,7 +96,12 @@ class AppController extends Controller {
 
 
 	// ------------------------用户反馈页面------------------------
-
+	async feedback() {
+		const { ctx } = this;
+		const feedbackMsg = ctx.request.body; // request.body获取前端post值
+		const result = await ctx.service.feedback.addFeedback(feedbackMsg);
+		ctx.body = result;
+	}
 
 
 

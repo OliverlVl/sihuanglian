@@ -168,6 +168,9 @@ module.exports = app => {
 
 
   // ------------------------用户反馈页面------------------------
+  router.post(url + '/feedback', controller.appController.feedback)
+
+
 
 
 
