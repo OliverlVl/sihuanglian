@@ -27,7 +27,11 @@ module.exports = app => {
 				key: 'teacher_sign_id'
 			}
 		},
-		student_place: {
+		longitude: {
+			type: STRING,
+			allowNull: true
+		},
+		latitude: {
 			type: STRING,
 			allowNull: true
 		},
