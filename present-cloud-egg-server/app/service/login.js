@@ -83,7 +83,7 @@ class LoginService extends Service {
         const { ctx } = this;
         console.log(JSON.stringify(user));
         // md5加密
-        user.pwd =  crypto.createHash('md5').update(user.pwd).digest('hex');
+        user.pwd = crypto.createHash('md5').update(user.pwd).digest('hex');
         // const result = await ctx.model.Login.create(user);
         // 1、添加用户相关信息 获取用户id (老师)
         const result = await ctx.model.Teacher.create({
@@ -124,18 +124,18 @@ class LoginService extends Service {
 
 
         if (result != null) {
-			return {
-				code: 200,
-				msg: "注册成功"
-			}
-		} else {
-			return {
-				code: -1,
-				msg: "注册失败"
-			}
-		}
+            return {
+                code: 200,
+                msg: "注册成功"
+            }
+        } else {
+            return {
+                code: -1,
+                msg: "注册失败"
+            }
+        }
         // return result.dataValues;
-        
+
     }
 
     // 专门对数据进行md5加密的方法，输入明文返回密文
@@ -150,69 +150,56 @@ class LoginService extends Service {
     // }
 
 
-    //查找用户
-    async selectUser(user) {
-        const { ctx } = this;
-        const result = await ctx.model.Login.findOne({
-            where: {
-                login_name: user.name,
-            },
-        })
-        if (result == null) {
-            return false // 用户不存在
-        }
-        return result.dataValues;
 
-    }
 
 
     // 忘记密码
-    async resetPassword(account,password,repassword){
+    async resetPassword(account, password, repassword) {
         const { ctx } = this;
-        if(password != repassword){
+        if (password != repassword) {
             return {
-				code: -1,
-				msg: "密码不一致"
-			}
+                code: -1,
+                msg: "密码不一致"
+            }
         }
         // 查找账户
         const container = await ctx.model.Login.findOne({
-            where:{
-                login_name:account
+            where: {
+                login_name: account
             }
         })
 
-        if(container == null){
+        if (container == null) {
             return {
-				code: -1,
-				msg: "用户不存在"
-			}
+                code: -1,
+                msg: "用户不存在"
+            }
         }
         //加密
         const md5Password = await this.getMd5Data(password)
         // console.log(typeof(md5Password))
         const result = await ctx.model.Login.update(
             {
-                login_password:md5Password
+                login_password: md5Password
             },
             {
-                where:{
+                where: {
                     user_id: container.user_id
                 }
 
             }
         )
         if (result != 0) {
-			return {
-				code: 200,
-				msg: "成功"
-			}
-		} else {
-			return {
-				code: -1,
-				msg: "失败"
-			}
-		} 
+            return {
+                code: 200,
+                msg: "成功"
+            }
+        } else {
+            return {
+                code: -1,
+                msg: "失败"
+            }
+        }
 
 
     }
@@ -230,77 +217,50 @@ class LoginService extends Service {
 
 
 
-    //修改密码
-    // async updatePassword(passwordMsg) {
-    //     const { ctx } = this;
-    //     // const updateMsg = ctx.request.body;
-    //     const originalPassword = passwordMsg.originalPassword; //原密码
-    //     const newPassword = passwordMsg.newPassword; //新密码
-        
-    //     // 1.对原密码进行md5加密与数据库中密码比较
-    //     //md5加密
-    //     const md5OriginalPassword = await getMd5Data(originalPassword);
-    //     //查找用户
-    //     const user = await selectUser(passwordMsg);
-    //     //比较更新
-    //     if (user == false) {
-    //          const result = { status: "用户不存在" }; //用户不存在
-    //     } else if (md5OriginalPassword != user.login_password) {
-    //          const result = { status: "密码错误" }; //密码错误
-    //     } else {
-    //         const md5NewPassword = await getMd5Data(newPassword);
-    //         const result = await update({
-    //             login_password: md5NewPassword
-    //         }, {
-    //             where: { login_name: user.login_name }
-    //         })
-    //         result = { status: "修改成功" };
-    //     }
-    //     return result;
-    // }
+
 
     //----------------------------------------------------------app----------------------------------------------------------
 
     // 忘记密码
-    async appResetPassword(account,password){
+    async appResetPassword(account, password) {
         const { ctx } = this;
         // 查找账户
         const container = await ctx.model.Login.findOne({
-            where:{
-                login_name:account
+            where: {
+                login_name: account
             }
         })
 
-        if(container == null){
+        if (container == null) {
             return {
-				code: -1,
-				msg: "用户不存在"
-			}
+                code: -1,
+                msg: "用户不存在"
+            }
         }
         //加密
         const md5Password = await this.getMd5Data(String(password))
         // console.log(typeof(md5Password))
         const result = await ctx.model.Login.update(
             {
-                login_password:md5Password
+                login_password: md5Password
             },
             {
-                where:{
+                where: {
                     user_id: container.user_id
                 }
             }
         )
         if (result != 0) {
-			return {
-				code: 200,
-				msg: "成功"
-			}
-		} else {
-			return {
-				code: -1,
-				msg: "失败"
-			}
-		} 
+            return {
+                code: 200,
+                msg: "成功"
+            }
+        } else {
+            return {
+                code: -1,
+                msg: "失败"
+            }
+        }
     }
 
 
@@ -357,19 +317,19 @@ class LoginService extends Service {
         const { ctx } = this;
         console.log(JSON.stringify(user));
         // md5加密
-        user.password =  crypto.createHash('md5').update(user.password).digest('hex');
+        user.password = crypto.createHash('md5').update(user.password).digest('hex');
         // const result = await ctx.model.Login.create(user);
-        var userId=0
+        var userId = 0
         var result
-        if(user.role == 2) { // role==2老师
-             // 1、添加用户相关信息 获取用户id (老师)
+        if (user.role == 2) { // role==2老师
+            // 1、添加用户相关信息 获取用户id (老师)
             result = await ctx.model.Teacher.create({
                 teacher_number: user.identity,
                 teacher_name: user.name,
                 teacher_telephone: user.phone,
             });
             userId = result.teacher_id;
-        }else (user.role == 1) ;{ // role==1学生
+        } else (user.role == 1); { // role==1学生
             result = await ctx.model.Student.create({
                 student_number: user.identity,
                 student_name: user.name,
@@ -377,7 +337,7 @@ class LoginService extends Service {
             });
             userId = result.student_id;
         }
-       
+
 
         // 2、添加用户登录信息 
         // a、账号 
@@ -407,41 +367,105 @@ class LoginService extends Service {
 
 
         if (result != null) {
-			return {
-				code: 200,
-				msg: "注册成功"
-			}
-		} else {
-			return {
-				code: -1,
-				msg: "注册失败"
-			}
-		}
+            return {
+                code: 200,
+                msg: "注册成功"
+            }
+        } else {
+            return {
+                code: -1,
+                msg: "注册失败"
+            }
+        }
         // return result.dataValues;
     }
 
 
     // 验证密码
-    async verifyPassword(id,password){
+    async verifyPassword(id, password) {
         const { ctx } = this;
         const result = await ctx.model.Login.findOne({
             where: {
-                user_id:id
+                user_id: id
             }
         })
         //加密
         const md5Password = await this.getMd5Data(password)
         console.log(md5Password)
-        if(result.login_password != md5Password){
+        if (result.login_password != md5Password) {
             return {
                 code: -1,
-				msg: "密码错误"
+                msg: "密码错误"
             }
-        }else{
+        } else {
             return {
-				code: 200,
-				msg: "验证成功"
-			}
+                code: 200,
+                msg: "验证成功"
+            }
+        }
+    }
+
+    //查找用户
+    async selectUser(user) {
+        const { ctx } = this;
+
+        if (result == null) {
+            return false // 用户不存在
+        }
+        return result.dataValues;
+
+    }
+
+
+    // app修改密码
+    async changePassword(id, oldPwd, newPwd) {
+        const { ctx } = this;
+
+        // 对原密码进行md5加密与数据库中密码比较
+        //md5加密
+        const md5oldPwd = await this.getMd5Data(oldPwd)
+        //根据id查找用户
+        const user = await ctx.model.Login.findOne({
+            where: {
+                user_id: id,
+            },
+        })
+        if (user == null) {
+            return {
+                code: -1,
+                msg: "用户不存在"
+            }
+        }
+        // 比较原密码是否一致
+        if (md5oldPwd != user.login_password) {
+            return {
+                code: -2,
+                msg: "密码错误"
+            }
+        }
+        // md5加密新密码
+        const md5newPwd = await this.getMd5Data(newPwd)
+        // 更新
+        const result = await ctx.model.Login.update(
+            {
+                login_password: md5newPwd
+            },
+            {
+                where: {
+                    user_id: id
+                }
+            }
+        )
+        if (result != 0) {
+            return {
+                code: 200,
+                msg: "修改成功"
+            }
+        } else {
+            return {
+                code: -3,
+                msg: "修改失败"
+            }
         }
     }
 

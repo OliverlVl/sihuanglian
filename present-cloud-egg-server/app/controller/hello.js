@@ -26,15 +26,6 @@ class helloController extends Controller {
 		ctx.body = result;
 	}
 
-	// 修改密码
-	// async updatePassword() {
-	// 	const { ctx } = this;
-	// 	const passwordMsg = ctx.request.body;
-	// 	const result = await ctx.service.login.updatePassword(passwordMsg);
-	// 	ctx.body = result;
-
-	// }
-
 	// 忘记密码
 	async resetPassword(){
 		const { ctx } = this;
