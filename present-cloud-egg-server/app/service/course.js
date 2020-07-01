@@ -45,6 +45,25 @@ class CourseService extends Service {
         }
     }
 
+    // getCourseInfo App 根据id找课程
+    // async getCourseInfo(course_id) {
+    //     const { ctx } = this
+    //     const result = await ctx.model.Course.findAll({
+    //         where: { 
+    //             course_id: course_id,
+    //         }, 
+	// 	})
+	// 	// console.log(result)
+    //     if(result != 0){
+    //         return  result
+    //     } else{
+    //         return {
+	// 			code: -1,
+	// 			msg: "班课不存在"
+	// 		}
+    //     }
+    // }
+
 }
 
 module.exports = CourseService;
