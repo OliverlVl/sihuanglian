@@ -30,10 +30,10 @@ class AppController extends Controller {
 	// 忘记密码
 	async appResetPassword() {
 		const { ctx } = this;
-		const appPasswordMsg = ctx.request.body;
+		const PasswordMsg = ctx.request.body;
 		const result = await ctx.service.login.appResetPassword(
-			appPasswordMsg.phone,
-			appPasswordMsg.newPwd,
+			PasswordMsg.phone,
+			PasswordMsg.newPwd,
 		)
 		ctx.body = result
 	}
@@ -83,17 +83,44 @@ class AppController extends Controller {
 
 
 
+
 	// ------------------------更改手机号码页面------------------------
 
+	//验证密码
+	async verifyPassword() {
+		const { ctx } = this;
+		const password = ctx.query.password;
+		const token = JSON.parse(ctx.request.header.token);
+		const result = await ctx.service.login.verifyPassword(token.id, password)
+		ctx.body = result
+	}
 
+	//验证码
 
-
+	//更改手机号
+	async updatePhone() {
+		const { ctx } = this;
+		const phoneMsg = ctx.request.body;
+		const token = JSON.parse(ctx.request.header.token);
+		const result = await ctx.service.student.updatePhone(token.id, phoneMsg.newPhone)
+		ctx.body = result
+	}
 
 	// ------------------------修改密码页面------------------------
 
+	// app修改密码
+	async changePassword() {
+		const { ctx } = this;
+		const passwordMsg = ctx.request.body;
+		const token = JSON.parse(ctx.request.header.token);
+		const result = await ctx.service.login.changePassword(
+			token.id,
+			passwordMsg.oldPwd,
+			passwordMsg.newPwd
+		)
+		ctx.body = result
 
-
-
+	}
 
 	// ------------------------用户反馈页面------------------------
 	async feedback() {
