@@ -212,6 +212,11 @@ module.exports = app => {
   router.get(url + '/signInRecord', controller.appController.signInRecord)
 
 
+//------------------------14.单词学生签到详情页面------------------------
+  //a)签到记录接口
+  router.get(url + '/singleSignInRecord', controller.appController.singleSignInRecord)
+
+
 
 
   // 完善老师信息
