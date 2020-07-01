@@ -143,6 +143,7 @@ module.exports = app => {
   router.get(url + '/getCourseInfo', controller.appController.selcetCourseInfoByCourseId)
 
   // ------------------------学生课程信息页面------------------------
+
   // a)获取班课信息接口
   // router.get(url+'/getCourseInfo', controller.appController.getCourseInfo)
   // b)学生参与签到接口
@@ -170,8 +171,18 @@ module.exports = app => {
   router.post(url + '/changePwd', controller.appController.changePassword)
 
   // ------------------------用户反馈页面------------------------
+
   router.post(url + '/feedback', controller.appController.feedback)
 
+  //------------------------10.教师主页页面------------------------
+
+  //a)课程表接口：
+  router.get(url + '/courseList', controller.appController.courseList)
+
+  //------------------------11.创建班课页面------------------------
+
+  // 创建班课接口：
+  router.post(url + '/createCourse', controller.appController.createCourse)
 
   // ------------------------教师课程信息页面------------------------
 
@@ -190,6 +201,8 @@ module.exports = app => {
   
 
 
+
+  
   // 完善老师信息
   router.post('/updateTeacherInfo', controller.teacher.updateTeacherInfo)
 
