@@ -130,25 +130,64 @@ class AppController extends Controller {
 		ctx.body = result;
 	}
 
+	//------------------------10.教师主页页面------------------------
 
-  //------------------------10.教师主页页面------------------------
-  //a)课程表接口：???
-  async courseList() {
-	const { ctx } = this;
-	var teacherId = ctx.query.teacherId;// request.body获取前端post值
-	const result = await ctx.service.course.selcetCourseInfoByTeacher(teacherId);
-	ctx.body = result;
-  }
+	//a)课程表接口：???
+	async courseList() {
+		const { ctx } = this;
+		var teacherId = ctx.query.teacherId;// request.body获取前端post值
+		const result = await ctx.service.course.selcetCourseInfoByTeacher(teacherId);
+		ctx.body = result;
+	}
 
-  //------------------------11.创建班课页面------------------------
-  // 创建班课接口：
-  async createCourse() {
-	const { ctx } = this;
-	const courseMsg = ctx.request.body; // request.body获取前端post值
-	const result = await ctx.service.course.createCourse(courseMsg);
-	ctx.body = result;
-  }	
+	//------------------------11.创建班课页面------------------------
 
+	// 创建班课接口：
+	async createCourse() {
+		const { ctx } = this;
+		const courseMsg = ctx.request.body; // request.body获取前端post值
+		const result = await ctx.service.course.createCourse(courseMsg);
+		ctx.body = result;
+	}	
+
+	// ------------------------教师课程信息页面------------------------
+
+	// 获取班课信息(同学生功能)
+
+	// 发起签到
+	async launchSignIn(){
+		const { ctx } = this;
+		const signInMsg = ctx.request.body;
+		const token = JSON.parse(ctx.request.header.token);
+		const result = await ctx.service.teacherSignIn.launchSignIn(
+			token.id,
+			signInMsg.courseId,
+			signInMsg.longitude,
+			signInMsg.latitude 
+		)
+		ctx.body = result
+
+	}
+	// 签到详情
+	async teachrerSignInInfo(){
+		const { ctx } = this;
+		const courseId = ctx.query.courseId;
+	}
+
+	// 结束签到
+	async signInEnd(){
+		const { ctx } = this;
+		const teacherSignId = ctx.query.teacherSignId;
+		const result = await ctx.service.teacherSignIn.signInEnd(teacherSignId)
+		ctx.body = result
+	}
+
+
+
+
+
+
+  
 
 
   

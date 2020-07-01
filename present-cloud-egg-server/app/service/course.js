@@ -24,9 +24,6 @@ class CourseService extends Service {
 
     }
 
-
-
-
     // 学生通过班课编号查找班课
     async selectCourse(course_number) {
         const { ctx } = this
