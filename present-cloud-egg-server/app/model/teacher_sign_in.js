@@ -19,10 +19,14 @@ module.exports = app => {
 				key: 'course_id'
 			}
         },
-		teacher_place: {
+		longitude: {
 			type: STRING,
 			allowNull: true
-        },
+		},
+		latitude: {
+			type: STRING,
+			allowNull: true
+		},
         teacher_id: {
 			type: INTEGER,
 			allowNull: true,
@@ -30,10 +34,6 @@ module.exports = app => {
 				model: 'teacher',
 				key: 'teacher_id'
 			}
-		},
-		gesture: {
-			type: STRING,
-			allowNull: true
 		},
 		state: {
 			type: INTEGER,
