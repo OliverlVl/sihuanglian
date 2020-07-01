@@ -127,7 +127,8 @@ module.exports = app => {
 
   router.get(url+'/index', controller.appController.index)
 
-
+  // 忘记密码
+  router.post(url+'/resetPwd', controller.appController.appResetPassword)
 
   
 
