@@ -182,8 +182,13 @@ module.exports = app => {
 
 
 
+  //------------------------13.签到记录页面------------------------
+  //a)签到记录接口
+  router.get(url + '/signInRecord', controller.appController.signInRecord)
 
-  
+
+
+
   // 完善老师信息
   router.post('/updateTeacherInfo', controller.teacher.updateTeacherInfo)
 

@@ -151,6 +151,15 @@ class AppController extends Controller {
 
 
 
+  
+  //------------------------13.签到记录页面------------------------
+  //a)签到记录接口
+  async signInRecord() {
+	const { ctx } = this;
+	const courseId  = ctx.query.courseId ;// request.body获取前端post值
+	const result = await ctx.service.signIn.getSignInRecordByCourseId(courseId);
+	ctx.body = result;
+  }
 
 
 
