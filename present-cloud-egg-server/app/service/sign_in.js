@@ -5,12 +5,12 @@ const Service = require('egg').Service;
 class SignInService extends Service {
 
 	//b)学生参与签到接口
-	async signIn(user) {
+	async signIn(signMsg) {
 		const { ctx } = this;
-		const result = await ctx.model.Login.findOne({
-			where: {
-				login_name: user.name,
-			},
+		console.log(signMsg) // courseId 还没用到
+		const result = await ctx.model.SignIn.create({
+			longitude: signMsg.longitude,
+			latitude: signMsg.latitude,
 		})
 		if (result == null) {
 			return false // 用户不存在
