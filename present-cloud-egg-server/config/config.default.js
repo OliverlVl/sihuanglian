@@ -23,11 +23,12 @@ module.exports = appInfo => {
   //数据库ORM
   config.sequelize = {
     dialect: 'mysql', // 表示使用mysql
-    host: '127.0.0.1', // 连接的数据库主机地址
+    // host: '127.0.0.1', // 连接的数据库主机地址
+    host: '47.92.226.135', // 连接的数据库主机地址
     port: 3306, // mysql服务端口
     database: 'present_cloud', // 数据库名
     username: 'root', // 数据库用户名
-    password: 'Admin888', // 数据库密码
+    password: 'jinchengll', // 数据库密码
     pool: {
       max: 5, // 连接池中最大连接数量
       min: 0, // 连接池中最小连接数量
