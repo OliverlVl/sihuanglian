@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.07.01 16:33:15                          */
+/* Created on:     2020.07.02 20:20:44                          */
 /*==============================================================*/
 
 
@@ -59,6 +59,7 @@ create table course
    course_number        int,
    course_class         varchar(20) not null,
    course_teacher_id    int not null,
+   student_total_number int,
    course_image         varchar(255),
    create_time          datetime,
    creator              varchar(20),
@@ -201,6 +202,7 @@ create table sign_in
    teacher_sign_id      int,
    longitude            varchar(50),
    latitude             varchar(50),
+   distance             float,
    create_time          datetime,
    creator              varchar(20),
    update_time          datetime,
