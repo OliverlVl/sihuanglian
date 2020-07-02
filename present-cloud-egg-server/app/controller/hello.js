@@ -27,7 +27,7 @@ class helloController extends Controller {
 	}
 
 	// 忘记密码
-	async resetPassword(){
+	async resetPassword() {
 		const { ctx } = this;
 		const passwordMsg = ctx.request.body;
 		const result = await ctx.service.login.resetPassword(

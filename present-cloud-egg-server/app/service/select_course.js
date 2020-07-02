@@ -57,9 +57,6 @@ class SelectCourseService extends Service {
 		return result
 	}
 
-
-
-
 	// 学生加入班课
 	async addCourse(student_id, course_id) {
 		const { ctx } = this;
@@ -71,7 +68,7 @@ class SelectCourseService extends Service {
 				course_id: course_id
 			}
 		})
-		if(selectCourse != null){
+		if (selectCourse != null) {
 			return {
 				code: -1,
 				msg: "班课已存在"
@@ -103,8 +100,6 @@ class SelectCourseService extends Service {
 
 	}
 
-
-
 	// 单次学生签到详情接口
 	async singleSignInRecord(teacherSignId, courseId) {
 		const { ctx } = this;
@@ -123,17 +118,17 @@ class SelectCourseService extends Service {
 					student_id: selectCourse[i].student_id
 				}
 			})
-			if (signIn != null){
+			if (signIn != null) {
 				selectCourse[i].dataValues["distance"] = signIn.distance
 				selectCourse[i].dataValues["status"] = 1 // 已签到
-			}else{
+			} else {
 				selectCourse[i].dataValues["status"] = 0 // 缺勤
 			}
 
 			// 根据学生id获取学生信息
 			var student = await ctx.model.Student.findOne({
 				where: {
-					student_id : selectCourse[i].student_id
+					student_id: selectCourse[i].student_id
 				}
 			})
 			selectCourse[i].dataValues["name"] = student.student_name // 姓名

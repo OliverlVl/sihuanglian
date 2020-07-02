@@ -7,7 +7,7 @@ const Service = require('egg').Service;
 class TeacherSignInService extends Service {
 
 	// 学生签到记录
-	async studentSignInInfo(courseId,studentId) {
+	async studentSignInInfo(courseId, studentId) {
 		const { ctx } = this;
 		// 根据课程id查找每一次签到记录
 		var result = await ctx.model.TeacherSignIn.findAll({
@@ -26,9 +26,9 @@ class TeacherSignInService extends Service {
 				}
 			})
 
-			if(signIn!= null){
+			if (signIn != null) {
 				result[i].dataValues["status"] = 1 // 已签到
-			}else{
+			} else {
 				result[i].dataValues["status"] = 0 //未签到
 			}
 
@@ -117,7 +117,7 @@ class TeacherSignInService extends Service {
 			},
 		})
 
-		if(result.length == 0){
+		if (result.length == 0) {
 			return {
 				code: -1,
 				msg: "班课不存在"
@@ -125,8 +125,8 @@ class TeacherSignInService extends Service {
 		}
 
 		const course = await ctx.model.Course.findOne({
-			where:{
-				course_id:courseId
+			where: {
+				course_id: courseId
 			}
 		})
 
@@ -156,7 +156,7 @@ class TeacherSignInService extends Service {
 			console.log(result[i])
 		}
 		return result
-	
+
 	}
 
 	// 教师签到详情
@@ -165,13 +165,13 @@ class TeacherSignInService extends Service {
 	 * 查询成功签到人数
 	 * @param {*} courseId 
 	 */
-	async teachrerSignInInfo(courseId){
+	async teachrerSignInInfo(courseId) {
 		const { ctx } = this;
 
 		// 根据课程id获取课程总人数
 		const course = await ctx.model.Course.findOne({
-			where:{
-				course_id:courseId
+			where: {
+				course_id: courseId
 			}
 		})
 
@@ -183,10 +183,10 @@ class TeacherSignInService extends Service {
 				]
 			},
 			{
-				where:{
-				course_id: courseId,
+				where: {
+					course_id: courseId,
 				}
-				
+
 			}
 		)
 
@@ -195,11 +195,11 @@ class TeacherSignInService extends Service {
 				teacher_sign_id: teacherSignIn.teacher_sign_id
 			}
 		})
-		
+
 		return {
 
 			signInNumber: signIn.length,
-			studentTotalNumber: course.student_total_number		
+			studentTotalNumber: course.student_total_number
 		}
 
 

@@ -14,7 +14,7 @@ class AppController extends Controller {
 	// 登录方法
 	async login() {
 		const { ctx } = this;
-		const loginMsg = ctx.request.body; 
+		const loginMsg = ctx.request.body;
 		const result = await ctx.service.login.appLogin(loginMsg);
 		ctx.body = result;
 	}
@@ -70,9 +70,9 @@ class AppController extends Controller {
 	}
 
 	// 加入班课
-	async addCourse(){
+	async addCourse() {
 		const { ctx } = this;
-		const selectCourseMsg = ctx.request.body; 
+		const selectCourseMsg = ctx.request.body;
 		const result = await ctx.service.selectCourse.addCourse(
 			selectCourseMsg.studentId,
 			selectCourseMsg.courseId,
@@ -85,7 +85,7 @@ class AppController extends Controller {
 	// b)学生参与签到接口
 	async signIn() {
 		const { ctx } = this;
-		const signMsg = ctx.request.body; 
+		const signMsg = ctx.request.body;
 		const result = await ctx.service.signIn.signIn(signMsg);
 		ctx.body = result;
 	}
@@ -96,12 +96,9 @@ class AppController extends Controller {
 		const { ctx } = this;
 		const courseId = ctx.query.courseId;
 		const token = JSON.parse(ctx.request.header.token)
-		const result = await ctx.service.teacherSignIn.studentSignInInfo(courseId,token.id);
+		const result = await ctx.service.teacherSignIn.studentSignInInfo(courseId, token.id);
 		ctx.body = result;
 	}
-	
-
-
 
 	// ------------------------7.更改手机号码页面------------------------
 
@@ -144,7 +141,7 @@ class AppController extends Controller {
 	// ------------------------9.用户反馈页面------------------------
 	async feedback() {
 		const { ctx } = this;
-		const feedbackMsg = ctx.request.body; 
+		const feedbackMsg = ctx.request.body;
 		const result = await ctx.service.feedback.addFeedback(feedbackMsg);
 		ctx.body = result;
 	}
@@ -164,7 +161,7 @@ class AppController extends Controller {
 	// 创建班课接口：
 	async createCourse() {
 		const { ctx } = this;
-		const courseMsg = ctx.request.body; 
+		const courseMsg = ctx.request.body;
 		const result = await ctx.service.course.createCourse(courseMsg);
 		ctx.body = result;
 	}
@@ -217,7 +214,7 @@ class AppController extends Controller {
 	//------------------------14.单次学生签到详情页面------------------------
 
 	// 单次学生签到详情接口
-	async singleSignInRecord(){
+	async singleSignInRecord() {
 		const { ctx } = this;
 		const msg = ctx.request.body;
 
