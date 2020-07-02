@@ -10,7 +10,11 @@ class SystemParameterService extends Service {
     async selcetSystemParameterAll() {
         const { ctx } = this
         const result = await ctx.model.SystemParameter.findAll()
-        return result;
+
+        return {
+            "exp":result[0].parameter_value,
+            "distance":result[1].parameter_value
+        };
     }
 
     // 修改某个系统参数值

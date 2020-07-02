@@ -192,12 +192,12 @@ class LoginService extends Service {
         if (result != 0) {
             return {
                 code: 200,
-                msg: "成功"
+                msg: "重置密码成功，请重新登入"
             }
         } else {
             return {
                 code: -1,
-                msg: "失败"
+                msg: "重置密码失败"
             }
         }
 

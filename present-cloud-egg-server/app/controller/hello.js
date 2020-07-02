@@ -157,8 +157,7 @@ class helloController extends Controller {
 		console.log("添加菜单")
 		console.log(menu)
 		const result = await ctx.service.menu.insertMenu(
-			menu.name,
-			menu.submenu,
+			menu.menuname
 		)
 		ctx.body = result
 	}
@@ -170,8 +169,7 @@ class helloController extends Controller {
 		const page = ctx.request.body
 		const result = await ctx.service.menu.insertPage(
 			page.menuname,
-			page.supermenu,
-			page.buttons
+			page.supermenu
 		)
 		ctx.body = result
 	}

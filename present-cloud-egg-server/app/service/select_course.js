@@ -7,7 +7,7 @@ class SelectCourseService extends Service {
 	// 获取十条班课信息
 	async selectCourInfoByPage(page) {
 		const { ctx } = this
-		var result = {}
+		var result = []
 		for (var i = 0; i < 10; i++) {
 
 			const container = await ctx.model.SelectCourse.findOne({
@@ -34,7 +34,7 @@ class SelectCourseService extends Service {
 				container.dataValues['course_name'] = course.course_name
 
 				// console.log(container.dataValues)
-				result[i + 1] = container.dataValues
+				result.push(container.dataValues)
 				page++;
 			}
 

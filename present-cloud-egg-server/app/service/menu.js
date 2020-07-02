@@ -112,7 +112,7 @@ class MenuService extends Service {
 
 
 	// 增加菜单
-	async insertMenu(name, subArry) {
+	async insertMenu(name) {
 		const { ctx } = this
 		// var sub = '';
 		// var j = 0
@@ -124,10 +124,10 @@ class MenuService extends Service {
 		const result = await ctx.model.Menu.create({
 			name: name,
 			state: 0,
-			layer: 3,
-			sub: subArry,
+			layer: 1,
+			// sub: subArry,
 		})
-		console.log(result[0])
+		// console.log(result[0])
 		if (result != null) {
 			return {
 				code: 200,
@@ -143,7 +143,7 @@ class MenuService extends Service {
 
 
 	// 增加页面
-	async insertPage(menuname, supermenuId, buttons) {
+	async insertPage(menuname, supermenuId) {
 		const { ctx } = this
 		// var sub = '';
 		// for (j = 0, len = buttons.length; j < len; j++) {
@@ -153,7 +153,7 @@ class MenuService extends Service {
 			name: menuname,
 			state: 1,
 			layer: 2,
-			sub: buttons,
+			// sub: buttons,
 		})
 		// 查找id
 		const page = await ctx.model.Menu.findOne({
