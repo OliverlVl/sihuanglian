@@ -47,7 +47,7 @@ class AppController extends Controller {
 	// 获取课程表
 	async selcetCourseList() {
 		const { ctx } = this;
-		const token = JSON.parse(ctx.request.header.token);
+		const token = JSON.parse(ctx.request.header.Authorization);
 		//根据学生id获取课程信息
 		const selectCourse = await ctx.service.selectCourse.selectSeclectCourseByStudentId(token.id)
 
@@ -95,7 +95,7 @@ class AppController extends Controller {
 	async studentSignInInfo() {
 		const { ctx } = this;
 		const courseId = ctx.query.courseId;
-		const token = JSON.parse(ctx.request.header.token)
+		const token = JSON.parse(ctx.request.header.Authorization)
 		const result = await ctx.service.teacherSignIn.studentSignInInfo(courseId, token.id);
 		ctx.body = result;
 	}
@@ -106,7 +106,7 @@ class AppController extends Controller {
 	async verifyPassword() {
 		const { ctx } = this;
 		const password = ctx.query.password;
-		const token = JSON.parse(ctx.request.header.token);
+		const token = JSON.parse(ctx.request.header.Authorization);
 		const result = await ctx.service.login.verifyPassword(token.id, password)
 		ctx.body = result
 	}
@@ -117,7 +117,7 @@ class AppController extends Controller {
 	async updatePhone() {
 		const { ctx } = this;
 		const phoneMsg = ctx.request.body;
-		const token = JSON.parse(ctx.request.header.token);
+		const token = JSON.parse(ctx.request.header.Authorization);
 		const result = await ctx.service.student.updatePhone(token.id, phoneMsg.newPhone)
 		ctx.body = result
 	}
@@ -128,7 +128,7 @@ class AppController extends Controller {
 	async changePassword() {
 		const { ctx } = this;
 		const passwordMsg = ctx.request.body;
-		const token = JSON.parse(ctx.request.header.token);
+		const token = JSON.parse(ctx.request.header.Authorization);
 		const result = await ctx.service.login.changePassword(
 			token.id,
 			passwordMsg.oldPwd,
@@ -174,7 +174,7 @@ class AppController extends Controller {
 	async launchSignIn() {
 		const { ctx } = this;
 		const signInMsg = ctx.request.body;
-		const token = JSON.parse(ctx.request.header.token);
+		const token = JSON.parse(ctx.request.header.Authorization);
 		const result = await ctx.service.teacherSignIn.launchSignIn(
 			token.id,
 			signInMsg.courseId,
