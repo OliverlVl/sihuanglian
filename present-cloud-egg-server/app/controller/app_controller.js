@@ -14,7 +14,7 @@ class AppController extends Controller {
 	// 登录方法
 	async login() {
 		const { ctx } = this;
-		const loginMsg = ctx.request.body; // request.body获取前端post值
+		const loginMsg = ctx.request.body; 
 		const result = await ctx.service.login.appLogin(loginMsg);
 		ctx.body = result;
 	}
@@ -69,20 +69,37 @@ class AppController extends Controller {
 		ctx.body = result
 	}
 
+	// 加入班课
+	async addCourse(){
+		const { ctx } = this;
+		const selectCourseMsg = ctx.request.body; 
+		const result = await ctx.service.selectCourse.addCourse(
+			selectCourseMsg.studentId,
+			selectCourseMsg.courseId,
+		)
+		ctx.body = result
+	}
+
 	// ------------------------5.学生课程信息页面------------------------
 
 	// b)学生参与签到接口
 	async signIn() {
 		const { ctx } = this;
-		const signMsg = ctx.request.body; // request.body获取前端post值
+		const signMsg = ctx.request.body; 
 		const result = await ctx.service.signIn.signIn(signMsg);
 		ctx.body = result;
 	}
 
 	// ------------------------6.学生签到详情页面------------------------
 
-
-
+	async studentSignInInfo() {
+		const { ctx } = this;
+		const courseId = ctx.query.courseId;
+		const token = JSON.parse(ctx.request.header.token)
+		const result = await ctx.service.teacherSignIn.studentSignInInfo(courseId,token.id);
+		ctx.body = result;
+	}
+	
 
 
 
@@ -127,7 +144,7 @@ class AppController extends Controller {
 	// ------------------------9.用户反馈页面------------------------
 	async feedback() {
 		const { ctx } = this;
-		const feedbackMsg = ctx.request.body; // request.body获取前端post值
+		const feedbackMsg = ctx.request.body; 
 		const result = await ctx.service.feedback.addFeedback(feedbackMsg);
 		ctx.body = result;
 	}
@@ -137,7 +154,7 @@ class AppController extends Controller {
 	//a)课程表接口：???
 	async courseList() {
 		const { ctx } = this;
-		var teacherId = ctx.query.teacherId;// request.body获取前端post值
+		var teacherId = ctx.query.teacherId;
 		const result = await ctx.service.course.selcetCourseInfoByTeacher(teacherId);
 		ctx.body = result;
 	}
@@ -147,7 +164,7 @@ class AppController extends Controller {
 	// 创建班课接口：
 	async createCourse() {
 		const { ctx } = this;
-		const courseMsg = ctx.request.body; // request.body获取前端post值
+		const courseMsg = ctx.request.body; 
 		const result = await ctx.service.course.createCourse(courseMsg);
 		ctx.body = result;
 	}
@@ -192,7 +209,7 @@ class AppController extends Controller {
 	// 签到记录接口
 	async signInRecord() {
 		const { ctx } = this;
-		const courseId = ctx.query.courseId;// request.body获取前端post值
+		const courseId = ctx.query.courseId;
 		const result = await ctx.service.teacherSignIn.signInRecord(courseId);
 		ctx.body = result;
 	}
@@ -202,8 +219,12 @@ class AppController extends Controller {
 	// 单次学生签到详情接口
 	async singleSignInRecord(){
 		const { ctx } = this;
-		const teacherSingId = ctx.query.teacherSingId;// request.body获取前端post值
-		const result = await ctx.service.signIn.singleSignInRecord(teacherSingId);
+		const msg = ctx.request.body;
+
+		const result = await ctx.service.selectCourse.singleSignInRecord(
+			msg.teacherSignId,
+			msg.courseId
+		);
 		ctx.body = result;
 	}
 

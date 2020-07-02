@@ -6,6 +6,46 @@ const Service = require('egg').Service;
 
 class TeacherSignInService extends Service {
 
+	// 学生签到记录
+	async studentSignInInfo(courseId,studentId) {
+		const { ctx } = this;
+		// 根据课程id查找每一次签到记录
+		var result = await ctx.model.TeacherSignIn.findAll({
+			where: {
+				course_id: courseId,
+			},
+		})
+		// 在签到表中查找是否签到
+		for (var i = 0; i < result.length; i++) {
+
+			// 根据教师签到id 获取学生签到信息
+			var signIn = await ctx.model.SignIn.findOne({
+				where: {
+					teacher_sign_id: result[i].teacher_sign_id,
+					student_id: studentId
+				}
+			})
+
+			if(signIn!= null){
+				result[i].dataValues["status"] = 1 // 已签到
+			}else{
+				result[i].dataValues["status"] = 0 //未签到
+			}
+
+			// 删除不要的属性
+			delete result[i].dataValues.longitude
+			delete result[i].dataValues.latitude
+			delete result[i].dataValues.state
+			delete result[i].dataValues.creator
+			delete result[i].dataValues.updater
+			delete result[i].dataValues.update_time
+
+		}
+		return result
+
+
+	}
+
 	// 教师发起签到
 	async launchSignIn(teacherId, courseId, longitude, latitude) {
 		const { ctx } = this;
@@ -157,6 +197,7 @@ class TeacherSignInService extends Service {
 		})
 		
 		return {
+
 			signInNumber: signIn.length,
 			studentTotalNumber: course.student_total_number		
 		}

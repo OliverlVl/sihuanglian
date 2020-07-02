@@ -148,6 +148,9 @@ module.exports = app => {
   // 获取课程表信息
   router.get(url + '/getCourseInfo', controller.appController.selcetCourseInfoByCourseId)
 
+  // 加入班课
+  router.post(url + '/addCourse', controller.appController.addCourse)
+
   // ------------------------5.学生课程信息页面------------------------
 
   // a)获取班课信息接口
@@ -158,9 +161,8 @@ module.exports = app => {
 
   // ------------------------6.学生签到详情页面------------------------
 
-
-
-
+  // 所有的签到记录
+  router.get(url + '/studentSignInInfo', controller.appController.studentSignInInfo)
 
   // ------------------------7.更改手机号码页面------------------------
 
