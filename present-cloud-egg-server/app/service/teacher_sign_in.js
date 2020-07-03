@@ -41,8 +41,21 @@ class TeacherSignInService extends Service {
 			delete result[i].dataValues.update_time
 
 		}
-		return result
+		var signInCount = 0
+		var noSignInCount = 0
+		for (var i = 0; i < result.length; i++) {
+			if(result[i].dataValues.status == 1){
+				signInCount ++;
+			}else{
+				noSignInCount ++;
+			}
+		}
+		return {
+			list:result,
+			signInCount:signInCount,
+			noSignInCount:noSignInCount
 
+		}
 
 	}
 
@@ -144,7 +157,7 @@ class TeacherSignInService extends Service {
 			result[i].dataValues["signInNumber"] = signIn.length
 
 			// 总人数
-			result[i].dataValues["studentTotalNumber"] = course.student_total_number
+			result[i].dataValues["studentTotalNumber"] = course.student_total_number - signIn.length
 
 			// 删除不要的属性
 			delete result[i].dataValues.longitude
