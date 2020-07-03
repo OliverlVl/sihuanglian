@@ -113,7 +113,7 @@ class AppController extends Controller {
 
 	//验证码
 
-	//更改手机号
+	//更改学生手机号
 	async updatePhone() {
 		const { ctx } = this;
 		const phoneMsg = ctx.request.body;

@@ -13,7 +13,7 @@ class helloController extends Controller {
 	// 登录方法
 	async login() {
 		const { ctx } = this;
-		const loginMsg = ctx.request.body; // request.body获取前端post值
+		const loginMsg = ctx.query; // request.body获取前端post值
 		const result = await ctx.service.login.login(loginMsg);
 		ctx.body = result;
 	}
@@ -21,7 +21,7 @@ class helloController extends Controller {
 	// 注册方法
 	async register() {
 		const { ctx } = this;
-		const registerMsg = ctx.request.body;
+		const registerMsg = ctx.query;
 		const result = await ctx.service.login.register(registerMsg);
 		ctx.body = result;
 	}
@@ -29,7 +29,7 @@ class helloController extends Controller {
 	// 忘记密码
 	async resetPassword() {
 		const { ctx } = this;
-		const passwordMsg = ctx.request.body;
+		const passwordMsg = ctx.query;
 		const result = await ctx.service.login.resetPassword(
 			passwordMsg.account,
 			passwordMsg.password,
@@ -50,7 +50,7 @@ class helloController extends Controller {
 	// 查询具体id字典详情信息
 	async selectDictionaryDetailById() {
 		const { ctx } = this;
-		const DictionaryDetailId = ctx.request.body;
+		const DictionaryDetailId = ctx.query;
 		const result = await ctx.service.dictionaryDetail.selectDictionaryDetailById(DictionaryDetailId.detail_id);
 		ctx.body = result;
 	}
@@ -69,7 +69,7 @@ class helloController extends Controller {
 	async updateDictionaryDetail() {
 		const { ctx } = this
 		// post 数据
-		const info = ctx.request.body
+		const info = ctx.query
 		const result = await ctx.service.dictionaryDetail.updateDictionaryDetail(
 			info.id,
 			info.dataValue
@@ -81,7 +81,7 @@ class helloController extends Controller {
 	async insertDictionaryDetail() {
 		const { ctx } = this
 		// post 数据
-		const info = ctx.request.body
+		const info = ctx.query
 		const result = await ctx.service.dictionaryDetail.insertDictionaryDetail(
 			info.code,
 			info.dataKey,
@@ -119,7 +119,7 @@ class helloController extends Controller {
 	async updateSystemParameter() {
 		const { ctx } = this
 		// post 数据
-		const systemParameter = ctx.request.body
+		const systemParameter = ctx.query
 		const result = await ctx.service.systemParameter.updateSystemParameter(
 			systemParameter.exp,
 			systemParameter.distance
@@ -153,7 +153,7 @@ class helloController extends Controller {
 	async insertMenu() {
 		const { ctx } = this
 		// post 数据
-		const menu = ctx.request.body
+		const menu = ctx.query
 		console.log("添加菜单")
 		console.log(menu)
 		const result = await ctx.service.menu.insertMenu(
@@ -166,7 +166,7 @@ class helloController extends Controller {
 	async insertPage() {
 		const { ctx } = this
 		// post 数据
-		const page = ctx.request.body
+		const page = ctx.query
 		const result = await ctx.service.menu.insertPage(
 			page.menuname,
 			page.supermenu
@@ -178,7 +178,7 @@ class helloController extends Controller {
 	async insertButton() {
 		const { ctx } = this
 		// post 数据
-		const button = ctx.request.body
+		const button = ctx.query
 		// for (j = 0, len = button.lengt; j < len; j++) {
 		const result = await ctx.service.menu.insertButton(
 			button.button,
@@ -200,7 +200,7 @@ class helloController extends Controller {
 	// 根据id查询角色信息
 	async selectRoleById() {
 		const { ctx } = this;
-		const roleId = ctx.request.body;
+		const roleId = ctx.query;
 		const result = await ctx.service.role.selectRoleById(roleId.roleId);
 		ctx.body = result;
 	}
@@ -208,7 +208,7 @@ class helloController extends Controller {
 	// 添加角色
 	async insertRole() {
 		const { ctx } = this;
-		const role = ctx.request.body;
+		const role = ctx.query;
 		const result = await ctx.service.role.insertRole(
 			role.name,
 			role.type,
@@ -221,7 +221,7 @@ class helloController extends Controller {
 	async updateRole() {
 		const { ctx } = this
 		// post 数据
-		const role = ctx.request.body
+		const role = ctx.query
 		const result = await ctx.service.role.updateRole(
 			role.id,
 			role.name,
@@ -262,7 +262,7 @@ class helloController extends Controller {
 	async updateStudent() {
 		const { ctx } = this
 		// post 数据
-		const student = ctx.request.body
+		const student = ctx.query
 		// console.log(student)
 		const result = await ctx.service.student.updateStudent(
 			student.id,

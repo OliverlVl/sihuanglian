@@ -70,7 +70,7 @@ class LoginService extends Service {
                     expiresIn: "30 days",
                 });
                 res.data = result;
-                res.code = 1;
+                res.msg = 1;
                 res.token = token;
                 res.status = 'ok';
             }
@@ -246,7 +246,8 @@ class LoginService extends Service {
             },
             {
                 where: {
-                    user_id: container.user_id
+                    user_id: container.user_id,
+                    login_type: container.login_type
                 }
             }
         )
