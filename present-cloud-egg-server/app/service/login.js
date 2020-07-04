@@ -271,17 +271,18 @@ class LoginService extends Service {
         const res = {};
         // 为当前输入的密码加密 ### md5加密
         loginMsg.password = crypto.createHash('md5').update(loginMsg.password).digest('hex')
-        console.log(loginMsg)
+        console.log(loginMsg.phone)
         // 在当前数据库中验证此用户思否存在
         const queryResult = await ctx.model.Login.findOne({
             where: {
                 login_name: loginMsg.phone,
             }
         });
+        console.log(queryResult)
         if (!queryResult) {
             res.code = -2;
             res.msg = '用户不存在，请前去注册';
-            res.data = {};
+            res.userInfo = {};
             res.status = 'failed';
         } else {
             const result = await ctx.model.Login.findOne({
@@ -293,7 +294,7 @@ class LoginService extends Service {
             if (!result) {
                 res.code = -1;
                 res.msg = '用户密码不正确';
-                res.data = {};
+                res.userInfo = {};
                 res.status = 'failed';
             } else {
                 // 签发token
@@ -304,7 +305,7 @@ class LoginService extends Service {
                     this.config.jwts.secret, {
                     expiresIn: "30 days",
                 });
-                res.data = result;
+                res.userInfo = result;
                 res.code = 1;
                 res.token = token;
                 res.status = 'ok';

@@ -9,7 +9,7 @@ class CourseService extends Service {
         const { ctx } = this
         const result = await ctx.model.Course.findOne({
             where: {
-                course_id: courseId,
+                course_number: courseId, //课程号
             },
         })
         // console.log(result)

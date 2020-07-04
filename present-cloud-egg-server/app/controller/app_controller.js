@@ -14,7 +14,8 @@ class AppController extends Controller {
 	// 登录方法
 	async login() {
 		const { ctx } = this;
-		const loginMsg = ctx.request.body;
+		const loginMsg = ctx.query;
+		console.log(loginMsg)
 		const result = await ctx.service.login.appLogin(loginMsg);
 		ctx.body = result;
 	}
@@ -73,8 +74,9 @@ class AppController extends Controller {
 	async addCourse() {
 		const { ctx } = this;
 		const selectCourseMsg = ctx.request.body;
+		const token = JSON.parse(ctx.request.header.Authorization);
 		const result = await ctx.service.selectCourse.addCourse(
-			selectCourseMsg.studentId,
+			token.id,
 			selectCourseMsg.courseId,
 		)
 		ctx.body = result
@@ -95,7 +97,7 @@ class AppController extends Controller {
 	async studentSignInInfo() {
 		const { ctx } = this;
 		const courseId = ctx.query.courseId;
-		const token = JSON.parse(ctx.request.header.Authorization)
+		const token = JSON.parse(ctx.request.header.token)
 		const result = await ctx.service.teacherSignIn.studentSignInInfo(courseId, token.id);
 		ctx.body = result;
 	}
