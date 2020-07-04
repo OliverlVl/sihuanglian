@@ -12,8 +12,8 @@ module.exports = (options, app) => {
       // 当前token值不存在的时候
     } else if (!token) {
       //  不验证token的页面
-      // if (ctx.path === '/login' || ctx.path === '/register') {
-      if (true) {  // 取消jwt 测试
+      if (ctx.path === '/login' || ctx.path === '/register'|| ctx.path === '/app/login'||ctx.path === '/app/register'|| ctx.path === '/app/resetPwd'||ctx.path === '/resetPassword') {
+      // if (true) {  // 取消jwt 测试
         await next();
       } else {
         ctx.throw(401, '未登录， 请先登录');
@@ -22,14 +22,12 @@ module.exports = (options, app) => {
       let decode;
       try {
         // 验证当前token
-        console.log(111111111)
-        console.log(token)
         decode = JWT.verify(token, options.secret);
-        console.log(decode)
         // decode = ctx.app.jwt.verify(token, "123456");
         if (!decode || !decode.account) {
           ctx.throw(401, '没有权限，请登录');
         } else {
+          await next();
           console.log(decode)
         }
         if (Date.now() - decode.expire > 0) {

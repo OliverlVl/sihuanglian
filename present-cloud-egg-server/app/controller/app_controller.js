@@ -48,9 +48,13 @@ class AppController extends Controller {
 	// 获取课程表
 	async selcetCourseList() {
 		const { ctx } = this;
-		const token = JSON.parse(ctx.request.header.Authorization);
+		const JWT = require('jsonwebtoken')
+		const token = ctx.request.header.authorization;
+		var decode = JWT.verify(token, "123456");
+
+
 		//根据学生id获取课程信息
-		const selectCourse = await ctx.service.selectCourse.selectSeclectCourseByStudentId(token.id)
+		const selectCourse = await ctx.service.selectCourse.selectSeclectCourseByStudentId(decode.id)
 
 		console.log(selectCourse.length)
 		//根据课程id获取课程信息
@@ -73,10 +77,13 @@ class AppController extends Controller {
 	// 加入班课
 	async addCourse() {
 		const { ctx } = this;
+		const JWT = require('jsonwebtoken')
+		const token = ctx.request.header.authorization;
+		var decode = JWT.verify(token, "123456");
 		const selectCourseMsg = ctx.request.body;
-		const token = JSON.parse(ctx.request.header.Authorization);
+		
 		const result = await ctx.service.selectCourse.addCourse(
-			token.id,
+			decode.id,
 			selectCourseMsg.courseId,
 		)
 		ctx.body = result
@@ -86,12 +93,13 @@ class AppController extends Controller {
 	// 退出班课
 	async quitCourse() {
 		const { ctx } = this;
+		const JWT = require('jsonwebtoken')
+		const token = ctx.request.header.authorization;
+		var decode = JWT.verify(token, "123456");
 		const quitCourseMsg = ctx.request.body;
-		console.log(quitCourseMsg)
-		const userId = 1
 		// const token = JSON.parse(ctx.request.header.Authorization);
 		const result = await ctx.service.selectCourse.quitCourse(
-			userId,
+			decode.id,
 			quitCourseMsg.courseId,
 		)
 		ctx.body = result
@@ -111,9 +119,11 @@ class AppController extends Controller {
 
 	async studentSignInInfo() {
 		const { ctx } = this;
+		const JWT = require('jsonwebtoken')
+		const token = ctx.request.header.authorization;
+		var decode = JWT.verify(token, "123456");
 		const courseId = ctx.query.courseId;
-		const token = JSON.parse(ctx.request.header.token)
-		const result = await ctx.service.teacherSignIn.studentSignInInfo(courseId, token.id);
+		const result = await ctx.service.teacherSignIn.studentSignInInfo(courseId, decode.id);
 		ctx.body = result;
 	}
 
@@ -122,9 +132,11 @@ class AppController extends Controller {
 	//验证密码
 	async verifyPassword() {
 		const { ctx } = this;
+		const JWT = require('jsonwebtoken')
+		const token = ctx.request.header.authorization;
+		var decode = JWT.verify(token, "123456");
 		const msg = ctx.request.body;
-		const token = JSON.parse(ctx.request.header.Authorization);
-		const result = await ctx.service.login.verifyPassword(token.id, msg.password, msg.role)
+		const result = await ctx.service.login.verifyPassword(decode.id, msg.password, msg.role)
 		ctx.body = result
 	}
 
@@ -133,9 +145,11 @@ class AppController extends Controller {
 	//更改学生手机号
 	async updatePhone() {
 		const { ctx } = this;
+		const JWT = require('jsonwebtoken')
+		const token = ctx.request.header.authorization;
+		var decode = JWT.verify(token, "123456");
 		const msg = ctx.request.body;
-		const token = JSON.parse(ctx.request.header.token);
-		const result = await ctx.service.student.updatePhone(token.id, msg.newPhone, msg.role)
+		const result = await ctx.service.student.updatePhone(decode.id, msg.newPhone, msg.role)
 		ctx.body = result
 	}
 
@@ -144,10 +158,12 @@ class AppController extends Controller {
 	// app修改密码
 	async changePassword() {
 		const { ctx } = this;
+		const JWT = require('jsonwebtoken')
+		const token = ctx.request.header.authorization;
+		var decode = JWT.verify(token, "123456");
 		const passwordMsg = ctx.request.body;
-		const token = JSON.parse(ctx.request.header.token);
 		const result = await ctx.service.login.changePassword(
-			token.id,
+			decode.id,
 			passwordMsg.oldPwd,
 			passwordMsg.newPwd,
 			passwordMsg.role
@@ -191,10 +207,12 @@ class AppController extends Controller {
 	// 发起签到
 	async launchSignIn() {
 		const { ctx } = this;
+		const JWT = require('jsonwebtoken')
+		const token = ctx.request.header.authorization;
+		var decode = JWT.verify(token, "123456");
 		const signInMsg = ctx.request.body;
-		const token = JSON.parse(ctx.request.header.token);
 		const result = await ctx.service.teacherSignIn.launchSignIn(
-			token.id,
+			decode.id,
 			signInMsg.courseId,
 			signInMsg.longitude,
 			signInMsg.latitude
