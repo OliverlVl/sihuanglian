@@ -150,6 +150,62 @@ class SelectCourseService extends Service {
 	}
 
 
+	// 学生退出班课
+	async quitCourse(student_id, course_id) {
+		const { ctx } = this;
+
+		// // 检查是否有已加入班课
+		// const selectCourse = await ctx.model.SelectCourse.findOne({
+		// 	where: {
+		// 		student_id: student_id,
+		// 		course_id: course_id
+		// 	}
+		// })
+		// if (selectCourse != null) {
+		// 	return {
+		// 		code: -1,
+		// 		msg: "班课已存在"
+		// 	}
+		// }
+		// 删除选课记录
+		const result = await ctx.model.SelectCourse.destroy({
+				where: {
+					student_id: student_id,
+					course_id: course_id
+				}
+		})
+		// 删除签到记录
+		// 找到老师发布的签到id
+		const teacherSignInId = await ctx.model.TeacherSignIn.findOne({
+			where: {
+				course_id: course_id
+			}
+		})
+		console.log(teacherSignInId.teacher_sign_id)
+		// 删除签到信息
+		const signInInfo = await  ctx.model.SignIn.destroy({
+			where: {
+				student_id: student_id,
+				teacher_sign_id: teacherSignInId.teacher_sign_id
+			}
+		})
+
+		if (result == null) {
+			// 创建失败
+			return {
+				code: -2,
+				msg: "退出失败"
+			}
+		} else {
+			return {
+				code: 200,
+				msg: "退出成功"
+			}
+		}
+
+	}
+
+
 
 }
 

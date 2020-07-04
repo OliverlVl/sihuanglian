@@ -82,6 +82,21 @@ class AppController extends Controller {
 		ctx.body = result
 	}
 
+	
+	// 退出班课
+	async quitCourse() {
+		const { ctx } = this;
+		const quitCourseMsg = ctx.request.body;
+		console.log(quitCourseMsg)
+		const userId = 1
+		// const token = JSON.parse(ctx.request.header.Authorization);
+		const result = await ctx.service.selectCourse.quitCourse(
+			userId,
+			quitCourseMsg.courseId,
+		)
+		ctx.body = result
+	}
+
 	// ------------------------5.学生课程信息页面------------------------
 
 	// b)学生参与签到接口

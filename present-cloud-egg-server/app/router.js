@@ -151,6 +151,9 @@ module.exports = app => {
   // 加入班课
   router.post(url + '/addCourse', controller.appController.addCourse)
 
+  // 退出班课
+  router.post(url + '/quit', controller.appController.quitCourse)
+
   // ------------------------5.学生课程信息页面------------------------
 
   // a)获取班课信息接口
