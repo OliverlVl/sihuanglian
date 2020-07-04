@@ -61,9 +61,12 @@ class AppController extends Controller {
 		var result = []
 		for (var i = 0; i < selectCourse.length; i++) {
 			const course = await ctx.service.course.selcetCourseInfoByCourseId(selectCourse[i].course_id)
-			result.push(course)
+			result.push(course.msg)
 		}
-		ctx.body = result
+		ctx.body = {
+			code: 1,
+			msg: result
+		}
 	}
 
 	// 获取班课信息
@@ -71,6 +74,7 @@ class AppController extends Controller {
 		const { ctx } = this;
 		const courseId = ctx.query.courseId;
 		const result = await ctx.service.course.selcetCourseInfoByCourseId(courseId)
+
 		ctx.body = result
 	}
 
@@ -81,7 +85,7 @@ class AppController extends Controller {
 		const token = ctx.request.header.authorization;
 		var decode = JWT.verify(token, "123456");
 		const selectCourseMsg = ctx.request.body;
-		
+
 		const result = await ctx.service.selectCourse.addCourse(
 			decode.id,
 			selectCourseMsg.courseId,
@@ -89,7 +93,7 @@ class AppController extends Controller {
 		ctx.body = result
 	}
 
-	
+
 	// 退出班课
 	async quitCourse() {
 		const { ctx } = this;

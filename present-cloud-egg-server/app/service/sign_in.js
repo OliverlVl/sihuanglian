@@ -43,7 +43,7 @@ class SignInService extends Service {
 
 		// return distance // 公里
 		return {
-			code: 200,
+			code: 1,
 			msg: "签到成功",
 			distance: distance
 		}

@@ -61,7 +61,10 @@ class FeedbackService extends Service {
 				msg: "添加失败"
 			} // 错误
 		}
-		return result.dataValues;
+		return {
+            code: 1,
+            msg: result.dataValues
+        }
 	}
 }
 

@@ -51,6 +51,7 @@ class TeacherSignInService extends Service {
 			}
 		}
 		return {
+			code: 1,
 			list: result,
 			signInCount: signInCount,
 			noSignInCount: noSignInCount
@@ -75,7 +76,7 @@ class TeacherSignInService extends Service {
 		console.log(result)
 		if (result != null) {
 			return {
-				code: 200,
+				code: 1,
 				msg: "签到成功"
 			}
 		} else {
@@ -162,7 +163,10 @@ class TeacherSignInService extends Service {
 
 			// console.log(result[i])
 		}
-		return selectCourse
+		return {
+			code: 1,
+			msg: selectCourse
+		}
 
 
 	}
@@ -223,7 +227,10 @@ class TeacherSignInService extends Service {
 
 			console.log(result[i])
 		}
-		return result
+		return {
+			code: 1,
+			msg: result
+		}
 
 	}
 

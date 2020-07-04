@@ -191,7 +191,7 @@ class StudentService extends Service {
             )
             if (result1 != 0 & result2 != 0) {
                 return {
-                    code: 200,
+                    code: 1,
                     msg: "修改成功"
                 }
             } else {
@@ -231,7 +231,7 @@ class StudentService extends Service {
             )
             if (result1 != 0 & result2 != 0) {
                 return {
-                    code: 200,
+                    code: 1,
                     msg: "修改成功"
                 }
             } else {

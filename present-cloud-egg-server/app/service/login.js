@@ -260,12 +260,12 @@ class LoginService extends Service {
         )
         if (result != 0) {
             return {
-                code: 200,
+                code: 1,
                 msg: "成功"
             }
         } else {
             return {
-                code: -1,
+                code: -2,
                 msg: "失败"
             }
         }
@@ -382,7 +382,7 @@ class LoginService extends Service {
 
         if (result != null) {
             return {
-                code: 200,
+                code: 1,
                 msg: "注册成功"
             }
         } else {
@@ -429,7 +429,7 @@ class LoginService extends Service {
             }
         } else {
             return {
-                code: 200,
+                code: 1,
                 msg: "验证成功"
             }
         }
@@ -498,7 +498,7 @@ class LoginService extends Service {
         )
         if (result != 0) {
             return {
-                code: 200,
+                code: 1,
                 msg: "修改成功"
             }
         } else {

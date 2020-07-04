@@ -93,7 +93,7 @@ class SelectCourseService extends Service {
 			}
 		} else {
 			return {
-				code: 200,
+				code: 1,
 				msg: "加入成功"
 			}
 		}
@@ -145,7 +145,10 @@ class SelectCourseService extends Service {
 
 			// console.log(result[i])
 		}
-		return selectCourse
+		return {
+			code: 1,
+			msg: selectCourse
+		}
 
 	}
 
@@ -198,7 +201,7 @@ class SelectCourseService extends Service {
 			}
 		} else {
 			return {
-				code: 200,
+				code: 1,
 				msg: "退出成功"
 			}
 		}
