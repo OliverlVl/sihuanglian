@@ -25,7 +25,7 @@ class AppController extends Controller {
 	// 注册方法
 	async register() {
 		const { ctx } = this;
-		const registerMsg = ctx.request.body;
+		const registerMsg = ctx.query;
 		const result = await ctx.service.login.appRegister(registerMsg);
 		ctx.body = result;
 	}
@@ -35,7 +35,7 @@ class AppController extends Controller {
 	// 忘记密码
 	async appResetPassword() {
 		const { ctx } = this;
-		const PasswordMsg = ctx.request.body;
+		const PasswordMsg = ctx.query;
 		const result = await ctx.service.login.appResetPassword(
 			PasswordMsg.phone,
 			PasswordMsg.newPwd,
@@ -73,7 +73,7 @@ class AppController extends Controller {
 	// 加入班课
 	async addCourse() {
 		const { ctx } = this;
-		const selectCourseMsg = ctx.request.body;
+		const selectCourseMsg = ctx.query;
 		const token = JSON.parse(ctx.request.header.Authorization);
 		const result = await ctx.service.selectCourse.addCourse(
 			token.id,
@@ -87,7 +87,7 @@ class AppController extends Controller {
 	// b)学生参与签到接口
 	async signIn() {
 		const { ctx } = this;
-		const signMsg = ctx.request.body;
+		const signMsg = ctx.query;
 		const result = await ctx.service.signIn.signIn(signMsg);
 		ctx.body = result;
 	}
@@ -118,7 +118,7 @@ class AppController extends Controller {
 	//更改学生手机号
 	async updatePhone() {
 		const { ctx } = this;
-		const phoneMsg = ctx.request.body;
+		const phoneMsg = ctx.query;
 		const token = JSON.parse(ctx.request.header.Authorization);
 		const result = await ctx.service.student.updatePhone(token.id, phoneMsg.newPhone)
 		ctx.body = result
@@ -129,7 +129,7 @@ class AppController extends Controller {
 	// app修改密码
 	async changePassword() {
 		const { ctx } = this;
-		const passwordMsg = ctx.request.body;
+		const passwordMsg = ctx.query;
 		const token = JSON.parse(ctx.request.header.Authorization);
 		const result = await ctx.service.login.changePassword(
 			token.id,
@@ -143,7 +143,7 @@ class AppController extends Controller {
 	// ------------------------9.用户反馈页面------------------------
 	async feedback() {
 		const { ctx } = this;
-		const feedbackMsg = ctx.request.body;
+		const feedbackMsg = ctx.query;
 		const result = await ctx.service.feedback.addFeedback(feedbackMsg);
 		ctx.body = result;
 	}
@@ -163,7 +163,7 @@ class AppController extends Controller {
 	// 创建班课接口：
 	async createCourse() {
 		const { ctx } = this;
-		const courseMsg = ctx.request.body;
+		const courseMsg = ctx.query;
 		const result = await ctx.service.course.createCourse(courseMsg);
 		ctx.body = result;
 	}
@@ -218,7 +218,7 @@ class AppController extends Controller {
 	// 单次学生签到详情接口
 	async singleSignInRecord() {
 		const { ctx } = this;
-		const msg = ctx.request.body;
+		const msg = ctx.query;
 
 		const result = await ctx.service.selectCourse.singleSignInRecord(
 			msg.teacherSignId,
