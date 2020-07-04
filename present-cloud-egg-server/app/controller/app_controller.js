@@ -72,8 +72,8 @@ class AppController extends Controller {
 	// 获取班课信息
 	async selcetCourseInfoByCourseId() {
 		const { ctx } = this;
-		const courseId = ctx.query.courseId;
-		const result = await ctx.service.course.selcetCourseInfoByCourseId(courseId)
+		const course_number = ctx.query.course_number;
+		const result = await ctx.service.course.selcetCourseInfoByCourseId(course_number)
 
 		ctx.body = result
 	}

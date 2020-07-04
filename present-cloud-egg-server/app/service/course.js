@@ -5,11 +5,11 @@ const Service = require('egg').Service;
 class CourseService extends Service {
 
     // 根据课程id获取课程信息
-    async selcetCourseInfoByCourseId(courseId) {
+    async selcetCourseInfoByCourseId(course_number) {
         const { ctx } = this
         const result = await ctx.model.Course.findOne({
             where: {
-                course_number: courseId, //课程号
+                course_number: course_number, //课程号
             },
         })
         // console.log(result)
