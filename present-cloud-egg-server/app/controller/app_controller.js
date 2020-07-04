@@ -124,7 +124,7 @@ class AppController extends Controller {
 		const { ctx } = this;
 		const msg = ctx.query;
 		const token = JSON.parse(ctx.request.header.Authorization);
-		const result = await ctx.service.login.verifyPassword(token.id, msg.password,msg.role)
+		const result = await ctx.service.login.verifyPassword(token.id, msg.password, msg.role)
 		ctx.body = result
 	}
 
@@ -133,9 +133,9 @@ class AppController extends Controller {
 	//更改学生手机号
 	async updatePhone() {
 		const { ctx } = this;
-		const phoneMsg = ctx.query;
-		const token = JSON.parse(ctx.request.header.Authorization);
-		const result = await ctx.service.student.updatePhone(token.id, phoneMsg.newPhone)
+		const msg = ctx.query;
+		const token = JSON.parse(ctx.request.header.token);
+		const result = await ctx.service.student.updatePhone(token.id, msg.newPhone, msg.role)
 		ctx.body = result
 	}
 
@@ -145,11 +145,12 @@ class AppController extends Controller {
 	async changePassword() {
 		const { ctx } = this;
 		const passwordMsg = ctx.query;
-		const token = JSON.parse(ctx.request.header.Authorization);
+		const token = JSON.parse(ctx.request.header.token);
 		const result = await ctx.service.login.changePassword(
 			token.id,
 			passwordMsg.oldPwd,
-			passwordMsg.newPwd
+			passwordMsg.newPwd,
+			passwordMsg.role
 		)
 		ctx.body = result
 

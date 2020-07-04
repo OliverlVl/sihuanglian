@@ -209,9 +209,6 @@ module.exports = app => {
   router.get(url + '/signInEnd', controller.appController.signInEnd)
 
 
-
-
-
   //------------------------13.签到记录页面------------------------
   //a)签到记录接口
   router.get(url + '/signInRecord', controller.appController.signInRecord)
@@ -221,20 +218,6 @@ module.exports = app => {
   //a)签到记录接口
   router.get(url + '/singleSignInRecord', controller.appController.singleSignInRecord)
 
-
-
-
-  // 完善老师信息
-  router.post('/updateTeacherInfo', controller.teacher.updateTeacherInfo)
-
-  // 完善学生信息
-  router.post('/updateStudentInfo', controller.student.updateStudentInfo)
-
-  // 查询班课(学生通过班课编号查) 地址加问号传入course_number
-  router.get('/selectCourse', controller.course.selectCourse)
-
-  // 学生加入班课 地址加问号传入course_number
-  router.get('/addCourse', controller.selectCourse.addCourse)
 
 
 

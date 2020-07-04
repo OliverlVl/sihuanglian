@@ -165,6 +165,7 @@ class LoginService extends Service {
             }
         }
         // 查找账户
+        console.log(account)
         const container = await ctx.model.Login.findOne({
             where: {
                 login_name: account
@@ -180,13 +181,16 @@ class LoginService extends Service {
         //加密
         const md5Password = await this.getMd5Data(password)
         // console.log(typeof(md5Password))
+        console.log(container.user_id)
+        console.log(container.login_type)
         const result = await ctx.model.Login.update(
             {
                 login_password: md5Password
             },
             {
                 where: {
-                    user_id: container.user_id
+                    user_id: container.user_id,
+                    login_type: container.login_type
                 }
 
             }
@@ -242,6 +246,7 @@ class LoginService extends Service {
         //加密
         const md5Password = await this.getMd5Data(String(password))
         // console.log(typeof(md5Password))
+        // 更改密码
         const result = await ctx.model.Login.update(
             {
                 login_password: md5Password
@@ -390,22 +395,22 @@ class LoginService extends Service {
     }
 
     // 判断角色
-    getUserRole(role){
+    getUserRole(role) {
         // 1: 学生  2：老师 3：管理员
-        if(role == "学生") return 1
-        if(role == "老师") return 2
-        if(role == "管理员") return 3
+        if (role == "学生") return 1
+        if (role == "老师") return 2
+        if (role == "管理员") return 3
         return 0
 
     }
 
 
     // 验证密码
-    async verifyPassword(id, password,role) {
+    async verifyPassword(id, password, role) {
         const { ctx } = this;
-        if(role == "学生"){
+        if (role == "学生") {
             role = 1
-        }else{
+        } else {
             role = 2
         }
         const result = await ctx.model.Login.findOne({
@@ -443,9 +448,14 @@ class LoginService extends Service {
 
 
     // app修改密码
-    async changePassword(id, oldPwd, newPwd) {
+    async changePassword(id, oldPwd, newPwd, role) {
         const { ctx } = this;
 
+        if (role == "学生") {
+            role = 1
+        } else {
+            role = 2
+        }
         // 对原密码进行md5加密与数据库中密码比较
         //md5加密
         const md5oldPwd = await this.getMd5Data(oldPwd)
@@ -453,6 +463,7 @@ class LoginService extends Service {
         const user = await ctx.model.Login.findOne({
             where: {
                 user_id: id,
+                login_type: role
             },
         })
         if (user == null) {
@@ -477,7 +488,8 @@ class LoginService extends Service {
             },
             {
                 where: {
-                    user_id: id
+                    user_id: id,
+                    login_type: role
                 }
             }
         )
