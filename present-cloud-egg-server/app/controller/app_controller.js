@@ -72,9 +72,17 @@ class AppController extends Controller {
 	// 获取班课信息
 	async getCourseInfo() {
 		const { ctx } = this;
-		const course_number = ctx.query.course_number;
-		const result = await ctx.service.course.getCourseInfo(course_number)
+		const course_id = ctx.query.course_id;
+		const result = await ctx.service.course.selcetCourseInfoByCourseId(course_id)
+		ctx.body = result
+	}
 
+	// 查询班课是否存在
+	async selectCourse() {
+		const { ctx } = this;
+		const course_number = ctx.query.course_number;
+		console.log(111111111111)
+		const result = await ctx.service.course.selectCourse(course_number)
 		ctx.body = result
 	}
 

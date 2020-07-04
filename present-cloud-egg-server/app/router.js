@@ -144,6 +144,9 @@ module.exports = app => {
   // 获取课程表信息
   router.get(url + '/getCourseInfo', controller.appController.getCourseInfo)
 
+  // 查询班课是否存在
+  router.get(url + '/selectCourse', controller.appController.selectCourse)
+
   // 加入班课
   router.post(url + '/addCourse', controller.appController.addCourse)
 

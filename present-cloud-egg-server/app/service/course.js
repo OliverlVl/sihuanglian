@@ -36,7 +36,7 @@ class CourseService extends Service {
 
         // 获取教师名字
         const teacher = await ctx.model.Teacher.findOne({
-            where:{
+            where: {
                 teacher_id: result.course_teacher_id
             }
         })
@@ -58,26 +58,6 @@ class CourseService extends Service {
     }
 
 
-    async getCourseInfo(course_number){
-        const { ctx } = this
-        const result = await ctx.model.Course.findOne({
-            where: {
-                course_number: course_number, //课程号
-            },
-        })
-        if (result != null) {
-            return {
-                code: 1,
-                msg: result
-            }
-        } else {
-            return {
-                code: -1,
-                msg: "班课不存在"
-            }
-        }
-    }
-
     // 学生通过班课编号查找班课
     async selectCourse(course_number) {
         const { ctx } = this
@@ -88,7 +68,10 @@ class CourseService extends Service {
         })
         // console.log(result)
         if (result != 0) {
-            return result
+            return {
+                code: 1,
+                msg: result
+            }
         } else {
             return {
                 code: -1,
