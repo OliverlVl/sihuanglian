@@ -107,9 +107,9 @@ class AppController extends Controller {
 	//验证密码
 	async verifyPassword() {
 		const { ctx } = this;
-		const password = ctx.query.password;
+		const msg = ctx.query;
 		const token = JSON.parse(ctx.request.header.Authorization);
-		const result = await ctx.service.login.verifyPassword(token.id, password)
+		const result = await ctx.service.login.verifyPassword(token.id, msg.password,msg.role)
 		ctx.body = result
 	}
 
@@ -175,8 +175,8 @@ class AppController extends Controller {
 	// 发起签到
 	async launchSignIn() {
 		const { ctx } = this;
-		const signInMsg = ctx.request.body;
-		const token = JSON.parse(ctx.request.header.Authorization);
+		const signInMsg = ctx.query;
+		const token = JSON.parse(ctx.request.header.token);
 		const result = await ctx.service.teacherSignIn.launchSignIn(
 			token.id,
 			signInMsg.courseId,
@@ -186,20 +186,20 @@ class AppController extends Controller {
 		ctx.body = result
 
 	}
-	// 签到详情
-	async teachrerSignInInfo() {
-		const { ctx } = this;
-		const courseId = ctx.query.courseId;
-		const result = await ctx.service.teacherSignIn.teachrerSignInInfo(courseId)
+	// // 签到详情
+	// async teachrerSignInInfo() {
+	// 	const { ctx } = this;
+	// 	const courseId = ctx.query.courseId;
+	// 	const result = await ctx.service.teacherSignIn.teachrerSignInInfo(courseId)
 
-		ctx.body = result
-	}
+	// 	ctx.body = result
+	// }
 
 	// 结束签到
 	async signInEnd() {
 		const { ctx } = this;
-		const teacherSignId = ctx.query.teacherSignId;
-		const result = await ctx.service.teacherSignIn.signInEnd(teacherSignId)
+		const courseId = ctx.query.courseId;
+		const result = await ctx.service.teacherSignIn.signInEnd(courseId)
 		ctx.body = result
 	}
 

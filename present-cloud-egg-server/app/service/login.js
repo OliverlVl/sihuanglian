@@ -384,11 +384,17 @@ class LoginService extends Service {
 
 
     // 验证密码
-    async verifyPassword(id, password) {
+    async verifyPassword(id, password,role) {
         const { ctx } = this;
+        if(role == "学生"){
+            role = 1
+        }else{
+            role = 2
+        }
         const result = await ctx.model.Login.findOne({
             where: {
-                user_id: id
+                user_id: id,
+                login_type: role
             }
         })
         //加密

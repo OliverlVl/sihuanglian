@@ -200,7 +200,7 @@ module.exports = app => {
   router.post(url + '/launchSignIn', controller.appController.launchSignIn)
 
   // 签到详情
-  router.get(url + '/teachrerSignInInfo', controller.appController.teachrerSignInInfo)
+  // router.get(url + '/teachrerSignInInfo', controller.appController.teachrerSignInInfo)
 
   // 结束签到
   router.get(url + '/signInEnd', controller.appController.signInEnd)
