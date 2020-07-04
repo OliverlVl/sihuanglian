@@ -2,7 +2,7 @@
 
 const Controller = require('egg').Controller;
 
-class helloController extends Controller {
+class WebController extends Controller {
 
 	// ------------------------登入------------------------
 
@@ -302,4 +302,4 @@ class helloController extends Controller {
 
 }
 
-module.exports = helloController;
+module.exports = WebController;

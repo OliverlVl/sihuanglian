@@ -5,116 +5,112 @@
  */
 module.exports = app => {
   const { router, controller, jwt } = app;
-  router.get('/', controller.home.index);
-
-  // 配置路由
-  router.get('/user', controller.home.getUserInfo)
 
   //----------------------------------------------------------web----------------------------------------------------------
 
   // ------------------------登入------------------------
 
   // 登录
-  router.post('/login', controller.hello.login)
-  router.post('/login/index', jwt, controller.hello.index)
-  // router.get('/getMD5/:data', controller.hello.getMd5Data)
+  router.post('/login', controller.webController.login)
+  // router.post('/login/index', jwt, controller.webController.index)
+  // router.get('/getMD5/:data', controller.webController.getMd5Data)
 
   // 注册
-  router.post('/register', controller.hello.register)
+  router.post('/register', controller.webController.register)
 
   //修改密码
-  // router.post('/updatePassword',controller.hello.updatePassword)
+  // router.post('/updatePassword',controller.webController.updatePassword)
 
   // 忘记密码
-  router.post('/resetPassword', controller.hello.resetPassword)
+  router.post('/resetPassword', controller.webController.resetPassword)
 
 
 
   // ------------------------数据字典------------------------
 
   // 获取所有字典详情信息
-  router.get('/getAllDictList', controller.hello.selectDictionaryDetailAll)
+  router.get('/getAllDictList', controller.webController.selectDictionaryDetailAll)
 
   // 查询具体id字典详情信息
-  router.get('/selectDictionaryDetailById', controller.hello.selectDictionaryDetailById)
+  router.get('/selectDictionaryDetailById', controller.webController.selectDictionaryDetailById)
 
   // 查询字典详情
-  router.get('/selectDictionaryDetail', controller.hello.selectDictionaryDetail)
+  router.get('/selectDictionaryDetail', controller.webController.selectDictionaryDetail)
 
   // 根据id修改item_value
-  router.post('/editDictItem', controller.hello.updateDictionaryDetail)
+  router.post('/editDictItem', controller.webController.updateDictionaryDetail)
 
   // 根据code增加记录
-  router.post('/addDict', controller.hello.insertDictionaryDetail)
+  router.post('/addDict', controller.webController.insertDictionaryDetail)
 
   // 根据id删除记录
-  router.delete('/deleteDictionaryDetail', controller.dictionaryDetail.deleteDictionaryDetail)
+  router.delete('/deleteDictionaryDetail', controller.webController.deleteDictionaryDetail)
 
 
   // ------------------------系统参数------------------------
 
   // 查询系统参数
-  router.get('/selcetSystemParameterAll', controller.hello.selcetSystemParameterAll)
+  router.get('/selcetSystemParameterAll', controller.webController.selcetSystemParameterAll)
 
   // 修改系统参数
-  router.put('/updateSystemParameter', controller.hello.updateSystemParameter)
+  router.put('/updateSystemParameter', controller.webController.updateSystemParameter)
 
 
   // ------------------------菜单管理------------------------
 
   // 查看所有菜单
-  router.get('/selectMenuAll', controller.hello.selectMenuAll)
+  router.get('/selectMenuAll', controller.webController.selectMenuAll)
 
   // 删除菜单
-  router.get('/deleteMenu', controller.hello.deleteMenu)
+  router.get('/deleteMenu', controller.webController.deleteMenu)
 
   // 添加菜单
-  router.post('/insertMenu', controller.hello.insertMenu)
+  router.post('/insertMenu', controller.webController.insertMenu)
 
   // 添加page
-  router.post('/insertPage', controller.hello.insertPage)
+  router.post('/insertPage', controller.webController.insertPage)
 
   // 添加按钮
-  router.post('/insertButton', controller.hello.insertButton)
+  router.post('/insertButton', controller.webController.insertButton)
 
 
   // ------------------------角色------------------------
 
   // 获取所有角色
-  router.get('/selectRoleAll', controller.hello.selectRoleAll)
+  router.get('/selectRoleAll', controller.webController.selectRoleAll)
 
   // 根据id查询角色信息
-  router.get('/selectRoleById', controller.hello.selectRoleById)
+  router.get('/selectRoleById', controller.webController.selectRoleById)
 
   // 添加角色
-  router.post('/insertRole', controller.hello.insertRole)
+  router.post('/insertRole', controller.webController.insertRole)
 
   // 修改角色
-  router.put('/updateRole', controller.hello.updateRole)
+  router.put('/updateRole', controller.webController.updateRole)
 
   // 根据id删除角色
-  router.delete('/deleteRoleById', controller.hello.deleteRoleById)
+  router.delete('/deleteRoleById', controller.webController.deleteRoleById)
 
 
   // ------------------------学生用户管理------------------------
 
   // 获取所有学生 #获取所有用户
-  router.get('/getAllList', controller.hello.selectStudentAll)
+  router.get('/getAllList', controller.webController.selectStudentAll)
 
   // 根据id查询学生信息 #获取用户
-  router.get('/getUser', controller.hello.selectStudentById)
+  router.get('/getUser', controller.webController.selectStudentById)
 
   // 修改学生信息 #编辑用户
-  router.put('/editUser', controller.hello.updateStudent)
+  router.put('/editUser', controller.webController.updateStudent)
 
   // 根据id删除学生 #删除用户
-  router.delete('/deleteUser', controller.hello.deleteStudentById)
+  router.delete('/deleteUser', controller.webController.deleteStudentById)
 
 
   // ------------------------课程管理------------------------
 
   // 获取十条班课信息
-  router.get('/selectCourInfoByPage', controller.hello.selectCourInfoByPage)
+  router.get('/selectCourInfoByPage', controller.webController.selectCourInfoByPage)
 
 
 
