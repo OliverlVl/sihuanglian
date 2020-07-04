@@ -62,9 +62,11 @@ class LoginService extends Service {
                 res.status = 'failed';
             } else {
                 // 签发token
+                console.log(result.user_id)
                 // const token = this.app.jwt.sign({
                 const token = JWT.sign({
                     account: result.login_name,
+                    id: result.user_id
                 },
                     this.config.jwts.secret, {
                     expiresIn: "30 days",
@@ -301,6 +303,7 @@ class LoginService extends Service {
                 // const token = this.app.jwt.sign({
                 const token = JWT.sign({
                     account: result.login_name,
+                    id: result.user_id
                 },
                     this.config.jwts.secret, {
                     expiresIn: "30 days",
@@ -323,6 +326,11 @@ class LoginService extends Service {
         // const result = await ctx.model.Login.create(user);
         var userId = 0
         var result
+
+        console.log(user.role)
+        user.role = this.getUserRole(user.role)
+        console.log(user.role)
+
         if (user.role == 2) { // role==2老师
             // 1、添加用户相关信息 获取用户id (老师)
             result = await ctx.model.Teacher.create({
@@ -353,7 +361,7 @@ class LoginService extends Service {
         // b、电话2
         await ctx.model.Login.create({
             login_name: user.phone,
-            login_password: user.pwd,
+            login_password: user.password,
             login_type: user.role,
             user_id: userId
         })
@@ -367,7 +375,6 @@ class LoginService extends Service {
         //     user_id: userId
         // })
 
-
         if (result != null) {
             return {
                 code: 200,
@@ -380,6 +387,16 @@ class LoginService extends Service {
             }
         }
         // return result.dataValues;
+    }
+
+    // 判断角色
+    getUserRole(role){
+        // 1: 学生  2：老师 3：管理员
+        if(role == "学生") return 1
+        if(role == "老师") return 2
+        if(role == "管理员") return 3
+        return 0
+
     }
 
 

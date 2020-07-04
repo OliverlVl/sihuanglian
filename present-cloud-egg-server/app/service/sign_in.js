@@ -39,8 +39,14 @@ class SignInService extends Service {
 		// 传入参数为 数值型 xxx.xxx
 		const distance = await this.GetDistance(signMsg.latitude, signMsg.longitude, latitude2, longitude2)
 		console.log(distance)
+	
 
-		return distance // 公里
+		// return distance // 公里
+		return {
+			code: 200,
+			msg: "签到成功",
+			distance: distance
+		}
 
 		// if (result == null) {
 		// 	return false // 用户不存在
