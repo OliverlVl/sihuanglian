@@ -62,9 +62,11 @@ class LoginService extends Service {
                 res.status = 'failed';
             } else {
                 // 签发token
+                console.log(result.user_id)
                 // const token = this.app.jwt.sign({
                 const token = JWT.sign({
                     account: result.login_name,
+                    id: result.user_id
                 },
                     this.config.jwts.secret, {
                     expiresIn: "30 days",
