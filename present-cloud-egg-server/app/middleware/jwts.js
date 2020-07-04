@@ -22,7 +22,10 @@ module.exports = (options, app) => {
       let decode;
       try {
         // 验证当前token
+        console.log(111111111)
+        console.log(token)
         decode = JWT.verify(token, options.secret);
+        console.log(decode)
         // decode = ctx.app.jwt.verify(token, "123456");
         if (!decode || !decode.account) {
           ctx.throw(401, '没有权限，请登录');
