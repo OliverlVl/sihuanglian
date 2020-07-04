@@ -352,7 +352,7 @@ class LoginService extends Service {
         // b、电话2
         await ctx.model.Login.create({
             login_name: user.phone,
-            login_password: user.pwd,
+            login_password: user.password,
             login_type: user.role,
             user_id: userId
         })
