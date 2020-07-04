@@ -142,7 +142,7 @@ module.exports = app => {
   router.get(url + '/courseList', controller.appController.selcetCourseList)
 
   // 获取课程表信息
-  router.get(url + '/getCourseInfo', controller.appController.selcetCourseInfoByCourseId)
+  router.get(url + '/getCourseInfo', controller.appController.getCourseInfo)
 
   // 加入班课
   router.post(url + '/addCourse', controller.appController.addCourse)

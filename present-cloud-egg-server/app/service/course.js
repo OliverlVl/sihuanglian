@@ -5,17 +5,17 @@ const Service = require('egg').Service;
 class CourseService extends Service {
 
     // 根据课程id获取课程信息
-    async selcetCourseInfoByCourseId(course_number) {
+    async selcetCourseInfoByCourseId(courseId) {
         const { ctx } = this
         const result = await ctx.model.Course.findOne({
             where: {
-                course_number: course_number, //课程号
+                course_id: courseId, //课程号
             },
         })
         // console.log(result)
         const selectCourse = await ctx.model.SelectCourse.findAll({
             where: {
-                course_id: course_number
+                course_id: courseId
             }
         })
         var list = []
@@ -55,6 +55,27 @@ class CourseService extends Service {
             }
         }
 
+    }
+
+
+    async getCourseInfo(course_number){
+        const { ctx } = this
+        const result = await ctx.model.Course.findOne({
+            where: {
+                course_number: course_number, //课程号
+            },
+        })
+        if (result != null) {
+            return {
+                code: 1,
+                msg: result
+            }
+        } else {
+            return {
+                code: -1,
+                msg: "班课不存在"
+            }
+        }
     }
 
     // 学生通过班课编号查找班课
