@@ -303,6 +303,7 @@ class LoginService extends Service {
                 // const token = this.app.jwt.sign({
                 const token = JWT.sign({
                     account: result.login_name,
+                    id: result.user_id
                 },
                     this.config.jwts.secret, {
                     expiresIn: "30 days",
