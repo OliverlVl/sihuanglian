@@ -56,7 +56,10 @@ class FeedbackService extends Service {
 		})
 		// console.log(this.getNowFormatDate())
 		if (result == null) {
-			return false // 错误
+			return {
+				code: -1,
+				msg: "添加失败"
+			} // 错误
 		}
 		return result.dataValues;
 	}

@@ -13,7 +13,10 @@ class MenuService extends Service {
 			},
 		})
 		if (result == null) {
-			return false // 不存在
+			return {
+				code: -1,
+				msg: "不存在"
+			}
 		}
 		return result.dataValues;
 	}

@@ -440,7 +440,10 @@ class LoginService extends Service {
         const { ctx } = this;
 
         if (result == null) {
-            return false // 用户不存在
+            return {
+				code: -1,
+				msg: "用户不存在"
+			}
         }
         return result.dataValues;
 

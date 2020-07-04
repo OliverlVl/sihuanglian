@@ -96,7 +96,10 @@ class CourseService extends Service {
             course_teacher_id: courseMsg.teacher
 		})
 		if (result == null) {
-			return false // 错误
+			return {
+                code: -1,
+                msg: "创建失败"
+            } 
 		}
 		return result.dataValues;
 	}
