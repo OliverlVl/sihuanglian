@@ -15,7 +15,7 @@ class CourseService extends Service {
         // console.log(result)
         const selectCourse = await ctx.model.SelectCourse.findAll({
             where: {
-                course_id: courseId
+                course_id: course_number
             }
         })
         var list = []
