@@ -2,42 +2,26 @@
   <div class="table">
     <div class="crumbs">
       <el-breadcrumb separator="/">
-        <el-breadcrumb-item>
-          <i class="el-icon-tickets"></i>
-        </el-breadcrumb-item>
+       
       </el-breadcrumb>
     </div>
     <div class="container">
-      
-
       <el-table
         :data="tableData"
         border
         style="width: 100%"
-        ref="multipleTable"
-        @selection-change="handleSelectionChange"
+       
+        
       >
-        <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column prop="number" label="学号" sortable width="120"></el-table-column>
-        <el-table-column prop="name" label="姓名" sortable width="120"></el-table-column>
-        <el-table-column prop="identity" label="身份" width="120"></el-table-column>
-        <el-table-column prop="school" label="学校" width="160"></el-table-column>
-        <el-table-column prop="course" label="课程" width="160"></el-table-column>
-        
-        <el-table-column prop="access_goal" label="经验值" width="120"></el-table-column>
-        
-      
+        <!-- <el-table-column type="selection" width="55"></el-table-column> -->
+        <el-table-column prop="number" label="学号"  width="220"></el-table-column>
+        <el-table-column prop="name" label="姓名"  width="220"></el-table-column>
+
+        <el-table-column prop="course" label="课程" width="220"></el-table-column>
+
+        <el-table-column prop="access_goal" label="经验值" width="220"></el-table-column>
       </el-table>
-      <div class="delAll">
-        <el-button type="primary" icon="delete" class="handle-del" @click="delAll">批量删除</el-button>
-      </div>
-      <div class="pagination">
-        <el-pagination
-          @current-change="handleCurrentChange"
-          layout="prev, pager, next"
-          :total="1000"
-        ></el-pagination>
-      </div>
+     
     </div>
 
     <!-- 编辑弹出框 -->
@@ -49,23 +33,13 @@
         <el-form-item label="姓名">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
-        <el-form-item label="身份">
-          <el-input v-model="form.identity"></el-input>
-        </el-form-item>
-        <el-form-item label="学校">
-          <el-input v-model="form.school"></el-input>
-        </el-form-item>
+
         <el-form-item label="课程">
           <el-input v-model="form.course"></el-input>
         </el-form-item>
-        <el-form-item label="班级">
-          <el-input v-model="form.class"></el-input>
-        </el-form-item>
-        <el-form-item label="获得分数">
+
+        <el-form-item label="经验值">
           <el-input v-model="form.access_goal"></el-input>
-        </el-form-item>
-        <el-form-item label="总分数">
-          <el-input v-model="form.total_goal"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -73,14 +47,7 @@
         <el-button type="primary" @click="saveEdit">确 定</el-button>
       </span>
     </el-dialog>
-    <!-- 删除提示框 -->
-    <el-dialog title="提示" :visible.sync="delVisible" width="400px">
-      <div class="del-dialog-cnt">是否确定删除？</div>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="delVisible = false">取 消</el-button>
-        <el-button type="primary" @click="deleteRow">确 定</el-button>
-      </span>
-    </el-dialog>
+  
   </div>
 </template>
 
@@ -94,103 +61,94 @@ export default {
         {
           number: "",
           name: "",
-          identity: "",
-          school: "",
           course: "",
-          class: "",
-          access_goal: "",
-          total_goal: ""
+          access_goal: ""
         },
         {
           number: "",
           name: "",
-          identity: "",
-          school: "",
           course: "",
-          class: "",
-          access_goal: "",
-          total_goal: ""
+          access_goal: ""
         },
         {
           number: "",
           name: "",
-          identity: "",
-          school: "",
           course: "",
-          class: "",
-          access_goal: "",
-          total_goal: ""
+          access_goal: ""
         },
         {
           number: "",
           name: "",
-          identity: "",
-          school: "",
           course: "",
-          class: "",
-          access_goal: "",
-          total_goal: ""
+          access_goal: ""
         },
         {
           number: "",
           name: "",
-          identity: "",
-          school: "",
           course: "",
-          class: "",
-          access_goal: "",
-          total_goal: ""
+          access_goal: ""
         },
         {
           number: "",
           name: "",
-          identity: "",
-          school: "",
           course: "",
-          class: "",
-          access_goal: "",
-          total_goal: ""
+          access_goal: ""
         },
         {
           number: "",
           name: "",
-          identity: "",
-          school: "",
           course: "",
-          class: "",
-          access_goal: "",
-          total_goal: ""
+          access_goal: ""
         },
         {
           number: "",
           name: "",
-          identity: "",
-          school: "",
           course: "",
-          class: "",
-          access_goal: "",
-          total_goal: ""
+          access_goal: ""
         },
         {
           number: "",
           name: "",
-          identity: "",
-          school: "",
           course: "",
-          class: "",
-          access_goal: "",
-          total_goal: ""
+          access_goal: ""
         },
         {
           number: "",
           name: "",
-          identity: "",
-          school: "",
           course: "",
-          class: "",
-          access_goal: "",
-          total_goal: ""
-        }
+          access_goal: ""
+        },
+        {
+          number: "",
+          name: "",
+          course: "",
+          access_goal: ""
+        },{
+          number: "",
+          name: "",
+          course: "",
+          access_goal: ""
+        },{
+          number: "",
+          name: "",
+          course: "",
+          access_goal: ""
+        },{
+          number: "",
+          name: "",
+          course: "",
+          access_goal: ""
+        },{
+          number: "",
+          name: "",
+          course: "",
+          access_goal: ""
+        },{
+          number: "",
+          name: "",
+          course: "",
+          access_goal: ""
+        },
       ],
       curPage: 1,
       multipleSelection: [],
@@ -207,18 +165,15 @@ export default {
       form: {
         number: "",
         name: "",
-        identity: "",
-        school: "",
         course: "",
-        class: "",
-        access_goal: "",
-        total_goal: ""
+        access_goal: ""
       },
       rowId: -1
     };
   },
   created() {
-    this.getData();
+    
+    this.load();
   },
   computed: {
     data() {
@@ -246,34 +201,39 @@ export default {
     // 分页导航
     handleCurrentChange(val) {
       this.curPage = val;
-      this.getData();
+      
     },
-    // 获取easy mock数据
-    getData() {
-      // this.$axios
-      //     .get(this.url, {
-      //         page: this.curPage
-      //     })
-      //     .then(res => {
-      //         this.tableData = res.data.list;
-      //     });
-    },
-    load() {//改过了628
+  
+    load() {
+      //改过了628
       this.isSearch = true;
       const self = this;
-      courageMainAPI.getAllCourage(this.curPage).then(res => {
-        console.log(res);
-        for (let i in res.data) {
-          this.tableData[i].number = res.data[i].User_No;
-          this.tableData[i].name = res.data[i].User_Name;
-          this.tableData[i].identity = res.data[i].User_Type;
-          this.tableData[i].school = res.data[i].User_School;
-          this.tableData[i].course = res.data[i].Course_Name;
+  
+      courageMainAPI
+        .getAllCourage(this.curPage)
+        .then(res => {
           
-          this.tableData[i].access_goal = res.data[i].acc_goals;
+          // console.log('res'+res);
+
+          for (let i in res.data) {
+            this.tableData[i].number = res.data[i].student_id;
+            this.tableData[i].name = res.data[i].student_name;
+            this.tableData[i].course = res.data[i].course_name;
+            this.tableData[i].access_goal = res.data[i].course_experience_point;
+
+          }
+        })
+        .catch(err => {
+          // console.log(err.status);
+          // for (let i in err) {
+          //   this.tableData[i].number = err[i].student_id;
+          //   this.tableData[i].name = err[i].student_name;
+          //   this.tableData[i].course = err[i].course_name;
+          //   this.tableData[i].access_goal = err[i].course_experience_point;
+
+          // }
           
-        }
-      });
+        });
     },
     formatter(row, column) {
       return row.address;
@@ -284,12 +244,8 @@ export default {
       this.form = {
         number: item.number,
         name: item.name,
-        identity: item.identity,
-        school: item.school,
         course: item.course,
-        class: item.class,
-        access_goal: item.access_goal,
-        total_goal: item.total_goal
+        access_goal: item.access_goal
       };
       this.editVisible = true;
     },

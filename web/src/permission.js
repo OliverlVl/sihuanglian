@@ -41,38 +41,39 @@ router.beforeEach((to, from, next) => {
     if (getToken()) {
         if (to.path === '/login') {
             next({path: '/home'})
-        } else {
-            if (store.getters.userId === undefined) {
-                userMainAPI.getUserByToken().then(res => {
-                    // 用户token存在，已登录
-                    if (res.status === 0) {
-                        store.dispatch('updateUserInfo', res.data, getToken());
-                        let {menuList = []} = res.data;
-                        let menuMap = {};
-                        for (let tmp of menuList) {
-                            menuMap[tmp.url] = tmp.id;
-                        }
-                        // debugger
-                        let accessedRouters = filterAsyncRouter(routes, menuMap) // 路由过滤
-                        router.addRoutes(accessedRouters); // 动态添加可访问路由表
-                        store.dispatch('updateRoutes', accessedRouters).then(() => {
-                            next({...to, replace: true})
-                        });
-                    } else {
-                        // 用户token不存在
-                        next({path: '/login'})
-                    }
-                }).catch((e) => {
-                    console.error(e);
-                    removeToken();
-                    next({
-                        path: '/login', query: query
-                    });
-                })
-            } else {
-                next();
-            }
-        }
+        } 
+        // else {
+        //     if (store.getters.userId === undefined) {
+        //         userMainAPI.getUserByToken().then(res => {
+        //             // 用户token存在，已登录
+        //             if (res.status === 0) {
+        //                 store.dispatch('updateUserInfo', res.data, getToken());
+        //                 let {menuList = []} = res.data;
+        //                 let menuMap = {};
+        //                 for (let tmp of menuList) {
+        //                     menuMap[tmp.url] = tmp.id;
+        //                 }
+        //                 // debugger
+        //                 let accessedRouters = filterAsyncRouter(routes, menuMap) // 路由过滤
+        //                 router.addRoutes(accessedRouters); // 动态添加可访问路由表
+        //                 store.dispatch('updateRoutes', accessedRouters).then(() => {
+        //                     next({...to, replace: true})
+        //                 });
+        //             } else {
+        //                 // 用户token不存在
+        //                 next({path: '/login'})
+        //             }
+        //         }).catch((e) => {
+        //             console.error(e);
+        //             removeToken();
+        //             next({
+        //                 path: '/login', query: query
+        //             });
+        //         })
+        //     } else {
+        //         next();
+        //     }
+        // }
     } else {
         if (whiteList.indexOf(to.path) !== -1) {
             // NProgress.done();

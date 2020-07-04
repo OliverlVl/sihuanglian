@@ -125,7 +125,7 @@
                     utilsMainAPI.getVercode(
                         this.forgetForm.email,
                          'FORGETPWD').then(res => {
-                        this.$utils.message.showSuccess(res.msg);
+                        this.$utils.message.showSuccess(res.data.msg);
                     });
                     return true;
                 }, () => {

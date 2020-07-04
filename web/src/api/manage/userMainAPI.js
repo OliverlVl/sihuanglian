@@ -2,65 +2,44 @@ import request from '@/api/request'
 import {setToken, getToken, removeToken} from '@/utils/auth';
 
 const userMainAPI = {
-    base_url: '/user/',
+    
 
     getAllList: function () {
         return request({
-            url: this.base_url + 'all',
+            url: 'getAllList',
             method: 'get'
         });
     },
-    addUser: function (data) {
-        return request({
-            url: this.base_url + 'userInfo',
-            method: 'post',
-            params: data
-        });
-    },
+    
     getUser: function (ID) {
         return request({
-            url: this.base_url + 'userInfo',
+            url: 'getUser',
             method: 'get',
             params: {
                 userId: ID
             }
         });
     },
-    // 根据获取用户信息
-    getUserByToken: function () {
-        return request({
-            url: this.base_url + 'token',
-            method: 'get'
-        });
-    },
+    
     editUser: function (userData) {
-        const data = {
-            userName: userData.userName,
-            account: userData.account,
-            email: userData.email,
-            phone: userData.phone,
-            sex: userData.sex,
-            status: userData.status,
-            userType: userData.userType
-        }
         return request({
-            url: this.base_url + 'userInfo',
-            method: 'put',
-            params: data
-        });
-    },
-    resetPassword: function (ID) {
-        return request({
-            url: this.base_url + 'pwd',
+            url: 'editUser',
             method: 'put',
             params: {
-                id: ID
+                id: userData.id,
+                userName: userData.userName,
+                account: userData.account,
+                email: userData.email,
+                phone: userData.phone,
+                sex: userData.sex,
+                
             }
         });
     },
+    
     deleteUser: function (ID) {
         return request({
-            url: this.base_url + 'userInfo',
+            url: 'deleteUser',
             method: 'delete',
             params: {
                 uid: ID

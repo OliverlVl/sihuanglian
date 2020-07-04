@@ -3,51 +3,67 @@ import {setToken, getToken, removeToken} from '@/utils/auth';
 import roleMainAPI from './roleMainAPI';
 
 const menuMainAPI = {
-    base_url: '/menu/',
+
 
     
     findAll: function () {
         return request({
-            url: this.base_url + 'findAll',
+            url: 'selectMenuAll',
             method: 'get',
             
         });
     },
-    deletemenu: function (delSel) {
+    deletemenu: function (id) {
+        // console.log('id:'+id);
         return request({
-            url: this.base_url + 'deletemenu',
-            method: 'post',
+            url: 'deleteMenu',
+            method: 'get',
             params: {
-                delSel: delSel
+                id:id
             }
         });
     },
     
-    addmenu: function (Menu) {
+    addmenu: function (menuname,submenus) {
+        // console.log('menuname:'+menuname);
+        // console.log('submenus:'+submenus);
         return request({
-            url: this.base_url + 'addmenu',
+            
+
+            url: 'insertMenu',
             method: 'post',
             params: {
-                Menu: Menu
+                menuname:menuname,
+                submenus:submenus
             }
         });
     },
   
-    addpage: function (Page1) {
+    addpage: function (buttons,menuname,supermenu) {
+        // console.log('buttons:'+buttons);
+    
+        // console.log('menuname:'+menuname);
+        // console.log('supermenu:'+supermenu);
         return request({
-            url: this.base_url + 'addpage',
+            url: 'insertPage',
             method: 'post',
             params: {
-                Page: Page1
+                buttons:buttons,
+                menuname:menuname,
+                supermenu:supermenu
             }
         });
     },
-    addbutton: function (button1) {
+    addbutton: function (button,supermenu) {
+        // console.log('button:'+button);
+    
+        // console.log('supermenu:'+supermenu);
         return request({
-            url: this.base_url + 'addbutton',
+            url: 'insertButton',
             method: 'post',
             params: {
-                button: button1
+                button:button,
+                supermenu:supermenu
             }
         });
     },

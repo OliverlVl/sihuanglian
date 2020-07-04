@@ -1,6 +1,5 @@
 <template>
   <div class="dict-manage-container">
-    <page-header title="数据字典与系统参数管理"></page-header>
     <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
       <el-tab-pane label="数据字典" name="first">
         <dictionary-index></dictionary-index>
@@ -13,15 +12,13 @@
 </template>
 
 <script>
-import PageHeader from "../../common/PageHeader";
 import DictionaryIndex from "./dataDic/DictionaryIndex";
 import DataSelectIndex from "./dataSelect/DataSelectIndex";
 export default {
   name: "DictionaryContainer",
   components: {
     DictionaryIndex,
-    DataSelectIndex,
-    PageHeader
+    DataSelectIndex
   },
   data() {
     return {

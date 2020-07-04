@@ -4,9 +4,10 @@ import {setToken, getToken, removeToken} from '../utils/auth';
 import store from '../store/index'
 
 const service = axios.create({
-    baseURL: 'http://59.77.134.232/star/api', 
+    baseURL: 'http://47.92.226.135:7001/', 
+
     // process.env.VUE_APP_BASE_API, // api的base_url
-    timeout: 10
+    timeout: 1000
 })
 
 const NOT_LOGIN = constant.ERROR_CODE_NOT_LOGIN;
@@ -22,16 +23,12 @@ service.interceptors.request.use(config => {
 
 service.interceptors.response.use(
     response => {
-        const res = response.data;
+        const res = response;
 
         return new Promise((resolve, reject) => {
-            if (res !== null && res.status === 0) {
+            if ( res.status === 200) {
                 resolve(res);
             } else {
-                message.showError(res.msg);
-                if (res.status === '99') {
-                    store.dispatch('Locked');
-                }
                 reject(res);
             }
         })
@@ -41,7 +38,7 @@ service.interceptors.response.use(
         console.log(error);
     
         if (constant.ERROR_CODE_NETWORK_ERROR === error.code) {
-            // message.showError('连接错误!');
+            message.showError('连接错误!');
             return;
             // return Promise.reject();
         }

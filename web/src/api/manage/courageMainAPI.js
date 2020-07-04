@@ -2,10 +2,10 @@ import request from '@/api/request'
 import { setToken, getToken, removeToken } from '@/utils/auth';
 
 const courageMainAPI = {
-    base_url: '/courage/',
     getAllCourage: function (page) {
+        console.log('page:'+page);
         return request({
-            url: this.base_url + 'data',
+            url: 'selectCourInfoByPage',
             method: 'get',
             params: {
                 

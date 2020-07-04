@@ -1,7 +1,7 @@
 <template>
     <div class="main-wrapper">
         <el-row class="card-flex">
-            <simple-card position="left" title="系统角色列表">
+            <simple-card position="left" title="角色列表">
                 <template slot="right">
                     <el-button v-show="!editVisible" icon="el-icon-refresh" type="text"
                                @click="loadRoleTree"></el-button>
@@ -12,12 +12,10 @@
             </simple-card>
             <simple-card position="right" hide-title style="border: none;" :body-style="{paddingTop:0,paddingBottom:0}">
                 <el-row  :gutter="20">
-                    <el-col :md="12" :sm="24">
+                    <el-col :md="24" :sm="24">
                         <role-info-main ref="roleInfoMain" @refreshTree="loadRoleTree" :userTypeMap="userTypeMap"></role-info-main>
                     </el-col>
-                    <el-col :md="12" :sm="24">
-                        <role-menu-edit :role-id="roleID" :role-name="roleName"></role-menu-edit>
-                    </el-col>
+                    
                 </el-row>
             </simple-card>
         </el-row>
@@ -27,12 +25,12 @@
     import SimpleCard from '../../common/Card/SimpleCard';
     import SystemRoleTree from './SystemRoleTree';
     import RoleInfoMain from './RoleInfoMain';
-    import RoleMenuEdit from './RoleMenuEdit';
+
     import dictionaryMainAPI from '@/api/manage/dictionaryMainAPI';
 
     export default {
         name: 'RoleMainIndex',
-        components: { RoleMenuEdit, RoleInfoMain, SystemRoleTree, SimpleCard },
+        components: { RoleInfoMain, SystemRoleTree, SimpleCard },
         data () {
             return {
                 editVisible: false,
@@ -40,7 +38,7 @@
                 activeName: 'role',
                 roleSelected: false,
                 roleID: '',
-                roleName: '',
+                role_name: '',
                 userTypeMap: []
             }
         },
@@ -48,21 +46,16 @@
         },
         methods: {
             getBaeInfo () {
-                dictionaryMainAPI.getDataItemByType('userType').then(res => {
+                dictionaryMainAPI.selectDictionaryDetail('userType').then(res => {
                     this.userTypeMap = res.data;
                 }).catch(err => {
                     console.error(err)
                 });
             },
             selectRole (node) {
-                console.log(node);
-                // 只能选叶节点
-                if (node.children === undefined) {
-                    this.$refs.roleInfoMain.init(node.roleId);
-                    this.roleSelected = true;
-                    this.roleID = node.roleId;
-                    this.roleName = node.label + ' - 菜单';
-                }
+                // console.log(node);
+                this.$refs.roleInfoMain.getselected(node)
+                
             },
             addRole () {
                 this.$refs.roleInfoMain.openCreate();

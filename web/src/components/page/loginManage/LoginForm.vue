@@ -92,7 +92,7 @@ export default {
           loginAPI
             .login(this.loginForm.account, this.loginForm.password)
             .then(res => {
-              if (res === 1) {
+              if (res.data.msg === 1) {
                 this.loading = false;
                 this.$router.push({ path: "/home" });
               } else {

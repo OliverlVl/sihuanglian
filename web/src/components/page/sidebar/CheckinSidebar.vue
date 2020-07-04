@@ -60,7 +60,7 @@ export default {
         {
           icon: "el-icon-date",
           index: "courage",
-          title: "课程管理",
+          title: "课程查看",
           
         },
         {
@@ -119,7 +119,7 @@ export default {
   },
   created() {
     console.log(routes);
-    console.log(routes[2].meta.title);
+   
   },
   methods: {
     handleOpen(key, keyPath) {

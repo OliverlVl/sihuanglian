@@ -2,7 +2,7 @@
   <div>
     <el-checkbox-group v-model="selected">
       <li v-for="(item1,index1) in datatable">
-        <el-checkbox :label="item1.name" :key="item1" border>
+        <el-checkbox :label="item1.id" :key="item1" border>
           <strong>{{item1.name}}</strong>
         </el-checkbox>
 
@@ -10,13 +10,13 @@
           <el-checkbox-group v-model="selected">
             <ul>
               <li v-for="(item2,index2) in datatable[index1].sub">
-                <el-checkbox :label="item2.name" :key="item2" border>{{item2.name}}</el-checkbox>
+                <el-checkbox :label="item2.id" :key="item2" border>{{item2.name}}</el-checkbox>
                 <ul>
                   <el-checkbox-group v-model="selected">
                     <ul>
                       <el-checkbox
                         v-for="item3 in datatable[index1].sub[index2].sub"
-                        :label="item3.name"
+                        :label="item3.id"
                         :key="item3"
                         border
                       >{{item3.name}}</el-checkbox>
@@ -34,34 +34,14 @@
     <el-button type="primary" @click="dialogVisible1 = true">添加菜单</el-button>
     <el-button type="primary" @click="dialogVisible2 = true">添加页面</el-button>
     <el-button type="primary" @click="addbutton3()">添加按钮</el-button>
-    <el-button type="primary" @click="handdelete()">勾选删除</el-button>
+    <el-button type="primary" @click="handdelete()">勾选删除(仅一个)</el-button>
     <el-dialog title="添加菜单" :visible.sync="dialogVisible1" width="60%" :before-close="handleClose1">
       <el-form :model="menuname" label-width="80px">
         <el-form-item label="名称">
           <el-input v-model="menuname"></el-input>
         </el-form-item>
-        <el-form-item label="链接">
-          <el-input v-model="temp1"></el-input>
-        </el-form-item>
-        <el-form-item label="包含页面">
-          <el-tag
-            :key="tag"
-            v-for="tag in submenus"
-            closable
-            :disable-transitions="false"
-            @close="handleClose(tag)"
-          >{{tag}}</el-tag>
-          <el-input
-            class="input-new-tag"
-            v-if="inputVisible"
-            v-model="inputValue"
-            ref="saveTagInput"
-            size="small"
-            @keyup.enter.native="handleInputConfirm"
-            @blur="handleInputConfirm"
-          ></el-input>
-          <el-button v-else size="small" @click="showInput">添加新页面</el-button>
-        </el-form-item>
+        
+        
       </el-form>
       <el-button @click="dialogVisible1 = false">取 消</el-button>
       <el-button type="primary" @click="addmenu()">确 定</el-button>
@@ -71,31 +51,11 @@
         <el-form-item label="名称">
           <el-input v-model="menuname"></el-input>
         </el-form-item>
-        <el-form-item label="链接">
-          <el-input v-model="temp1"></el-input>
-        </el-form-item>
+        
         <el-form-item label="上级菜单">
           <el-input v-model="supermenu"></el-input>
         </el-form-item>
-        <el-form-item label="包含按钮">
-          <el-tag
-            :key="tag"
-            v-for="tag in submenus"
-            closable
-            :disable-transitions="false"
-            @close="handleClose(tag)"
-          >{{tag}}</el-tag>
-          <el-input
-            class="input-new-tag"
-            v-if="inputVisible"
-            v-model="inputValue"
-            ref="saveTagInput"
-            size="small"
-            @keyup.enter.native="handleInputConfirm"
-            @blur="handleInputConfirm"
-          ></el-input>
-          <el-button v-else size="small" @click="showInput">添加新按钮</el-button>
-        </el-form-item>
+        
       </el-form>
       <el-button @click="dialogVisible2 = false">取 消</el-button>
       <el-button type="primary" @click="addpage()">确 定</el-button>
@@ -121,7 +81,7 @@ export default {
   data() {
     return {
       selected: [],
-      temp1: "",
+      
       temp2: 0,
       dialogVisible1: false,
       dialogVisible2: false,
@@ -132,57 +92,37 @@ export default {
       menuname: "",
       supermenu: "",
       button: "",
-      delSel: {
-        submenu: []
-      },
-      button1: {
-        button: "",
-        supermenu: ""
-      },
-      Menu: {
-        menuname: "",
-        submenus: []
-      },
-      Page: {
-        menuname: "",
-        supermenu: ""
-      },
-      Page1: {
-        menuname: "",
-        supermenu: "",
-        buttons: []
-      },
+
       buttons: [],
       datatable: [
         {
+          id:1,
           name: "班课频道",
           state: "checked",
           layer: 1,
           sub: [
             {
+              id:2,
               name: "班课管理",
               state: "checked",
               layer: 2,
               sub: [
                 {
+                  id:3,
                   name: "创建班课",
                   state: "unchecked",
                   layer: 3,
                   sub: null
                 },
                 {
+                  id:4,
                   name: "班课列表排序",
                   state: "checked",
                   layer: 3,
                   sub: null
                 },
                 {
-                  name: "查看班课",
-                  state: "checked",
-                  layer: 3,
-                  sub: null
-                },
-                {
+                  id:5,
                   name: "查看班课",
                   state: "checked",
                   layer: 3,
@@ -191,6 +131,7 @@ export default {
               ]
             },
             {
+              id:6,
               name: "加入班级",
               state: "unchecked",
               layer: 2,
@@ -199,35 +140,35 @@ export default {
           ]
         },
         {
+          id:7,
           name: "发现",
           state: "checked",
           layer: 1,
           sub: null
         },
         {
+          id:8,
           name: "我的频道",
           state: "checked",
           layer: 1,
           sub: [
+            
             {
-              name: "创建班课",
-              state: "unchecked",
-              layer: 3,
-              sub: null
-            },
-            {
+              id:9,
               name: "333",
               state: "checked",
               layer: 3,
               sub: null
             },
             {
+              id:10,
               name: "222",
               state: "checked",
               layer: 3,
               sub: null
             },
             {
+              id:11,
               name: "111",
               state: "checked",
               layer: 3,
@@ -240,11 +181,11 @@ export default {
   },
   methods: {
     handdelete() {
-      this.delSel.submenu = this.selected;
-      console.log(this.selected);
-      console.log(this.delSel);
+      
+      console.log('selected'+this.selected[0]);
+      
       const _this = this;
-      menuMainAPI.deletemenu(this.delSel).then(res => {
+      menuMainAPI.deletemenu(this.selected[0]).then(res => {
         menuMainAPI.findAll().then(res => {
           _this.datatable = res.data;
           this.$alert("删除成功", "删除", {
@@ -263,13 +204,10 @@ export default {
     },
     addmenu() {
       this.dialogVisible1 = false;
-      this.Menu.menuname = this.menuname;
-      this.Menu.submenus = this.submenus;
-      const _this = this;
-      console.log(this.Menu);
-      menuMainAPI.addmenu(this.Menu).then(res => {
+      
+      menuMainAPI.addmenu(this.menuname,  this.submenus).then(res => {
         menuMainAPI.findAll().then(res => {
-          _this.datatable = res.data;
+          this.datatable = res.data;
           this.$alert("分配权限成功", "分配权限", {
             confirmButtonText: "确定",
             callback: action => {}
@@ -280,14 +218,10 @@ export default {
     addpage() {
       this.dialogVisible2 = false;
       this.buttons = this.submenus;
-      this.Page1.buttons = this.buttons;
-      this.Page1.menuname = this.menuname;
-      this.Page1.supermenu = this.supermenu;
-      const _this = this;
-      console.log(this.Page1);
-      menuMainAPI.addpage(this.Page1).then(res => {
+      
+      menuMainAPI.addpage(this.buttons, this.menuname, this.supermenu).then(res => {
         menuMainAPI.findAll().then(res => {
-          _this.datatable = res.data;
+          this.datatable = res.data;
           this.$alert("新增页面成功", "新增页面", {
             confirmButtonText: "确定",
             callback: action => {}
@@ -297,13 +231,9 @@ export default {
     },
     addbutton() {
       this.dialogVisible3 = false;
-      this.button1.button = this.button;
-      this.button1.supermenu = this.supermenu;
-      const _this = this;
-      console.log(this.button1);
-      menuMainAPI.addbutton(this.button1).then(res => {
+      menuMainAPI.addbutton(this.button, this.supermenu).then(res => {
         menuMainAPI.findAll().then(res => {
-          _this.datatable = res.data;
+          this.datatable = res.data;
           this.$alert("新增按钮成功", "新增按钮", {
             confirmButtonText: "确定",
             callback: action => {}

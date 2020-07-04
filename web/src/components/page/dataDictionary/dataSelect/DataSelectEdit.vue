@@ -72,8 +72,9 @@
                 this.validate().then(valid => {
                     this.loadingStart();
                     console.log(this.dataSelectData)
-                    dictionaryMainAPI.editDataItem(this.dataSelectData).then(res => {
-                        // console.log(res);
+                    dictionaryMainAPI.updateSystemParameter(this.dataSelectData).then(res => {
+                        console.log('11');
+                         console.log(res);
                         this.loadingEnd();
                         this.$emit('load');
                         showMessage('success', '修改成功!');
@@ -89,8 +90,8 @@
                 
                 this.loadingStart();
                 
-                dictionaryMainAPI.getDataInfo().then(res => {
-                    console.log(res)
+                dictionaryMainAPI.selcetSystemParameterAll().then(res => {
+                    console.log(res.data)
                     this.dataSelectData = res.data;
                     this.loadingEnd();
                 }).catch(err => {

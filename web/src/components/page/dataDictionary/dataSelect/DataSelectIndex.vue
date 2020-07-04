@@ -8,7 +8,7 @@
         ></data-select-table>
 
         <data-select-edit ref="dataSelectEdit" @load="load"></data-select-edit>
-        <data-select-show ref="dataSelectShow"></data-select-show>
+        
     </div>
 </template>
 
@@ -19,12 +19,12 @@
     import ContainerSearchGroup from '../../../common/ContainerSearchGroup';
     import DataSelectEdit from './DataSelectEdit';
     // import DataSelectAdd from './DataSelectAdd';
-    import DataSelectShow from './DataSelectShow';
+    
     import {showMessage, showSimpleConfirm, showSuccess, showInfo} from '@/utils/message';
 
     export default {
         name: 'DataSelectIndex',
-        components: {DataSelectShow, 
+        components: {
         // DataSelectAdd, 
         DataSelectEdit, ContainerSearchGroup, Pagination, DataSelectTable},
         data () {

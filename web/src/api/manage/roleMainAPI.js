@@ -2,11 +2,11 @@ import request from '@/api/request'
 import {setToken, getToken, removeToken} from '@/utils/auth';
 
 const roleMainAPI = {
-    base_url: '/role/',
+
     // 获取所有角色
     getAllRole: function () {
         return request({
-            url: this.base_url + 'all',
+            url: 'selectRoleAll',
             method: 'get'
         });
     },
@@ -14,7 +14,7 @@ const roleMainAPI = {
     getById: function (id) {
         console.log(id);
         return request({
-            url: this.base_url + 'roleInfo',
+            url: 'selectRoleById',
             method: 'get',
             params: {
                 roleId: id
@@ -24,29 +24,34 @@ const roleMainAPI = {
     // 增加角色
     addRole: function (data) {
         return request({
-            url: this.base_url + 'roleInfo',
+            url: 'insertRole',
             method: 'post',
-            params: data
+            params: {
+                name: data.role_name,
+                type: data.role_type,
+                detail: data.detail
+
+            }
         });
     },
     // 修改角色
     editRole: function (roleData) {
-        const data = {
-            roleName: roleData.roleName,
-            roleId: roleData.roleId,
-            detail: roleData.detail,
-            userType: roleData.userType
-        }
         return request({
-            url: this.base_url + 'roleInfo',
+            url: 'updateRole',
             method: 'put',
-            params: data
+            params: {
+            name: roleData.role_name,
+            id: roleData.roleId,
+            detail: roleData.detail,
+            type: roleData.role_type
+
+            }
         });
     }, 
     // 删除角色
     remove: function (ID) {
         return request({
-            url: this.base_url + 'roleInfo',
+            url: 'deleteRoleById',
             method: 'delete',
             params: {
                 id: ID

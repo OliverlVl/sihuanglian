@@ -13,25 +13,16 @@
                 @keyup.enter.native="editSubmit">
             <el-row :gutter="20">
                 <el-col :md="12" :sm="24">
-                    <el-form-item label="参数名称:" prop="dataKey">
-                        <el-input v-model="dictData.dataKey" placeholder="请输入参数名称"></el-input>
+                    <el-form-item label="参数名称:" prop="item_key">
+                        <el-input v-model="dictData.item_key" placeholder="请输入参数名称"></el-input>
                     </el-form-item>
                 </el-col>
                 <el-col :md="12" :sm="24">
-                    <el-form-item label="参数值:" prop="dataValue">
-                        <el-input v-model="dictData.dataValue" placeholder="请输入参数值"></el-input>
+                    <el-form-item label="参数值:" prop="item_value">
+                        <el-input v-model="dictData.item_value" placeholder="请输入参数值"></el-input>
                     </el-form-item>
                 </el-col>
 
-                <el-col :md="24" :sm="24">
-                    <el-form-item label="描述:" prop="dataDesc">
-                        <el-input
-                                type="textarea"
-                                :rows="3"
-                                placeholder="请输入内容"
-                                v-model="dictData.dataDesc"></el-input>
-                    </el-form-item>
-                </el-col>
             </el-row>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -72,9 +63,10 @@
             editSubmit () {
                 this.validate().then(valid => {
                     this.loadingStart();
-                    // console.log(this.dictData)
+                    console.log('---------')
+                    console.log(this.dictData)
                     dictionaryMainAPI.editDictItem(this.dictData).then(res => {
-                        // console.log(res);
+                        // console.log(res.data);
                         this.loadingEnd();
                         this.$emit('load');
                         showMessage('success', '修改数据字典成功!');
@@ -87,7 +79,7 @@
             },
             openEdit (dictData) {
                 this.loadingStart();
-                dictionaryMainAPI.getDictItem(dictData.id).then(res => {
+                dictionaryMainAPI.selectDictionaryDetailById(dictData.detail_id).then(res => {
                     this.loadingEnd();
                     this.dictData = res.data;
                 }).catch(err => {

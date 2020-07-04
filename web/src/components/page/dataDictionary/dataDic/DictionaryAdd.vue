@@ -12,26 +12,30 @@
                 label-position="right"
                 @keyup.enter.native="addSubmit">
             <el-row :gutter="20">
-                <el-col :md="12" :sm="24">
-                    <el-form-item label="参数名称:" prop="dataKey">
-                        <el-input v-model="dictData.dataKey" placeholder="请输入参数名称"></el-input>
-                    </el-form-item>
-                </el-col>
-                <el-col :md="12" :sm="24">
-                    <el-form-item label="参数值:" prop="dataValue">
-                        <el-input v-model="dictData.dataValue" placeholder="请输入参数值"></el-input>
-                    </el-form-item>
-                </el-col>
 
                 <el-col :md="24" :sm="24">
-                    <el-form-item label="描述:" prop="dataDesc">
+                    <el-form-item label="参数名称:" prop="code">
                         <el-input
                                 type="textarea"
                                 :rows="3"
-                                placeholder="请输入内容"
+                                placeholder="请输入参数名称"
                                 v-model="dictData.dataDesc"></el-input>
                     </el-form-item>
                 </el-col>
+
+
+                <el-col :md="12" :sm="24">
+                    <el-form-item label="参数key:" prop="item_key">
+                        <el-input v-model="dictData.item_key" placeholder="请输入参数key"></el-input>
+                    </el-form-item>
+                </el-col>
+                <el-col :md="12" :sm="24">
+                    <el-form-item label="参数value:" prop="item_value">
+                        <el-input v-model="dictData.item_value" placeholder="请输入参数value"></el-input>
+                    </el-form-item>
+                </el-col>
+
+                
             </el-row>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -80,7 +84,7 @@
                 this.validate().then(valid => {
                     this.loadingStart();
                     dictionaryMainAPI.addDict(this.dictData).then(res => {
-                        console.log(res);
+                        console.log(res.data);
                         this.loadingEnd();
                         this.$emit('load'); // 新建完刷新表单
                         showMessage('success', '新增数据字典成功!');

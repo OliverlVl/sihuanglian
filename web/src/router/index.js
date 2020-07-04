@@ -115,7 +115,7 @@ export const routes = [
       component: () => import('../components/page/courageManage/CourageIndex.vue'),
       name: 'courageManage',
       hidden: false,
-      meta: { title: '课程管理', noCache: true },
+      meta: { title: '课程查看', noCache: true },
     },
     ]
   },

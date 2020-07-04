@@ -2,80 +2,79 @@ import request from '@/api/request'
 import { setToken, getToken, removeToken } from '@/utils/auth';
 
 const dictionaryMainAPI = {
-    base_url: '/dict/',
+
     getAllDictList: function () {
         return request({
-            url: this.base_url + 'data',
+            url: 'getAllDictList',
             method: 'get'
         });
     },
     editDictItem: function (data) {
         return request({
-            url: this.base_url + 'data',
+            url: 'editDictItem',
             method: 'put',
             params: {
-                id: data.id,
-                // DataTypeKey: data.dataTypeKey,
-                DataKey: data.dataKey,
-                DataValue: data.dataValue,
-                DataDesc: data.dataDesc
+                id: data.detail_id,
+                
+                dataValue: data.item_value,
+                
             }
         });
     },
-    getDictItem: function (ID) {
+    selectDictionaryDetailById: function (detail_id) {
         return request({
-            url: this.base_url + 'dicId',
+            url: 'selectDictionaryDetailById',
             method: 'get',
             params: {
-                dicID: ID
+                detail_id: detail_id
             }
         });
     },
-    deleteDict: function (ID) {
+    deleteDictionaryDetail: function (detail_id) {
         return request({
-            url: this.base_url + 'data',
+            url: 'deleteDictionaryDetail',
             method: 'delete',
             params: {
-                id: ID
+                detail_id: detail_id
             }
         });
     },
     addDict: function (data) {
         return request({
-            url: this.base_url + 'data',
+            url: 'addDict',
             method: 'post',
             params: {
-                DataKey: data.dataKey,
-                DataValue: data.dataValue,
+                item_key: data.item_key,
+                item_value: data.item_value,
                 DataDesc: data.dataDesc
             }
         });
     },
     // 根据字典Key，返回字典内容的key和value
-    getDataItemByType: function (key) {
+    selectDictionaryDetail: function (key) {
         return request({
-            url: this.base_url + 'dicCnt/dicKey',
+            url: 'selectDictionaryDetail',
             method: 'get',
             params: {
                 dicKey: key
             }
         });
     },
-    getDataInfo: function () {
+    selcetSystemParameterAll: function () {
         return request({
-            url: this.base_url + 'dataContent',
+            url: 'selcetSystemParameterAll',
             method: 'get',
 
         });
     },
     // 根据ID修改字典内容
-    editDataItem: function (data) {
+    updateSystemParameter: function (data) {
         return request({
-            url: this.base_url + 'dataContent',
+            url: 'updateSystemParameter',
             method: 'put',
             params: {
                 exp: data.exp,
-                distance: data.distane
+                distance: data.distance
             }
         });
     },
