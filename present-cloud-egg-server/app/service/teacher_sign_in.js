@@ -44,16 +44,16 @@ class TeacherSignInService extends Service {
 		var signInCount = 0
 		var noSignInCount = 0
 		for (var i = 0; i < result.length; i++) {
-			if(result[i].dataValues.status == 1){
-				signInCount ++;
-			}else{
-				noSignInCount ++;
+			if (result[i].dataValues.status == 1) {
+				signInCount++;
+			} else {
+				noSignInCount++;
 			}
 		}
 		return {
-			list:result,
-			signInCount:signInCount,
-			noSignInCount:noSignInCount
+			list: result,
+			signInCount: signInCount,
+			noSignInCount: noSignInCount
 
 		}
 
@@ -124,12 +124,13 @@ class TeacherSignInService extends Service {
 				course_id: courseId
 			}
 		})
+
 		for (var i = 0; i < selectCourse.length; i++) {
 
 			// 根据教师签到id和学生id获取学生单次签到信息
 			var signIn = await ctx.model.SignIn.findOne({
 				where: {
-					teacher_sign_id: teacherSignIn.teacherSignId,
+					teacher_sign_id: teacherSignIn.dataValues.teacher_sign_id,
 					student_id: selectCourse[i].student_id
 				}
 			})

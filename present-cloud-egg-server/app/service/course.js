@@ -13,6 +13,26 @@ class CourseService extends Service {
             },
         })
         // console.log(result)
+        const selectCourse = await ctx.model.SelectCourse.findAll({
+            where:{
+                course_id: courseId
+            }
+        })
+        var list= []
+        for(var i = 0;i<selectCourse.length;i++){
+            var student = await ctx.model.Student.findOne({
+                where:{
+                    student_id:selectCourse[i].dataValues.student_id
+                }
+            })
+            var object = {
+                student_name:student.dataValues.student_name,
+                student_number:student.dataValues.student_number
+            }
+            list.push(object)
+
+        }
+        result.dataValues["list"] = list
         if (result != null) {
             return result
         } else {
