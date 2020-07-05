@@ -325,6 +325,7 @@ class LoginService extends Service {
                         }
                     })
                     result.dataValues["name"] = student.student_name
+                    result.dataValues["email"] = student.student_mailbox
 
                 }else{
                     const teacher = await ctx.model.Teacher.findOne({
@@ -334,6 +335,8 @@ class LoginService extends Service {
                         }
                     })
                     result.dataValues["name"] = teacher.teacher_name
+                    result.dataValues["email"] = teacher.teacher_mailbox
+
                 }
 
                 
