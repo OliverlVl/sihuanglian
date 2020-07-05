@@ -133,14 +133,17 @@ class CourseService extends Service {
                     course_id: course.dataValues.course_id
                 }
             })
-        if ( result == null) {
+        if (result == null) {
             return {
                 code: -1,
                 msg: "创建失败"
             }
         }
         course.dataValues["course_number"] = course.dataValues.course_id
-        return course.dataValues;
+        return {
+            code: 1,
+            msg: course.dataValues
+        }
     }
 
 }
