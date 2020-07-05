@@ -36,37 +36,41 @@ class MenuService extends Service {
 		for (const menu of result) {
 			console.log(menu.dataValues)
 			console.log(menu.dataValues.sub)
-			var sub1 = menu.dataValues.sub.split('a');
-			console.log(sub1)
-			menu.dataValues.sub = [] // 用以赋值
-			// 对所有二级菜单循环
-			for (const pageId of sub1) {
-				const page = await this.findOneById(pageId)
-				// console.log(page)
-				menu.dataValues.sub.push(page) // sub添加查到的数据
-				console.log('测试')
-				// console.log(menu.dataValues)
-
-				if (page.sub != undefined) { // 重点 记得先判断
-					console.log(page.sub)
-					var sub2 = page.sub.split('a');
-					console.log('SUB222222222222')
-					console.log(sub2)
-					page.sub = []
-					// 对三级菜单循环
-					if (sub2 != null) {
-						for (const buttonId of sub2) {
-							const button = await this.findOneById(buttonId)
-							// console.log('++++++++++++测试二++++++')
-							// console.log(button)
-							page.sub.push(button)
+			if(menu.dataValues.sub != null){
+				var sub1 = menu.dataValues.sub.split('a');
+				console.log(sub1)
+				menu.dataValues.sub = [] // 用以赋值
+				// 对所有二级菜单循环
+				for (const pageId of sub1) {
+					
+					const page = await this.findOneById(pageId)
+					// console.log(page)
+					menu.dataValues.sub.push(page) // sub添加查到的数据
+					console.log('测试')
+					// console.log(menu.dataValues)
+	
+					if (page.sub != undefined) { // 重点 记得先判断
+						console.log(page.sub)
+						var sub2 = page.sub.split('a');
+						console.log('SUB222222222222')
+						console.log(sub2)
+						page.sub = []
+						// 对三级菜单循环
+						if (sub2 != null) {
+							for (const buttonId of sub2) {
+								const button = await this.findOneById(buttonId)
+								// console.log('++++++++++++测试二++++++')
+								// console.log(button)
+								page.sub.push(button)
+							}
 						}
 					}
+	
+	
+	
 				}
-
-
-
 			}
+			
 		}
 
 		return result;
@@ -87,35 +91,45 @@ class MenuService extends Service {
 		if( result != null ) {
 			const sub = result.sub;
 			console.log(sub)
-			if (sub == 0) {
+			if (sub == null) {
 				//删除
 				const result1 = await ctx.model.Menu.destroy({
 					where: {
 						id: id
 					}
 				})
-				return result1
-			} else {
-				if(result != null) {
-					const sub1 = result.sub
-					const arr = sub1.split('a')
-					console.log(arr)
-					var j = 0
-					var len = arr.length
-					for (j = 0; j < len; j++) {
-						var result2 = await this.deleteMenu(arr[j])
-					}
-					result2 = await ctx.model.Menu.destroy({
-						where: {
-							id: id
-						}
-					})
+				return {
+					code: 200,
+					msg: "删除成功"
 				}
-				return result
+			} else {
+			
+				const sub1 = result.sub
+				console.log(result.sub)
+				console.log(sub1)
+				const arr = sub1.split('a')
+				console.log(arr)
+				var j = 0
+				var len = arr.length
+				for (j = 0; j < len; j++) {
+					var result2 = await this.deleteMenu(arr[j])
+				}
+				result2 = await ctx.model.Menu.destroy({
+					where: {
+						id: id
+					}
+				})
+				return {
+					code: 200,
+					msg: "删除成功"
+				}
 			}
 		}
 		
-		return result
+		return {
+			code: 200,
+			msg: "删除成功"
+		}
 
 	}
 
@@ -129,7 +143,7 @@ class MenuService extends Service {
 		// for (j = 0; j < len; j++) {
 		// 	sub.concat(subArry[j]);
 		// }
-		console.log(subArry)
+		// console.log(subArry)
 		const result = await ctx.model.Menu.create({
 			name: name,
 			state: 1,
