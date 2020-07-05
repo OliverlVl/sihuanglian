@@ -47,7 +47,7 @@ class SelectCourseService extends Service {
 	//----------------------------------------------------------APP----------------------------------------------------------
 
 	// 根据学生id获取选课信息
-	async selectSeclectCourseByStudentId(studentId) {
+	async SeclectCourseByStudentId(studentId) {
 		const { ctx } = this
 		const result = await ctx.model.SelectCourse.findAll({
 			where: {

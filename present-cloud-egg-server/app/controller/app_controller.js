@@ -46,7 +46,7 @@ class AppController extends Controller {
 	// ------------------------4.学生主页页面------------------------
 
 	// 获取课程表
-	async selcetCourseList() {
+	async selectCourseList() {
 		const { ctx } = this;
 		const JWT = require('jsonwebtoken')
 		const token = ctx.request.header.authorization;
@@ -54,7 +54,7 @@ class AppController extends Controller {
 
 
 		//根据学生id获取课程信息
-		const selectCourse = await ctx.service.selectCourse.selectSeclectCourseByStudentId(decode.id)
+		const selectCourse = await ctx.service.selectCourse.SeclectCourseByStudentId(decode.id)
 
 		console.log(selectCourse.length)
 		//根据课程id获取课程信息
