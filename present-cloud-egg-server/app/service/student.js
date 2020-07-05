@@ -135,8 +135,47 @@ class StudentService extends Service {
             }
         })
         // 删除签到表中的信息
+        await  ctx.model.SignIn.destroy({
+            where: {
+                student_id: studentId
+            }
+        })
 
         // 课程总人数减一 -1
+        // 找学生参加的所有课程id
+        const courseIdList = await ctx.model.SelectCourse.findAll({
+			where:{
+				student_id: studentId
+			}
+        })
+
+        for(const courseId in courseIdList){
+            const course = await ctx.model.Course.findOne({
+                where:{
+                    course_id: courseId
+                }
+            })
+            
+            await ctx.model.Course.update(
+                {
+                    student_total_number: course.student_total_number-1
+                },
+                {
+                    where: {
+                        course_id: course_id
+                    }
+                }
+            )
+
+        }
+
+        // 删除选课
+        await ctx.model.SelectCourse.destroy({
+            where: {
+                student_id: studentId
+            }
+        })
+        
 
 
         if (result != 0) {
