@@ -92,7 +92,10 @@ class LoginService extends Service {
             teacher_number: user.account,
             teacher_name: user.userName,
             teacher_telephone: user.phone,
-            student_mailbox: user.email
+            teacher_mailbox: user.email,
+            teacher_sex: 1,
+            teacher_school: "福州大学",
+            teacher_college: "数计学院"
         });
         // console.log("老师注册")
         // console.log(result.teacher_id)
@@ -441,9 +444,9 @@ class LoginService extends Service {
 
         if (result == null) {
             return {
-				code: -1,
-				msg: "用户不存在"
-			}
+                code: -1,
+                msg: "用户不存在"
+            }
         }
         return result.dataValues;
 

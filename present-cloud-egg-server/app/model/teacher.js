@@ -32,7 +32,7 @@ module.exports = app => {
 			defaultValue: null,
 			unique: true
 		},
-		student_mailbox: {
+		teacher_mailbox: {
 			type: STRING,
 			allowNull: true,
 			defaultValue: null
