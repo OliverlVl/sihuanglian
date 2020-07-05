@@ -288,7 +288,7 @@ class LoginService extends Service {
                 login_name: loginMsg.phone,
             }
         });
-        console.log(queryResult)
+        // console.log(queryResult)
         if (!queryResult) {
             res.code = -2;
             res.msg = '用户不存在，请前去注册';
@@ -317,8 +317,8 @@ class LoginService extends Service {
                     expiresIn: "30 days",
                 });
 
-                console.log(result.login_type)
-                if(result.login_type = 1){
+                if(result.login_type == 1){
+                    console.log(3333333333)
                     const student = await ctx.model.Student.findOne({
                         where:{
                             student_id: result.user_id
