@@ -83,33 +83,39 @@ class MenuService extends Service {
 				id: id
 			}
 		})
-		console.log(result.dataValues)
-		const sub = result.sub;
-		console.log(sub)
-		if (sub == 0) {
-			//删除
-			const result1 = await ctx.model.Menu.destroy({
-				where: {
-					id: id
+		// console.log(result.dataValues)
+		if( result != null ) {
+			const sub = result.sub;
+			console.log(sub)
+			if (sub == 0) {
+				//删除
+				const result1 = await ctx.model.Menu.destroy({
+					where: {
+						id: id
+					}
+				})
+				return result1
+			} else {
+				if(result != null) {
+					const sub1 = result.sub
+					const arr = sub1.split('a')
+					console.log(arr)
+					var j = 0
+					var len = arr.length
+					for (j = 0; j < len; j++) {
+						var result2 = await this.deleteMenu(arr[j])
+					}
+					result2 = await ctx.model.Menu.destroy({
+						where: {
+							id: id
+						}
+					})
 				}
-			})
-			return result1
-		} else {
-			const sub1 = result.sub
-			const arr = sub1.split('a')
-			console.log(arr)
-			var j = 0
-			var len = arr.length
-			for (j = 0; j < len; j++) {
-				var result2 = await this.deleteMenu(arr[j])
+				return result
 			}
-			result2 = await ctx.model.Menu.destroy({
-				where: {
-					id: id
-				}
-			})
-			return result
 		}
+		
+		return result
 
 	}
 
