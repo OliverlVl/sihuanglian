@@ -119,18 +119,28 @@ class CourseService extends Service {
         const { ctx } = this;
         console.log(courseMsg) // courseId 还没用到
 
-        const result = await ctx.model.Course.create({
+        const course = await ctx.model.Course.create({
             course_name: courseMsg.course,
             course_class: courseMsg.class,
             course_teacher_id: courseMsg.teacher
         })
-        if (result == null) {
+        const result = await ctx.model.Course.update(
+            {
+                course_number: course.dataValues.course_id
+            },
+            {
+                where: {
+                    course_id: course.dataValues.course_id
+                }
+            })
+        if ( result == null) {
             return {
                 code: -1,
                 msg: "创建失败"
             }
         }
-        return result.dataValues;
+        course.dataValues["course_number"] = course.dataValues.course_id
+        return course.dataValues;
     }
 
 }
