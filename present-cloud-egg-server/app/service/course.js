@@ -90,6 +90,15 @@ class CourseService extends Service {
             },
         })
         console.log(result)
+        const teacher = await ctx.model.Teacher.findOne({
+            where: {
+                teacher_id: teacherId
+            }
+        })
+        for (var i = 0; i < result.length; i++) {
+            result[i].dataValues["teacher_name"] = teacher.teacher_name
+
+        }
         if (result != null) {
             return {
                 code: 1,
