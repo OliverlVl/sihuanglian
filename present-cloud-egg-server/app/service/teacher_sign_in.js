@@ -46,12 +46,13 @@ class TeacherSignInService extends Service {
 		var signInList = []
 		var noSignInList = []
 		for (var i = 0; i < result.length; i++) {
+			console.log(result[i].dataValues)
 			if (result[i].dataValues.status == 1) {
 				signInCount++
 				signInList.push(result[i].dataValues)
 			} else {
 				noSignInCount++;
-				noSignInCount.push(result[i].dataValues)
+				noSignInList.push(result[i].dataValues)
 			}
 		}
 		return {
