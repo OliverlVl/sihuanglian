@@ -127,6 +127,18 @@ class StudentService extends Service {
                 student_id: studentId
             }
         })
+        // 删除login 表中登录信息 (学生)
+        await ctx.model.Login.destroy({
+            where: {
+                login_type: 1, // 学生
+                user_id: studentId
+            }
+        })
+        // 删除签到表中的信息
+
+        // 课程总人数减一 -1
+
+
         if (result != 0) {
             return {
                 code: 200,
