@@ -139,7 +139,7 @@ module.exports = app => {
   // ------------------------4.学生主页页面------------------------
 
   // 获取课程表
-  router.get(url + '/courseList', controller.appController.selcetCourseList)
+  router.get(url + '/selcetCourseList', controller.appController.selcetCourseList)
 
   // 获取课程表信息
   router.get(url + '/getCourseInfo', controller.appController.getCourseInfo)

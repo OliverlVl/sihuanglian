@@ -316,6 +316,27 @@ class LoginService extends Service {
                     this.config.jwts.secret, {
                     expiresIn: "30 days",
                 });
+
+                console.log(result.login_type)
+                if(result.login_type = 1){
+                    const student = await ctx.model.Student.findOne({
+                        where:{
+                            student_id: result.user_id
+                        }
+                    })
+                    result.dataValues["name"] = student.student_name
+
+                }else{
+                    const teacher = await ctx.model.Teacher.findOne({
+                        where:{
+                            teacher_id:result.user_id
+    
+                        }
+                    })
+                    result.dataValues["name"] = teacher.teacher_name
+                }
+
+                
                 res.userInfo = result;
                 res.code = 1;
                 res.token = token;
