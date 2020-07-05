@@ -8,7 +8,7 @@ import 'normalize.css'
 import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/styles/index.less'
-// import './permission'
+import './permission'
 import utils from './utils'
 
 import Icon from 'vue2-svg-icon/Icon'

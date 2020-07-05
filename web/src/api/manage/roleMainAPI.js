@@ -36,12 +36,13 @@ const roleMainAPI = {
     },
     // 修改角色
     editRole: function (roleData) {
+        // console.log(roleData)
         return request({
             url: 'updateRole',
             method: 'put',
             params: {
             name: roleData.role_name,
-            id: roleData.roleId,
+            id: roleData.id,
             detail: roleData.detail,
             type: roleData.role_type
 

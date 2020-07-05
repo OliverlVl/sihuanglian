@@ -79,6 +79,7 @@
                         this.$emit('load');
                         showMessage('success', '修改成功!');
                         this.close();
+                        location.reload();
                     }).catch(err => {
                         this.loadingEnd();
                         console.error(err)

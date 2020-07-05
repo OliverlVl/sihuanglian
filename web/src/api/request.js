@@ -14,7 +14,7 @@ const NOT_LOGIN = constant.ERROR_CODE_NOT_LOGIN;
 const NOT_PERMISSION = constant.ERROR_CODE_NOT_PERMISSION;
 
 service.interceptors.request.use(config => {
-    config.headers[constant.REQUEST_HEADER_TOKEN_KEY] = getToken();
+    config.headers['Authorization'] = localStorage.getItem('token');
     return config;
 }, error => {
     console.log(error);
@@ -44,7 +44,7 @@ service.interceptors.response.use(
         }
         let {data} = error.response;
         if (data !== undefined || data.msg !== undefined) {
-            message.showError(data.msg);
+            message.showError(data.message);
         } else {
             message.showError(error.message);
             

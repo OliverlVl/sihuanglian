@@ -4,12 +4,12 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-    user:{}
+    token:{}
 }
 
 const mutations = {
-    isLogin (state,user) {
-        state.user = user
+    setToken (state,token) {
+        state.token = token
     }
 }
 

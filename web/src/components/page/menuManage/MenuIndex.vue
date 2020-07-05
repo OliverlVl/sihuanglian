@@ -34,38 +34,45 @@
     <el-button type="primary" @click="dialogVisible1 = true">添加菜单</el-button>
     <el-button type="primary" @click="dialogVisible2 = true">添加页面</el-button>
     <el-button type="primary" @click="addbutton3()">添加按钮</el-button>
-    <el-button type="primary" @click="handdelete()">勾选删除(仅一个)</el-button>
+    <el-button type="primary" @click="handdelete()">删除菜单（仅菜单）</el-button>
     <el-dialog title="添加菜单" :visible.sync="dialogVisible1" width="60%" :before-close="handleClose1">
       <el-form :model="menuname" label-width="80px">
         <el-form-item label="名称">
           <el-input v-model="menuname"></el-input>
         </el-form-item>
-        
-        
       </el-form>
       <el-button @click="dialogVisible1 = false">取 消</el-button>
       <el-button type="primary" @click="addmenu()">确 定</el-button>
     </el-dialog>
-    <el-dialog title="添加页面" :visible.sync="dialogVisible2" width="60%" :before-close="handleClose2">
+    <el-dialog
+      title="添加页面（请确保上级菜单已创建）"
+      :visible.sync="dialogVisible2"
+      width="60%"
+      :before-close="handleClose2"
+    >
       <el-form :model="menuname" label-width="80px">
         <el-form-item label="名称">
           <el-input v-model="menuname"></el-input>
         </el-form-item>
-        
-        <el-form-item label="上级菜单">
+
+        <el-form-item label="输入上级菜单">
           <el-input v-model="supermenu"></el-input>
         </el-form-item>
-        
       </el-form>
       <el-button @click="dialogVisible2 = false">取 消</el-button>
       <el-button type="primary" @click="addpage()">确 定</el-button>
     </el-dialog>
-    <el-dialog title="添加按钮" :visible.sync="dialogVisible3" width="50%" :before-close="handleClose3">
+    <el-dialog
+      title="添加按钮（请确保上级页面已创建）"
+      :visible.sync="dialogVisible3"
+      width="50%"
+      :before-close="handleClose3"
+    >
       <el-form :model="menuname" label-width="80px">
-        <el-form-item label="名称">
+        <el-form-item label="名称                   ">
           <el-input v-model="button"></el-input>
         </el-form-item>
-        <el-form-item label="上级页面">
+        <el-form-item label="上级页面" style="width: 100%;">
           <el-input v-model="supermenu"></el-input>
         </el-form-item>
       </el-form>
@@ -76,12 +83,17 @@
 </template>
 <script>
 import menuMainAPI from "@/api/manage/menuMainAPI";
-
+import {
+  showMessage,
+  showSimpleConfirm,
+  showSuccess,
+  showInfo
+} from "@/utils/message";
 export default {
   data() {
     return {
       selected: [],
-      
+
       temp2: 0,
       dialogVisible1: false,
       dialogVisible2: false,
@@ -95,105 +107,74 @@ export default {
 
       buttons: [],
       datatable: [
-        {
-          id:1,
-          name: "班课频道",
-          state: "checked",
-          layer: 1,
-          sub: [
-            {
-              id:2,
-              name: "班课管理",
-              state: "checked",
-              layer: 2,
-              sub: [
-                {
-                  id:3,
-                  name: "创建班课",
-                  state: "unchecked",
-                  layer: 3,
-                  sub: null
-                },
-                {
-                  id:4,
-                  name: "班课列表排序",
-                  state: "checked",
-                  layer: 3,
-                  sub: null
-                },
-                {
-                  id:5,
-                  name: "查看班课",
-                  state: "checked",
-                  layer: 3,
-                  sub: null
-                }
-              ]
-            },
-            {
-              id:6,
-              name: "加入班级",
-              state: "unchecked",
-              layer: 2,
-              sub: null
-            }
-          ]
-        },
-        {
-          id:7,
-          name: "发现",
-          state: "checked",
-          layer: 1,
-          sub: null
-        },
-        {
-          id:8,
-          name: "我的频道",
-          state: "checked",
-          layer: 1,
-          sub: [
-            
-            {
-              id:9,
-              name: "333",
-              state: "checked",
-              layer: 3,
-              sub: null
-            },
-            {
-              id:10,
-              name: "222",
-              state: "checked",
-              layer: 3,
-              sub: null
-            },
-            {
-              id:11,
-              name: "111",
-              state: "checked",
-              layer: 3,
-              sub: null
-            }
-          ]
-        }
+        
       ]
     };
   },
+  created() {
+    this.load();
+  },
   methods: {
-    handdelete() {
-      
-      console.log('selected'+this.selected[0]);
-      
-      const _this = this;
-      menuMainAPI.deletemenu(this.selected[0]).then(res => {
-        menuMainAPI.findAll().then(res => {
-          _this.datatable = res.data;
-          this.$alert("删除成功", "删除", {
-            confirmButtonText: "确定",
-            callback: action => {}
-          });
-        });
+    load() {
+      menuMainAPI.findAll().then(res => {
+        // console.log(res.data.length)
+        // for(let i = 0; i < res.data.length; i++){
+        //     if(res.data[i].sub){
+        //       this.datatable[i].id = res.data[i].id
+        //       this.datatable[i].name = res.data[i].name
+        //       this.datatable[i].state = res.data[i].state
+        //       this.datatable[i].layer = res.data[i].layer
+        //       this.datatable[i].sub = res.data[i].sub
+        //     }
+        //     if(res.data[i].sub.length > 0){
+        //       for(let j = 0; j < res.data[i].sub.length; j++){
+        //       if(res.data[i].sub[j].sub){
+        //       this.datatable[i].sub[j].id = res.data[i].sub[j].id
+        //       this.datatable[i].sub[j].name = res.data[i].sub[j].name
+        //       this.datatable[i].sub[j].state = res.data[i].sub[j].state
+        //       this.datatable[i].sub[j].layer = res.data[i].sub[j].layer
+        //       this.datatable[i].sub[j].sub = res.data[i].sub[j].sub
+        //       }
+        //       if(res.data[i].sub[j].sub.length > 0){
+        //         for(let k = 0; k < res.data[i].sub[j].sub.length; k++){
+        //           if(res.data[i].sub[j].sub){
+        //           this.datatable[i].sub[j].sub[k].id = res.data[i].sub[j].sub[k].id
+        //           this.datatable[i].sub[j].sub[k].name = res.data[i].sub[j].sub[k].name
+        //           this.datatable[i].sub[j].sub[k].state = res.data[i].sub[j].sub[k].state
+        //           this.datatable[i].sub[j].sub[k].layer = res.data[i].sub[j].sub[k].layer
+        //           this.datatable[i].sub[j].sub[k].sub = res.data[i].sub[j].sub[k].sub
+        //           }
+        //         }
+        //        }
+             
+
+        //       }
+        //   }
+        // }
+
+
+        this.datatable = res.data;
+        // console.log(this.datatable)
+        
       });
+    },
+    handdelete() {
+      console.log("selected" + this.selected[0]);
+
+      menuMainAPI
+        .deletemenu(this.selected[0])
+        .then(res => {
+          if (res.message) {
+            showSuccess(res.message);
+          } else {
+            showMessage("删除成功");
+          }
+          this.load();
+          location.reload();
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     addbutton3() {
       this.dialogVisible3 = true;
@@ -204,41 +185,43 @@ export default {
     },
     addmenu() {
       this.dialogVisible1 = false;
-      
-      menuMainAPI.addmenu(this.menuname,  this.submenus).then(res => {
-        menuMainAPI.findAll().then(res => {
-          this.datatable = res.data;
-          this.$alert("分配权限成功", "分配权限", {
-            confirmButtonText: "确定",
-            callback: action => {}
-          });
-        });
+
+      menuMainAPI.addmenu(this.menuname).then(res => {
+        if (res.message) {
+          showSuccess(res.message);
+        } else {
+          showMessage("新增菜单成功");
+        }
+        this.load();
+        location.reload();
       });
     },
     addpage() {
       this.dialogVisible2 = false;
       this.buttons = this.submenus;
-      
-      menuMainAPI.addpage(this.buttons, this.menuname, this.supermenu).then(res => {
-        menuMainAPI.findAll().then(res => {
-          this.datatable = res.data;
-          this.$alert("新增页面成功", "新增页面", {
-            confirmButtonText: "确定",
-            callback: action => {}
-          });
+
+      menuMainAPI
+        .addpage(this.buttons, this.menuname, this.supermenu)
+        .then(res => {
+          if (res.message) {
+            showSuccess(res.message);
+          } else {
+            showMessage("新增页面成功");
+          }
+          this.load();
+          location.reload();
         });
-      });
     },
     addbutton() {
       this.dialogVisible3 = false;
       menuMainAPI.addbutton(this.button, this.supermenu).then(res => {
-        menuMainAPI.findAll().then(res => {
-          this.datatable = res.data;
-          this.$alert("新增按钮成功", "新增按钮", {
-            confirmButtonText: "确定",
-            callback: action => {}
-          });
-        });
+        if (res.message) {
+          showSuccess(res.msg);
+        } else {
+          showMessage("新增按钮成功");
+        }
+        this.load();
+        location.reload();
       });
     },
     handleClose2(tag) {
@@ -263,35 +246,6 @@ export default {
       this.inputVisible = false;
       this.inputValue = "";
     }
-  },
-  created() {
-    menuMainAPI.findAll().then(res => {
-      this.datatable = res.data;
-      for (let i = 0; i < this.datatable.length; ++i) {
-        if (this.datatable[i].state == "checked") {
-          this.selected.push(this.datatable[i].name);
-        }
-        if (this.datatable[i].sub == null) {
-          continue;
-        }
-        for (let j = 0; j < this.datatable[i].sub.length; ++j) {
-          if (this.datatable[i].sub[j].state == "checked") {
-            this.selected.push(this.datatable[i].sub[j].name);
-          }
-          if (this.datatable[i].sub[j].sub == null) {
-            continue;
-          }
-          for (var k = 0; k < this.datatable[i].sub[j].sub.length; ++k) {
-            if (this.datatable[i].sub[j].sub[k].state == "checked") {
-              this.selected.push(this.datatable[i].sub[j].sub[k].name);
-            }
-            if (this.datatable[i].sub[j].sub[k].sub == null) {
-              continue;
-            }
-          }
-        }
-      }
-    });
   }
 };
 </script>

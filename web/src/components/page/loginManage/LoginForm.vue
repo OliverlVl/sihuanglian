@@ -83,7 +83,7 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.loading = true;
+          // this.loading = true;
           // this.$store.dispatch('LoginByAccount', this.loginForm).then(() => {
           //     this.loading = false;
           //     this.$router.push({path: '/home'})
@@ -92,15 +92,24 @@ export default {
           loginAPI
             .login(this.loginForm.account, this.loginForm.password)
             .then(res => {
+              // console.log(res.data.msg)
               if (res.data.msg === 1) {
-                this.loading = false;
+                // this.loading = false;
+                // console.log('1111111')
+
+                var token = res.data.token
+                localStorage.setItem('token',token)
+                
+
                 this.$router.push({ path: "/home" });
+                                // console.log('1111111')
+
               } else {
                 this.$alert("登陆失败，请检查账号密码");
               }
             })
-            .finally(() => {
-              this.loading = false;
+            .catch(() => {
+              // this.loading = false;
             });
         } else {
           console.log("error submit!!");

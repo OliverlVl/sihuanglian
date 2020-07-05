@@ -10,18 +10,20 @@ const dictionaryMainAPI = {
         });
     },
     editDictItem: function (data) {
+        //    console.log(data)
         return request({
             url: 'editDictItem',
-            method: 'put',
+            method: 'post',
             params: {
                 id: data.detail_id,
-                
+               
                 dataValue: data.item_value,
                 
             }
         });
     },
     selectDictionaryDetailById: function (detail_id) {
+        // console.log(detail_id)
         return request({
             url: 'selectDictionaryDetailById',
             method: 'get',
@@ -35,7 +37,7 @@ const dictionaryMainAPI = {
             url: 'deleteDictionaryDetail',
             method: 'delete',
             params: {
-                detail_id: detail_id
+                id: detail_id
             }
         });
     },
@@ -44,9 +46,9 @@ const dictionaryMainAPI = {
             url: 'addDict',
             method: 'post',
             params: {
-                item_key: data.item_key,
-                item_value: data.item_value,
-                DataDesc: data.dataDesc
+                dataKey: data.item_key,
+                dataValue: data.item_value,
+                code: data.dataDesc
             }
         });
     },
