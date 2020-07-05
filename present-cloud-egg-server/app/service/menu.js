@@ -42,7 +42,7 @@ class MenuService extends Service {
 				menu.dataValues.sub = [] // 用以赋值
 				// 对所有二级菜单循环
 				for (const pageId of sub1) {
-					
+
 					const page = await this.findOneById(pageId)
 					// console.log(page)
 					menu.dataValues.sub.push(page) // sub添加查到的数据
@@ -185,6 +185,7 @@ class MenuService extends Service {
 			}
 		});
 		// 父菜单修改sub
+		console.log(page.id)
 		const result1 = await this.updateSub(supermenu, page.id)
 
 		if (result1 != null) {
@@ -210,7 +211,13 @@ class MenuService extends Service {
 			}
 		})
 		var sub = result.sub;
-		sub = sub.concat("a", pageId.toString())
+		console.log(sub)
+		if(sub != null){
+			sub = sub.concat("a", pageId.toString())
+		}else{
+			sub = pageId.toString()
+		}
+		
 		result = await ctx.model.Menu.update({
 			sub: sub
 		}, {
