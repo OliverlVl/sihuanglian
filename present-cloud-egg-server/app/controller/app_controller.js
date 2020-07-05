@@ -197,8 +197,10 @@ class AppController extends Controller {
 	//a)课程表接口：???
 	async courseList() {
 		const { ctx } = this;
-		var teacherId = ctx.query.teacherId;
-		const result = await ctx.service.course.selcetCourseInfoByTeacher(teacherId);
+		const JWT = require('jsonwebtoken')
+		const token = ctx.request.header.authorization;
+		var decode = JWT.verify(token, "123456");
+		const result = await ctx.service.course.selcetCourseInfoByTeacher(decode.id);
 		ctx.body = result;
 	}
 
