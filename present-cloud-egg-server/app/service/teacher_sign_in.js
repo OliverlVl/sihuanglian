@@ -43,16 +43,21 @@ class TeacherSignInService extends Service {
 		}
 		var signInCount = 0
 		var noSignInCount = 0
+		var signInList =[]
+		var noSignInList = []
 		for (var i = 0; i < result.length; i++) {
 			if (result[i].dataValues.status == 1) {
-				signInCount++;
+				signInCount++
+				signInList.push(result[i].dataValues)
 			} else {
 				noSignInCount++;
+				noSignInCount.push(result[i].dataValues)
 			}
 		}
 		return {
 			code: 1,
-			list: result,
+			signInList: signInList,
+			noSignInList: noSignInList,
 			signInCount: signInCount,
 			noSignInCount: noSignInCount
 
@@ -163,9 +168,20 @@ class TeacherSignInService extends Service {
 
 			// console.log(result[i])
 		}
+
+		var signInList =[]
+		var noSignInList = []
+		for(var i = 0; i < selectCourse.length; i++){
+			if(selectCourse[i].dataValues.status == 1){
+				signInList.push(selectCourse[i].dataValues)
+			}else{
+				noSignInList.push(selectCourse[i].dataValues)
+			}
+		}
 		return {
 			code: 1,
-			msg: selectCourse
+			signInList: signInList,
+			noSignInList: noSignInList
 		}
 
 

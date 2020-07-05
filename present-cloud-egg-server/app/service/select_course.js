@@ -126,11 +126,14 @@ class SelectCourseService extends Service {
 			}
 
 			// 根据学生id获取学生信息
-			var student = await ctx.model.Student.findOne({
+			console.log(111111111111)
+			console.log(selectCourse[i].student_id)
+			const student = await ctx.model.Student.findOne({
 				where: {
 					student_id: selectCourse[i].student_id
 				}
 			})
+			console.log(student)
 			selectCourse[i].dataValues["name"] = student.student_name // 姓名
 			selectCourse[i].dataValues["number"] = student.student_number // 学号
 
@@ -145,9 +148,20 @@ class SelectCourseService extends Service {
 
 			// console.log(result[i])
 		}
+		var signInList =[]
+		var noSignInList = []
+		for(var i = 0; i < selectCourse.length; i++){
+			if(selectCourse[i].dataValues.status == 1){
+				signInList.push(selectCourse[i].dataValues)
+			}else{
+				noSignInList.push(selectCourse[i].dataValues)
+			}
+		}
+
 		return {
 			code: 1,
-			msg: selectCourse
+			signInList: signInList,
+			noSignInList: noSignInList
 		}
 
 	}
