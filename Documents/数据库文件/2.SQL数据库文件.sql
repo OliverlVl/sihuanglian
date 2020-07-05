@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2020.06.29 1:02:31                           */
+/* Created on:     2020.07.02 20:20:44                          */
 /*==============================================================*/
 
 
@@ -59,6 +59,7 @@ create table course
    course_number        int,
    course_class         varchar(20) not null,
    course_teacher_id    int not null,
+   student_total_number int,
    course_image         varchar(255),
    create_time          datetime,
    creator              varchar(20),
@@ -199,7 +200,9 @@ create table sign_in
    sign_id              int not null auto_increment,
    student_id           int,
    teacher_sign_id      int,
-   student_place        varchar(255),
+   longitude            varchar(50),
+   latitude             varchar(50),
+   distance             float,
    create_time          datetime,
    creator              varchar(20),
    update_time          datetime,
@@ -270,9 +273,9 @@ create table teacher_sign_in
 (
    teacher_sign_id      int not null auto_increment,
    course_id            int,
-   teacher_place        varchar(255),
+   longitude            varchar(50),
+   latitude             varchar(50),
    teacher_id           int,
-   gesture              varchar(20),
    state                int comment '1代表正在签到，0代表结束签到',
    create_time          datetime,
    creator              varchar(20),

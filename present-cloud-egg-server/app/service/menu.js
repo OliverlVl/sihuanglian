@@ -13,7 +13,10 @@ class MenuService extends Service {
 			},
 		})
 		if (result == null) {
-			return false // 不存在
+			return {
+				code: -1,
+				msg: "不存在"
+			}
 		}
 		return result.dataValues;
 	}
@@ -112,7 +115,7 @@ class MenuService extends Service {
 
 
 	// 增加菜单
-	async insertMenu(name, subArry) {
+	async insertMenu(name) {
 		const { ctx } = this
 		// var sub = '';
 		// var j = 0
@@ -123,11 +126,11 @@ class MenuService extends Service {
 		console.log(subArry)
 		const result = await ctx.model.Menu.create({
 			name: name,
-			state: 0,
-			layer: 3,
-			sub: subArry,
+			state: 1,
+			layer: 1,
+			// sub: subArry,
 		})
-		console.log(result[0])
+		// console.log(result[0])
 		if (result != null) {
 			return {
 				code: 200,
@@ -143,7 +146,7 @@ class MenuService extends Service {
 
 
 	// 增加页面
-	async insertPage(menuname, supermenuId, buttons) {
+	async insertPage(menuname, supermenu) {
 		const { ctx } = this
 		// var sub = '';
 		// for (j = 0, len = buttons.length; j < len; j++) {
@@ -153,7 +156,7 @@ class MenuService extends Service {
 			name: menuname,
 			state: 1,
 			layer: 2,
-			sub: buttons,
+			// sub: buttons,
 		})
 		// 查找id
 		const page = await ctx.model.Menu.findOne({
@@ -162,7 +165,7 @@ class MenuService extends Service {
 			}
 		});
 		// 父菜单修改sub
-		const result1 = await this.updateSub(supermenuId, page.id)
+		const result1 = await this.updateSub(supermenu, page.id)
 
 		if (result1 != null) {
 			return {
@@ -179,11 +182,11 @@ class MenuService extends Service {
 
 
 	// 修改sub
-	async updateSub(superMenuId, pageId) {
+	async updateSub(superMenu, pageId) {
 		const { ctx } = this
 		var result = await ctx.model.Menu.findOne({
 			where: {
-				id: superMenuId
+				name: superMenu
 			}
 		})
 		var sub = result.sub;
@@ -191,7 +194,9 @@ class MenuService extends Service {
 		result = await ctx.model.Menu.update({
 			sub: sub
 		}, {
-			where: { id: superMenuId }
+			where: { 
+				name: superMenu
+			}
 		})
 		return result
 
@@ -200,7 +205,7 @@ class MenuService extends Service {
 
 
 	// 插入button
-	async insertButton(buttonName, supermenuId) {
+	async insertButton(buttonName, supermenu) {
 		const { ctx } = this
 		const result = await ctx.model.Menu.create({
 			name: buttonName,
@@ -214,7 +219,7 @@ class MenuService extends Service {
 			}
 		});
 		// 父菜单修改sub
-		const result1 = await this.updateSub(supermenuId, button.id)
+		const result1 = await this.updateSub(supermenu, button.id)
 
 		if (result1 != null) {
 			return {

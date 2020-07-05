@@ -31,6 +31,10 @@ module.exports = app => {
 				key: 'teacher_id'
 			}
 		},
+		student_total_number: {
+			type: INTEGER,
+			allowNull: true
+		},
 		course_image: {
 			type: STRING,
 			allowNull: true

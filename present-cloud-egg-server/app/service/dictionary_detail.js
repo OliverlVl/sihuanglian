@@ -39,7 +39,7 @@ class DictionaryDetailService extends Service {
 				code: code
 			}
 		})
-		console.log(result)
+		console.log(result[0])
 		if (result != 0) {
 			return result
 		} else {
@@ -64,8 +64,8 @@ class DictionaryDetailService extends Service {
 				}
 
 			})
-		// console.log(result[0])
-		if (result[0] != 0) {
+		console.log(result)
+		if (result != 0) {
 			return {
 				code: 200,
 				msg: "修改成功"

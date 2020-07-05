@@ -2,7 +2,7 @@
 /* jshint indent: 1 */
 
 module.exports = app => {
-	const { STRING, INTEGER, DATE } = app.Sequelize; //获取 sequelize对应的数据类型映射
+	const { STRING, INTEGER, DATE, FLOAT } = app.Sequelize; //获取 sequelize对应的数据类型映射
 
 	const SignIn = app.model.define('sign_in', {
 		sign_id: {
@@ -27,8 +27,16 @@ module.exports = app => {
 				key: 'teacher_sign_id'
 			}
 		},
-		student_place: {
+		longitude: {
 			type: STRING,
+			allowNull: true
+		},
+		latitude: {
+			type: STRING,
+			allowNull: true
+		},
+		distance: {
+			type: FLOAT,
 			allowNull: true
 		},
 		create_time: {
