@@ -17,7 +17,7 @@
       <el-table-column prop="item_value" label="参数value" align="center"></el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          <el-button v-if=" scope.row.detail_id !='' " icon="el-icon-edit" size="mini" @click="openEdit(scope.row)">编辑</el-button>
+          <el-button v-if=" scope.row.detail_id !='' " icon="el-icon-edit" size="mini" @click="openEdit(scope.row)">编辑参数value</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -173,6 +173,7 @@ export default {
               this.tableList[i].item_key = res.data[i].item_key,
               this.tableList[i].item_value = res.data[i].item_value;
           }
+          
         })
         .catch(() => {});
     },

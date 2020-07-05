@@ -24,7 +24,7 @@ const menuMainAPI = {
         });
     },
     
-    addmenu: function (menuname,submenus) {
+    addmenu: function (menuname) {
         // console.log('menuname:'+menuname);
         // console.log('submenus:'+submenus);
         return request({
@@ -34,7 +34,7 @@ const menuMainAPI = {
             method: 'post',
             params: {
                 menuname:menuname,
-                submenus:submenus
+                
             }
         });
     },
@@ -48,7 +48,7 @@ const menuMainAPI = {
             url: 'insertPage',
             method: 'post',
             params: {
-                buttons:buttons,
+                
                 menuname:menuname,
                 supermenu:supermenu
             }

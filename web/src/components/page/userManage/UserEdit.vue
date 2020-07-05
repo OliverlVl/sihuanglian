@@ -73,68 +73,29 @@ export default {
     return {
       userData: {
         id: 1,
-        account: '1',
-        userName: '1',
-        sex: '1',
-        email: '1',
-        phone: '',
-
-
-
-
+        account: "1",
+        userName: "1",
+        sex: "1",
+        email: "1",
+        phone: ""
       },
-      roleList: [
-        {
-          id: "SupperAdmin_SYS",
-          label: "超级管理员",
-          roleId: 105
-        },
-        {
-          id: "User_SYS",
-          label: "普通用户",
-          roleId: 152
-        },
-        {
-          id: "Admin_SYS",
-          label: "炒鸡用户1",
-          roleId: 138
-        }
-      ],
+     
       dialogVisible: false, // 控制添加用户的弹出框是否显示
       showLoading: false, // 控制组件加载动画
       // 性别下拉框内容
       sexOptionsList: [
         {
-          value: "female",
+          value: 0,
           label: "女"
         },
         {
-          value: "male",
+          value: 1,
           label: "男"
         }
       ],
-      // 用户状态下拉框内容
-      statusOptionsList: [
-        {
-          value: "Normal",
-          label: "正常"
-        },
-        {
-          value: "Disabled",
-          label: "禁用"
-        }
-      ],
+     
       // 验证规则
       rules: {
-        account: [
-          { required: true, message: "账号不能为空", trigger: "blur" },
-          {
-            min: 5,
-            max: 10,
-            message: "账号的长度需大于4个小于10个",
-            trigger: "blur"
-          }
-        ],
         userName: [
           { required: true, message: "用户名不能为空", trigger: "blur" },
           {
@@ -171,9 +132,7 @@ export default {
     };
   },
   created() {
-    // roleMainAPI.getAllRole().then(res => {
-    //     this.roleList = res.data;
-    // });
+    
   },
   methods: {
     // 提交表单
@@ -186,6 +145,7 @@ export default {
             // console.log(res);
             this.loadingEnd();
             this.$emit("load");
+
             showMessage("success", "修改用户信息成功!");
             this.close();
           })
@@ -203,18 +163,17 @@ export default {
       userMainAPI
         .getUser(userId)
         .then(res => {
-          console.log('2222222222')
-          console.log(res.data)
+          // console.log('2222222222')
+          // console.log(res.data)
           for (let i in res.data) {
+            this.userData.id = res.data.student_id;
             this.userData.account = res.data.student_number;
             this.userData.userName = res.data.student_name;
             this.userData.sex = res.data.student_sex;
             this.userData.email = res.data.student_mailbox;
             this.userData.phone = res.data.student_telephone;
-           
           }
 
-          
           this.loadingEnd();
         })
         .catch(err => {

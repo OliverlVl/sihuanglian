@@ -286,6 +286,7 @@ export default {
           userMainAPI.deleteUser(row.id).then(res => {
             showSuccess("删除用户成功!");
             _this.load();
+            location. reload()
           });
         },
         function() {

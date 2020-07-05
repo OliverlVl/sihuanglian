@@ -27,7 +27,7 @@
       <el-form-item prop="phone">
         <el-input name="phone" type="text" v-model="registerForm.phone" placeholder="请输入手机号">
           <div class="svg-container" slot="prefix">
-            <icon name="phone" :w="16" :h="16"></icon>
+            <icon name="username" :w="16" :h="16"></icon>
           </div>
         </el-input>
       </el-form-item>
@@ -180,7 +180,7 @@ export default {
     async sendEmailCode(e) {
       let flag = await this.validateCode().then(
         () => {
-          this.$utils.message.showSuccess("8888");
+          this.$utils.message.showSuccess("你的验证码为8888");
 
           return true;
         },
@@ -216,19 +216,19 @@ export default {
     },
     submitRegister() {
       this.validate().then(valid => {
-        this.loadingStart();
+        // this.loadingStart();
         if (this.registerForm.pwd === this.registerForm.repassword) {
           if (this.registerForm.code === "8888") {
             loginAPI
               .register(this.registerForm)
               .then(res => {
-                setTimeout(function() {
-                  window.location.reload();
-                }, 1000);
+                // setTimeout(function() {
+                //   window.location.reload();
+                // }, 1000);
                 this.$utils.message.showSuccess(res.data.msg);
               })
               .finally(err => {
-                this.loadingEnd();
+                // this.loadingEnd();
                 console.error(err);
               });
           } else {

@@ -1,6 +1,5 @@
 <template>
   <div class="dict-manage-index">
-
     <div class="tool-wrapper">
       <el-button-group>
         <el-button type="primary" icon="el-icon-plus" @click="createOpen" size="mini">新增</el-button>
@@ -9,10 +8,9 @@
     </div>
 
     <dictionary-table ref="DictionaryTable" @openEdit="openEdit"></dictionary-table>
-   
+
     <dictionary-add ref="DictionaryAdd" @load="load"></dictionary-add>
     <dictionary-edit @load="load" ref="DictionaryEdit"></dictionary-edit>
-
   </div>
 </template>
 
@@ -43,14 +41,10 @@ export default {
   data() {
     return {
       search: {
-        query:
-   
-          {
-            text: " "
-          },
-        sort: {
-
+        query: {
+          text: " "
         },
+        sort: {},
         page: 1,
         pageSize: 15,
         total: 0
@@ -58,13 +52,9 @@ export default {
       tableLoading: false
     };
   },
-  created() {
-    
-    
-  },
+  created() {},
   methods: {
     load() {
-        
       this.$refs.DictionaryTable.load();
     },
     // 获取选择列
@@ -90,13 +80,26 @@ export default {
       }
       const _this = this;
       showSimpleConfirm(
-        "是否确定删除数据字典中" + row.code+"参数的"+row.item_value + "参数值?",
+        "是否确定删除数据字典中" +
+          row.code +
+          "参数的" +
+          row.item_value +
+          "参数值?",
         function() {
           console.log(row);
-          dictionaryMainAPI.deleteDictionaryDetail(row.detail_id).then(res => {
-            showSuccess("删除数据字典成功!");
-            _this.load();
-          });
+          dictionaryMainAPI
+            .deleteDictionaryDetail(row.detail_id)
+            .then(res => {
+              if (res.message) {
+                showSuccess(res.message);
+              } else {
+                showSuccess("删除数据字典成功!");
+              }
+
+              _this.load();
+              location. reload()
+            })
+            .catch(() => {});
         },
         function() {
           showInfo("取消删除");

@@ -1,45 +1,49 @@
 <template>
-  <simple-card style="min-height: 700px" title="角色信息">
+  <simple-card style="min-height: 700px" title="角色信息(请点击一个角色进行操作)">
     <div slot="right" class="clearfix">
       <el-button
-        v-if="editStatus=='create'"
-        type="success"
-        icon="el-icon-check"
-        circle
-        @click="createSubmit"
-        size="mini"
-      ></el-button>
-      <el-button
-        v-else-if="editable"
-        type="success"
-        icon="el-icon-check"
-        circle
-        @click="updateSubmit"
-        size="mini"
-      ></el-button>
-      <el-button
-        v-if="!editable"
-        type="primary"
-        icon="el-icon-edit"
-        circle
-        @click="startEdit"
-        size="mini"
-      ></el-button>
-      <el-button
-        v-if="editStatus!='create' && editable"
-        icon="el-icon-close"
-        circle
-        @click="editCancel"
-        size="mini"
-      ></el-button>
-      <el-button
-        v-if="editStatus!='create'"
+        v-if="editStatus =='disable'"
         type="danger"
         icon="el-icon-delete"
-        circle
+        round
         @click="remove"
         size="mini"
-      ></el-button>
+      >删除</el-button>
+
+      <el-button
+        v-if="editStatus =='disable'"
+        type="primary"
+        icon="el-icon-edit"
+        round
+        @click="startEdit"
+        size="mini"
+      >编辑</el-button>
+
+      <el-button
+        v-if="(editStatus =='edit') || (editStatus =='create')"
+        icon="el-icon-close"
+        round
+        @click="editCancel"
+        size="mini"
+      >关闭</el-button>
+
+      <el-button
+        v-if="editStatus =='create'"
+        type="success"
+        icon="el-icon-check"
+        round
+        @click="createSubmit"
+        size="mini"
+      >提交</el-button>
+
+      <el-button
+        v-if="editStatus =='edit'"
+        type="success"
+        icon="el-icon-check"
+        round
+        @click="updateSubmit"
+        size="mini"
+      >提交</el-button>
     </div>
     <el-form
       size="small"
@@ -60,12 +64,14 @@
         </el-col>
         <el-col :md="24" :sm="24">
           <el-form-item label="角色类型:" prop="role_type">
-            <simple-select
-              v-model="roleData.role_type"
-              item-key="value"
-              :options="typeOptionsList"
-              :disabled="!editable"
-            ></simple-select>
+            <el-select v-model="roleData.role_type" placeholder="请选择">
+              <el-option
+                v-for="item in typeOptionsList"
+                :key="item.lable"
+                :label="item.label"
+                :value="item.value"
+              ></el-option>
+            </el-select>
           </el-form-item>
         </el-col>
 
@@ -90,24 +96,35 @@ import {
 } from "@/utils/message";
 import dictionaryMainAPI from "@/api/manage/dictionaryMainAPI";
 import SimpleCard from "../../common/Card/SimpleCard";
-import SimpleSelect from "../../common/SimpleSelect";
 
 export default {
   name: "RoleInfoMain",
-  components: { SimpleSelect, SimpleCard },
-  props: {
-    userTypeMap: { type: Array }
-  },
+  components: { SimpleCard },
+
   data() {
     return {
-      editStatus: "",
+      editStatus: "disable",
       editable: false,
       submitLoading: false,
       title: {
         create: "新增角色",
         edit: "修改角色信息"
       },
-      typeOptionsList: [],
+      typeOptionsList: [
+        {
+          value: "1",
+          label: "学生"
+        },
+        {
+          value: "2",
+          label: "老师"
+        },
+        {
+          value: "3",
+          label: "管理员"
+        }
+      ],
+
       groupOptionsList: [],
       dataScopeOptionsList: [],
       selected: {
@@ -147,9 +164,6 @@ export default {
     };
   },
   created() {
-    // dictionaryMainAPI.selectDictionaryDetail("student").then(res => {
-    //   this.typeOptionsList = res;
-    // });
     this.load();
   },
   methods: {
@@ -159,7 +173,6 @@ export default {
 
       //   console.log('code');
       //   console.log(code);
-      console.log(this.selected.id);
 
       roleMainAPI
         .getById(this.selected.id)
@@ -173,10 +186,19 @@ export default {
       this.roleData.detail = select.detail;
       this.roleData.id = select.id;
       this.roleData.role_name = select.label;
-      this.roleData.role_type = select.role_type;
-      console.log("this.selected");
-      console.log(this.roleData);
-      console.log("this.selected");
+
+      if (select.role_type === 1) {
+        this.roleData.role_type = "学生";
+      } else if (select.role_type === 2) {
+        this.roleData.role_type = "老师";
+      } else {
+        this.roleData.role_type = "管理员";
+      }
+
+      // console.log("this.selected");
+      // console.log(this.roleData);
+      // console.log("this.selected");
+      console.log(select);
     },
     clearForm() {
       this.init();
@@ -201,19 +223,18 @@ export default {
       //   console.log(event);
       const _this = this;
       this.validate().then(valid => {
-        _this.loadingStart();
+    
         roleMainAPI
           .addRole(this.roleData)
           .then(res => {
             // console.log(res.data);
-            _this.loadingEnd();
+           
             showMessage("success", "新增角色信息成功!");
-            this.refreshTree();
-            this.init(res.data.code);
-            _this.submitLoading = false;
+            
+            location.reload();
           })
           .finally(() => {
-            this.loadingEnd();
+        
           });
       });
     },
@@ -229,6 +250,7 @@ export default {
             this.editable = false;
             this.refreshTree();
             showMessage("success", "更新角色信息成功!");
+            location.reload();
           })
           .finally(() => {
             this.loadingEnd();
@@ -261,7 +283,7 @@ export default {
 
     // 删除角色
     remove() {
-      if (this.roleData.roleId === undefined) {
+      if (this.roleData.id === undefined) {
         // console.log(this.roleData);
         return;
       }
@@ -270,9 +292,10 @@ export default {
         "是否确定删除角色" + this.roleData.role_name + "?",
         function() {
           console.log("confirm");
-          roleMainAPI.remove(_this.roleData.roleId).then(res => {
+          roleMainAPI.remove(_this.roleData.id).then(res => {
             showSuccess("删除角色成功!");
             _this.refreshTree();
+            location.reload();
           });
         },
         function() {
@@ -282,10 +305,11 @@ export default {
       );
     },
     startEdit() {
-      this.editable = true;
+      this.editStatus = "edit";
     },
+
     editCancel() {
-      this.editable = false;
+      this.editStatus = "disable";
     }
   }
 };

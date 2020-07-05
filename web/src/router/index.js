@@ -4,6 +4,10 @@ import Router from 'vue-router'
 import Container from '../components/page/Container.vue'
 
 Vue.use(Router);
+
+
+
+
 const defaultRoute = [
   {
     path: '/login',

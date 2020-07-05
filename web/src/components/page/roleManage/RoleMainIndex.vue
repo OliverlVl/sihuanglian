@@ -4,9 +4,9 @@
             <simple-card position="left" title="角色列表">
                 <template slot="right">
                     <el-button v-show="!editVisible" icon="el-icon-refresh" type="text"
-                               @click="loadRoleTree"></el-button>
+                               @click="loadRoleTree">刷新</el-button>
                     <el-button v-show="!editVisible" icon="el-icon-plus" type="text"
-                               @click="addRole"></el-button>
+                               @click="addRole">新增</el-button>
                 </template>
                 <system-role-tree :handleNodeClick="selectRole" ref="roleTree"></system-role-tree>
             </simple-card>

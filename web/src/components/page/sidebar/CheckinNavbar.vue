@@ -12,10 +12,10 @@
                     <i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>我的消息</el-dropdown-item>
-                    <el-dropdown-item>设置</el-dropdown-item>
-                    <el-dropdown-item divided @click.native="logout">退出登录
-                    </el-dropdown-item>
+                    <!-- <el-dropdown-item>我的消息</el-dropdown-item> -->
+                    <!-- <el-dropdown-item>设置</el-dropdown-item> -->
+                    <!-- <el-dropdown-item divided @click.native="logout">退出登录
+                    </el-dropdown-item> -->
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -52,14 +52,15 @@
             logout: function () {
                 this.$confirm('确认退出?', '提示', {})
                     .then(() => {
-                        this.$store.dispatch('LogOut').then(() => {
-                            this.$router.push({name: 'login'});
-                            window.location.reload();
-                        }).catch(() => {});
-                    })
-            }
+                            // this.$store.dispatch('LogOut').then(() => {
+                            
+                            this.$router.push({path: '/login'});
+                           
+                        
+                    // }).catch(() => {});
+            })
         }
-    }
+    }}
 </script>
 
 <style rel="stylesheet/less" lang="less" scoped>
