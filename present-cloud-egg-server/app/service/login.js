@@ -104,7 +104,7 @@ class LoginService extends Service {
         // 2、添加用户登录信息 
         // a、账号 老师 type:2
         await ctx.model.Login.create({
-            login_name: user.account,
+            login_name: user.userName,
             login_password: user.pwd,
             login_type: 2,
             user_id: userId
@@ -345,6 +345,10 @@ class LoginService extends Service {
                 teacher_number: user.identity,
                 teacher_name: user.name,
                 teacher_telephone: user.phone,
+                teacher_mailbox: user.email,
+                teacher_sex: 1,
+                teacher_school: "福州大学",
+                teacher_college: "数计学院"
             });
             userId = result.teacher_id;
         } else (user.role == 1); { // role==1学生
@@ -352,6 +356,10 @@ class LoginService extends Service {
                 student_number: user.identity,
                 student_name: user.name,
                 student_telephone: user.phone,
+                student_mailbox: user.email,
+                student_sex: 1,
+                student_school: "福州大学",
+                student_college: "数计学院"
             });
             userId = result.student_id;
         }
@@ -375,13 +383,13 @@ class LoginService extends Service {
         })
 
 
-        // // c、邮箱
-        // await ctx.model.Login.create({
-        //     login_name: user.email,
-        //     login_password: user.pwd,
-        //     login_type: user.role,
-        //     user_id: userId
-        // })
+        // c、邮箱
+        await ctx.model.Login.create({
+            login_name: user.email,
+            login_password: user.password,
+            login_type: user.role,
+            user_id: userId
+        })
 
         if (result != null) {
             return {

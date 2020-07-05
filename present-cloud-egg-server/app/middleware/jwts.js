@@ -12,7 +12,7 @@ module.exports = (options, app) => {
       // 当前token值不存在的时候
     } else if (!token) {
       //  不验证token的页面
-      if (ctx.path === '/login' || ctx.path === '/register'|| ctx.path === '/app/login'||ctx.path === '/app/register'|| ctx.path === '/app/resetPwd'||ctx.path === '/resetPassword') {
+      if (ctx.path === '/login' || ctx.path === '/register'|| ctx.path === '/app/login'||ctx.path === '/app/regist'|| ctx.path === '/app/resetPwd'||ctx.path === '/resetPassword') {
       // if (true) {  // 取消jwt 测试
         await next();
       } else {
