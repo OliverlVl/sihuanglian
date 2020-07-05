@@ -68,6 +68,7 @@ class SelectCourseService extends Service {
 				course_id: course_id
 			}
 		})
+
 		if (selectCourse != null) {
 			return {
 				code: -1,
@@ -85,6 +86,21 @@ class SelectCourseService extends Service {
 		// console.log(select_course)
 		const result = await ctx.model.SelectCourse.create(select_course.dataValues)
 		// console.log(result==null)
+		const course = await ctx.model.Course.findOne({
+			where:{
+				course_id: course_id
+			}
+		})
+		await ctx.model.Course.update(
+			{
+                student_total_number: course.student_total_number+1
+            },
+            {
+                where: {
+                    course_id: course_id
+                }
+            }
+		)
 		if (result == null) {
 			// 创建失败
 			return {
@@ -198,14 +214,34 @@ class SelectCourseService extends Service {
 				course_id: course_id
 			}
 		})
-		console.log(teacherSignInId.teacher_sign_id)
-		// 删除签到信息
-		const signInInfo = await  ctx.model.SignIn.destroy({
-			where: {
-				student_id: student_id,
-				teacher_sign_id: teacherSignInId.teacher_sign_id
+		if(teacherSignInId != null){
+			console.log(teacherSignInId)
+			console.log(teacherSignInId.dataVaules.teacher_sign_id)
+			// 删除签到信息
+			const signInInfo = await  ctx.model.SignIn.destroy({
+				where: {
+					student_id: student_id,
+					teacher_sign_id: teacherSignInId.dataValues.teacher_sign_id
+				}
+			})
+		}
+		const course = await ctx.model.Course.findOne({
+			where:{
+				course_id: course_id
 			}
 		})
+		// 课程总人数减一
+		await ctx.model.Course.update(
+			{
+				student_total_number: course.student_total_number-1
+			},
+			{
+				where: {
+					course_id: course_id
+				}
+			}
+		)
+
 
 		if (result == null) {
 			// 创建失败
