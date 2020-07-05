@@ -122,8 +122,11 @@ class AppController extends Controller {
 	// b)学生参与签到接口
 	async signIn() {
 		const { ctx } = this;
+		const JWT = require('jsonwebtoken')
+		const token = ctx.request.header.authorization;
+		var decode = JWT.verify(token, "123456");
 		const signMsg = ctx.request.body;
-		const result = await ctx.service.signIn.signIn(signMsg);
+		const result = await ctx.service.signIn.signIn(signMsg,decode.id);
 		ctx.body = result;
 	}
 

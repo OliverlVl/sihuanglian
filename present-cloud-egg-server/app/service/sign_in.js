@@ -5,41 +5,58 @@ const Service = require('egg').Service;
 class SignInService extends Service {
 
 	//b)学生参与签到接口
-	async signIn(signMsg) {
+	async signIn(signMsg, studentId) {
 		const { ctx } = this;
 
-		// 存学生位置信息
-		const result = await ctx.model.SignIn.create({
-			longitude: signMsg.longitude,
-			latitude: signMsg.latitude,
-		})
 		// 通过课程id 查老师id
 		const course = await ctx.model.Course.findOne({
 			where: {
 				course_id: signMsg.courseId
 			}
 		})
-		const tId = course.course_teacher_id
-		console.log(tId)
 		// 通过老师id 查老师位置信息
 		const teacherLocal = await ctx.model.TeacherSignIn.findOne({
 			where: {
 				course_id: signMsg.courseId,
-				teacher_id: tId
+				teacher_id: course.course_teacher_id,
+				state: 1 // 1代表正在签到，2代表签到已结束
 			}
 		})
-		console.log(signMsg.longitude)
-		console.log(signMsg.latitude)
+		if (teacherLocal == null) {
+			return {
+				code: -1,
+				msg: "签到失败"
+			}
+		}
+		//查看是否已签到
+		const signIn = await ctx.model.SignIn.findOne({
+			where: {
+				student_id: studentId,
+				teacher_sign_id: teacherLocal.teacher_sign_id
+			}
+		})
+		if (signIn != null) {
+			return {
+				code: -2,
+				msg: "已签到，不可重复签到"
+			}
 
+		}
 		const longitude2 = teacherLocal.longitude
 		const latitude2 = teacherLocal.latitude
-		console.log(longitude2)
-		console.log(latitude2)
 		// 通过经纬度计算学生与老师的距离
 		// 传入参数为 数值型 xxx.xxx
 		const distance = await this.GetDistance(signMsg.latitude, signMsg.longitude, latitude2, longitude2)
-		console.log(distance)
-	
+
+		// 存学生位置信息
+		await ctx.model.SignIn.create({
+			student_id: studentId,
+			longitude: signMsg.longitude,
+			latitude: signMsg.latitude,
+			distance: distance,
+			teacher_sign_id: teacherLocal.teacher_sign_id
+
+		})
 
 		// return distance // 公里
 		return {

@@ -43,7 +43,7 @@ class TeacherSignInService extends Service {
 		}
 		var signInCount = 0
 		var noSignInCount = 0
-		var signInList =[]
+		var signInList = []
 		var noSignInList = []
 		for (var i = 0; i < result.length; i++) {
 			if (result[i].dataValues.status == 1) {
@@ -68,6 +68,20 @@ class TeacherSignInService extends Service {
 	// 教师发起签到
 	async launchSignIn(teacherId, courseId, longitude, latitude) {
 		const { ctx } = this;
+		const teacherSignIn = await ctx.model.TeacherSignIn.findOne({
+			where: {
+				teacher_id: teacherId,
+				course_id: courseId,
+				state: 1
+			}
+		})
+		if (teacherSignIn != null) {
+			return {
+				code: -2,
+				msg: "正在签到"
+			}
+		}
+
 		var now = new Date();
 		const result = await ctx.model.TeacherSignIn.create({
 			course_id: courseId,
@@ -82,7 +96,7 @@ class TeacherSignInService extends Service {
 		if (result != null) {
 			return {
 				code: 1,
-				msg: "签到成功"
+				msg: "发起签到成功"
 			}
 		} else {
 			return {
@@ -169,12 +183,12 @@ class TeacherSignInService extends Service {
 			// console.log(result[i])
 		}
 
-		var signInList =[]
+		var signInList = []
 		var noSignInList = []
-		for(var i = 0; i < selectCourse.length; i++){
-			if(selectCourse[i].dataValues.status == 1){
+		for (var i = 0; i < selectCourse.length; i++) {
+			if (selectCourse[i].dataValues.status == 1) {
 				signInList.push(selectCourse[i].dataValues)
-			}else{
+			} else {
 				noSignInList.push(selectCourse[i].dataValues)
 			}
 		}
