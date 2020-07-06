@@ -17,9 +17,9 @@
           v-model="loginForm.account"
           placeholder="请输入账号、邮箱或者手机号"
         >
-          <div class="svg-container" slot="prefix">
+          <!-- <div class="svg-container" slot="prefix">
             <icon name="user" :w="16" :h="16"></icon>
-          </div>
+          </div> -->
         </el-input>
       </el-form-item>
       <el-form-item prop="password">
@@ -28,19 +28,17 @@
           type="text"
           v-model="loginForm.password"
           placeholder="请输入密码"
-          show-password
-          @keyup.enter.native="handleLogin"
+          
+          
         >
-          <div class="svg-container" slot="prefix">
-            <icon name="password" :w="16" :h="16"></icon>
-          </div>
+          
         </el-input>
       </el-form-item>
       <el-button
         type="primary"
         style="width:100%;"
         :loading="loading"
-        @click.native.prevent="handleLogin"
+        @click="handleLogin"
       >登录</el-button>
     </el-form>
     <div class="login-footer">
@@ -79,8 +77,10 @@ export default {
       }
     };
   },
+  created() {},
   methods: {
     handleLogin() {
+      
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           // this.loading = true;
@@ -95,15 +95,13 @@ export default {
               // console.log(res.data.msg)
               if (res.data.msg === 1) {
                 // this.loading = false;
-                // console.log('1111111')
+                console.log('1111111')
 
-                var token = res.data.token
-                localStorage.setItem('token',token)
-                
+                var token = res.data.token;
+                localStorage.setItem("token", token);
 
                 this.$router.push({ path: "/home" });
-                                // console.log('1111111')
-
+                // console.log('1111111')
               } else {
                 this.$alert("登陆失败，请检查账号密码");
               }

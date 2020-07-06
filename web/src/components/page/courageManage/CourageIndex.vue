@@ -214,7 +214,7 @@ export default {
         .then(res => {
           
           // console.log('res'+res);
-
+          
           for (let i in res.data) {
             this.tableData[i].number = res.data[i].student_id;
             this.tableData[i].name = res.data[i].student_name;

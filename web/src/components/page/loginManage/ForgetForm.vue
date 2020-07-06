@@ -11,7 +11,7 @@
       :rules="forgetFormRules"
     >
       <el-form-item prop="account">
-        <el-input name="account" type="text" v-model="forgetForm.account" placeholder="请输入账号">
+        <el-input name="account" type="text" v-model="forgetForm.account" placeholder="请输入用户名/手机号/邮箱号">
           <div class="svg-container" slot="prefix">
             <icon name="user" :w="16" :h="16"></icon>
           </div>
@@ -158,7 +158,7 @@ export default {
     async sendEmailCode(e) {
       let flag = await this.validateCode().then(
         () => {
-          this.$utils.message.showSuccess("你的验证码为8888");
+          this.$utils.message.showSuccess("你的验证码为8098");
 
           return true;
         },
@@ -193,7 +193,7 @@ export default {
     },
     submitForget() {
       this.validate().then(valid => {
-        if (this.forgetForm.code === "8888") {
+        if (this.forgetForm.code === "8098") {
           this.showLoading = true;
           loginAPI
             .resetPassword(this.forgetForm)

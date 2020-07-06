@@ -6,17 +6,17 @@ import Container from '../components/page/Container.vue'
 Vue.use(Router);
 
 
+// const defaultRoute = [
+//   {
+//     path: '/login',
+//     name: 'login',
+//     component: () => import('../components/page/loginManage/login.vue'),
+//     hidden: false,
+//     meta: { title: '签到Star', authFilter: false }
+//   }
+// ]
 
 
-const defaultRoute = [
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('../components/page/loginManage/login.vue'),
-    hidden: false,
-    meta: { title: '签到Star', authFilter: false }
-  }
-]
 export const routes = [
   {
     path: '/login',
@@ -25,6 +25,7 @@ export const routes = [
     hidden: false,
     meta: { title: '签到Star', authFilter: false }
   },
+  
   {
     path: '/',
     component: Container,
@@ -90,7 +91,7 @@ export const routes = [
       name: 'userManage',
       hidden: false,
       meta: {
-        title: '用户管理', noCache: true, icon: 'account'
+        title: '学生用户', noCache: true, icon: 'account'
       },
     },
     {

@@ -1,5 +1,5 @@
 <template>
-    <div>这是首页</div>
+    <div>present-cloud后台管理系统</div>
 </template>
 
 <script>

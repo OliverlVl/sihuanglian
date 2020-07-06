@@ -7,9 +7,9 @@
             </el-aside>
 
             <el-container>
-                <el-header class="app-header">
+                <!-- <el-header class="app-header">
                     <checkin-navbar></checkin-navbar>
-                </el-header>
+                </el-header> -->
 
                 <el-main class="app-body">
                     <transition name="fade" mode="out-in">
@@ -25,12 +25,13 @@
 <script>
     // @ is an alias to /src
     import CheckinSidebar from './sidebar/CheckinSidebar';
-    import CheckinNavbar from './sidebar/CheckinNavbar'
+    // import CheckinNavbar from './sidebar/CheckinNavbar'
 
     export default {
         name: 'home',
         components: {
-            CheckinSidebar, CheckinNavbar
+            CheckinSidebar, 
+            // CheckinNavbar
             // HelloWorld
         },
         computed: {

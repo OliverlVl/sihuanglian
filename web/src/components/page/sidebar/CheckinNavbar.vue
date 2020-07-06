@@ -1,24 +1,13 @@
 <template>
     <div class="navbar-container">
-        <div class="left-toggle" @click.prevent="toggleSideBar">
+        <!-- <div class="left-toggle" @click.prevent="toggleSideBar">
             <i v-show="!isCollapse" class="el-icon-d-arrow-left"></i>
             <i v-show="isCollapse" class="el-icon-d-arrow-right"></i>
         </div>
         <checkin-breadcrumb></checkin-breadcrumb>
         <div class="app-header-userinfo">
-            <el-dropdown trigger="hover" :hide-on-click="false">
-                <span class="el-dropdown-link">
-                    用户：{{ userName }}
-                    <i class="el-icon-arrow-down el-icon--right"></i>
-                </span>
-                <el-dropdown-menu slot="dropdown">
-                    <!-- <el-dropdown-item>我的消息</el-dropdown-item> -->
-                    <!-- <el-dropdown-item>设置</el-dropdown-item> -->
-                    <!-- <el-dropdown-item divided @click.native="logout">退出登录
-                    </el-dropdown-item> -->
-                </el-dropdown-menu>
-            </el-dropdown>
-        </div>
+            
+        </div> -->
     </div>
 
 </template>
@@ -43,7 +32,7 @@
             // }
         },
         created () {
-            console.log(this.$store.state.user);
+            // console.log(this.$store.state.user);
         },
         methods: {
             toggleSideBar () {

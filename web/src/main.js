@@ -19,7 +19,8 @@ Vue.use(Element);
 
 Vue.prototype.$utils = utils
 
-console.log(process.env.VUE_APP_BASE_API);
+// console.log(process.env.VUE_APP_BASE_API);
+// console.log('111111111')
 new Vue({
   router,
   store,

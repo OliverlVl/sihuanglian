@@ -4,6 +4,7 @@ const userLoginAPI = {
     
     // 登录
     login: function (account, password) {
+        // console.log(account)
         return request({
             url: 'login',
             method: 'post',

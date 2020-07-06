@@ -72,7 +72,7 @@ export default {
          {
           icon: "el-icon-date",
           index: "user",
-          title: "用户管理",
+          title: "学生用户",
           
         },
          {
@@ -87,12 +87,12 @@ export default {
           title: "菜单管理",
           
         },
-        {
-          icon: "el-icon-date",
-          index: "organ",
-          title: "组织管理",
+        // {
+        //   icon: "el-icon-date",
+        //   index: "organ",
+        //   title: "组织管理",
           
-        },
+        // },
         {
           icon: "el-icon-tickets",
           index: "2",

@@ -14,7 +14,17 @@ const NOT_LOGIN = constant.ERROR_CODE_NOT_LOGIN;
 const NOT_PERMISSION = constant.ERROR_CODE_NOT_PERMISSION;
 
 service.interceptors.request.use(config => {
-    config.headers['Authorization'] = localStorage.getItem('token');
+   
+        if(localStorage.getItem('token')){
+            config.headers['Authorization'] = localStorage.getItem('token')
+        }else{
+            config.headers['Authorization'] = ''
+        }
+        
+        // localStorage.getItem('token')
+        ;
+    
+    
     return config;
 }, error => {
     console.log(error);

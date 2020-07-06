@@ -152,7 +152,7 @@ export default {
         //   }
         // }
 
-
+        console.log('11111111111111111')
         this.datatable = res.data;
         // console.log(this.datatable)
         

@@ -39,6 +39,10 @@
                 form: 'login'
             }
         },
+        created(){
+            // localStorage.setItem('token','1')
+            // console.log('222')
+        },
         methods: {
             showForget () {
                 this.form = 'forget';
