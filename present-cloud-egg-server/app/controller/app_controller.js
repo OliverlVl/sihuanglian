@@ -228,6 +228,8 @@ class AppController extends Controller {
 		const token = ctx.request.header.authorization;
 		var decode = JWT.verify(token, "123456");
 		const signInMsg = ctx.request.body;
+		console.log(111111111111111111)
+		console.log(signInMsg)
 		const result = await ctx.service.teacherSignIn.launchSignIn(
 			decode.id,
 			signInMsg.courseId,

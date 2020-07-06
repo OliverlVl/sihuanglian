@@ -83,6 +83,10 @@ class TeacherSignInService extends Service {
 			}
 		}
 
+		console.log(1111111111111111111111111111)
+		console.log(longitude)
+		console.log(latitude)
+
 		var now = new Date();
 		const result = await ctx.model.TeacherSignIn.create({
 			course_id: courseId,
